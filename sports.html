@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Arena | IGNITE 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+    <!-- Ambient Glowing Background Aura -->
+    <div class="bg-ambient-glow">
+        <div class="ambient-blob ambient-blob-1"></div>
+        <div class="ambient-blob ambient-blob-2"></div>
+        <div class="ambient-blob ambient-blob-3"></div>
+    </div>
+
+    <!-- Navigation Header -->
+    <nav>
+        <div class="container nav-content">
+            <a href="index.html" class="logo-link">
+                <img src="./images/mascot.jpeg" alt="IGNITE Phoenix Mascot" class="nav-logo">
+                <span class="logo-text">IGNITE</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="cultural.html">Cultural</a>
+                <a href="sports.html" class="active">Sports</a>
+                <a href="schedule.html">Schedule</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+
+            <div class="nav-cta-group">
+                <a href="contact.html" class="btn-register-nav">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sports Page Section -->
+    <section class="section-page">
+        <div class="container">
+            <h2 class="section-title gradient-text">Sports Arenas</h2>
+            <p class="section-subtitle">Championship athletics and tournaments hosted on Greenwood High's FIFA-standard astro turf and multi-sport complexes.</p>
+
+            <div class="events-grid">
+                <!-- Sport 1: Football -->
+                <div class="event-card">
+                    <div class="event-card-top">
+                        <div class="event-icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                                <path d="M2 12h20"></path>
+                            </svg>
+                        </div>
+                        <span class="event-participants-badge">⚽ 7v7 (Squad of 10)</span>
+                    </div>
+                    <h3>Ignite Football Cup</h3>
+                    <div class="event-tagline">"Dominance on the turf. Glory under the floodlights."</div>
+                    <p>
+                        High-tempo 7-a-side interschool football championship hosted on the Greenwood High FIFA-standard astro turf. Group stage fixtures followed by sudden-death knockouts and penalty shootouts.
+                    </p>
+                    <div class="event-rules-box">
+                        <strong>Additional Details & Rules</strong>
+                        Studs/cleats mandatory. Two 20-minute halves. Certified KSFA officials.
+                    </div>
+                    <div class="event-meta">
+                        <span>Format: League & Knockouts</span>
+                        <a href="contact.html" class="event-action">Register Squad →</a>
+                    </div>
+                </div>
+
+                <!-- Sport 2: Basketball -->
+                <div class="event-card">
+                    <div class="event-card-top">
+                        <div class="event-icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
+                                <line x1="19.07" y1="4.93" x2="4.93" y2="19.07"></line>
+                            </svg>
+                        </div>
+                        <span class="event-participants-badge">🏀 5v5 (Boys & Girls)</span>
+                    </div>
+                    <h3>Hoop Matrix Basketball</h3>
+                    <div class="event-tagline">"Fast breaks, clutch threes, and unrelenting defense."</div>
+                    <p>
+                        Full-court 5v5 championship in the floodlit indoor hardwood arena. Featuring boys and girls divisions competing for the prestigious IGNITE 2026 Championship Trophy.
+                    </p>
+                    <div class="event-rules-box">
+                        <strong>Additional Details & Rules</strong>
+                        FIBA rules. Four 8-minute running clock quarters. Max 12 players on roster.
+                    </div>
+                    <div class="event-meta">
+                        <span>Divisions: Boys & Girls</span>
+                        <a href="contact.html" class="event-action">Register Team →</a>
+                    </div>
+                </div>
+
+                <!-- Sport 3: Badminton -->
+                <div class="event-card">
+                    <div class="event-card-top">
+                        <div class="event-icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="8" r="5"></circle>
+                                <line x1="12" y1="13" x2="12" y2="21"></line>
+                                <line x1="9" y1="18" x2="15" y2="18"></line>
+                            </svg>
+                        </div>
+                        <span class="event-participants-badge">🏸 Singles & Doubles</span>
+                    </div>
+                    <h3>Shuttle Smash Badminton</h3>
+                    <div class="event-tagline">"Precision smashes and lightning-fast reflexes."</div>
+                    <p>
+                        Interschool shuttle tournament on synthetic courts. Teams battle across Boys Singles, Girls Singles, and Mixed Doubles matches with BWF-standard scoring.
+                    </p>
+                    <div class="event-rules-box">
+                        <strong>Additional Details & Rules</strong>
+                        Yonex feather shuttles provided. Non-marking shoes strictly mandatory.
+                    </div>
+                    <div class="event-meta">
+                        <span>Format: Best of 3 Sets</span>
+                        <a href="contact.html" class="event-action">Register Shuttlers →</a>
+                    </div>
+                </div>
+
+                <!-- Sport 4: Table Tennis -->
+                <div class="event-card">
+                    <div class="event-card-top">
+                        <div class="event-icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="8" cy="8" r="6"></circle>
+                                <path d="M12.5 12.5L20 20"></path>
+                            </svg>
+                        </div>
+                        <span class="event-participants-badge">🏓 Solo & Team Ties</span>
+                    </div>
+                    <h3>Spin Clash Table Tennis</h3>
+                    <div class="event-tagline">"Millisecond reactions. Devastating spin."</div>
+                    <p>
+                        High-octane table tennis tournament featuring Davis Cup style interschool ties. 11-point sets leading into high-stakes semifinal and final showdowns.
+                    </p>
+                    <div class="event-rules-box">
+                        <strong>Additional Details & Rules</strong>
+                        ITTF approved 3-star balls. Bring own authorized rubber paddles.
+                    </div>
+                    <div class="event-meta">
+                        <span>Format: 11-pt ITTF Sets</span>
+                        <a href="contact.html" class="event-action">Register TT Squad →</a>
+                    </div>
+                </div>
+
+                <!-- Sport 5: Swimming -->
+                <div class="event-card">
+                    <div class="event-card-top">
+                        <div class="event-icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M2 20c2 0 3-1 5-1s3 1 5 1 3-1 5-1 3 1 5 1"></path>
+                                <path d="M2 16c2 0 3-1 5-1s3 1 5 1 3-1 5-1 3 1 5 1"></path>
+                                <circle cx="12" cy="7" r="3"></circle>
+                            </svg>
+                        </div>
+                        <span class="event-participants-badge">🏊 Aquatic Sprints & Relays</span>
+                    </div>
+                    <h3>AquaIgnite Swimming Meet</h3>
+                    <div class="event-tagline">"Cut through the water. Touch the wall first."</div>
+                    <p>
+                        Hosted in Greenwood High's half-Olympic swimming pool. 50m & 100m freestyle, backstroke, breaststroke, butterfly, and 4x50m medley relay events.
+                    </p>
+                    <div class="event-rules-box">
+                        <strong>Additional Details & Rules</strong>
+                        Electronic touchpad timing. Regulation competitive swimwear and caps required.
+                    </div>
+                    <div class="event-meta">
+                        <span>Pool: Half-Olympic Heated</span>
+                        <a href="contact.html" class="event-action">Register Swimmers →</a>
+                    </div>
+                </div>
+
+                <!-- Sport 6: Athletics Track & Field -->
+                <div class="event-card">
+                    <div class="event-card-top">
+                        <div class="event-icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                            </svg>
+                        </div>
+                        <span class="event-participants-badge">🏃 Track Sprints & Field</span>
+                    </div>
+                    <h3>Sprint & Field Invitational</h3>
+                    <div class="event-tagline">"Faster, higher, stronger. Leave your mark."</div>
+                    <p>
+                        Individual track sprints (100m, 200m, 400m), 4x100m school relays, long jump, and shot put competitions testing raw power, speed, and endurance.
+                    </p>
+                    <div class="event-rules-box">
+                        <strong>Additional Details & Rules</strong>
+                        Spikes (up to 6mm) permitted. One false start disqualification rule strictly enforced.
+                    </div>
+                    <div class="event-meta">
+                        <span>Format: Heats & Grand Finals</span>
+                        <a href="contact.html" class="event-action">Register Athletes →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <img src="./images/mascot.jpeg" alt="IGNITE Crest">
+            <div class="logo-text gradient-text" style="font-size: 1.5rem; margin-bottom: 10px;">IGNITE 2026</div>
+            <ul class="footer-nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cultural.html">Cultural</a></li>
+                <li><a href="sports.html">Sports</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+            <p style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; color: var(--text-subtle);">© 2026 Greenwood High International School</p>
+        </div>
+    </footer>
+
+    <!-- SCARLETT AI VOICE/CHAT BUTTON (Omnipresent) -->
+    <div class="scarlett-omnipresent-container">
+        <div class="scarlett-fab-tag">
+            <span class="scarlett-status-dot"></span>
+            Ask Scarlett
+        </div>
+        <button id="scarlettVoiceBtn" class="scarlett-voice-button" aria-label="Open Scarlett AI Assistant">
+            <div class="scarlett-voice-pulse"></div>
+            <svg class="scarlett-mic-icon" viewBox="0 0 24 24">
+                <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Scarlett Chat Drawer Window -->
+    <div id="scarlettChatWindow" class="scarlett-chat-window">
+        <div class="scarlett-chat-header">
+            <div class="scarlett-profile">
+                <div class="scarlett-avatar-bubble">
+                    <svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+                </div>
+                <div>
+                    <div class="scarlett-name">Scarlett AI</div>
+                    <div class="scarlett-status-text">
+                        <span class="scarlett-status-dot"></span>
+                        IGNITE 2026 Assistant
+                    </div>
+                </div>
+            </div>
+            <button id="scarlettChatClose" class="scarlett-chat-close" aria-label="Close Chat">✕</button>
+        </div>
+
+        <div id="scarlettChatMessages" class="scarlett-chat-messages">
+            <div class="scarlett-msg bot">
+                <div class="scarlett-msg-bubble">
+                    Hello! I'm <strong>Scarlett</strong>. Looking for rules, formats, or squad requirements for any of our 6 Sports arenas? Just ask!
+                </div>
+                <span class="scarlett-msg-time">Just now</span>
+            </div>
+        </div>
+
+        <div class="scarlett-quick-chips">
+            <button class="scarlett-chip" data-prompt="What are the football tournament rules?">⚽ Football</button>
+            <button class="scarlett-chip" data-prompt="How does basketball tournament work?">🏀 Basketball</button>
+            <button class="scarlett-chip" data-prompt="Tell me about badminton events">🏸 Badminton</button>
+            <button class="scarlett-chip" data-prompt="What are the swimming meet details?">🏊 Swimming</button>
+            <button class="scarlett-chip" data-prompt="How do I register a sports contingent?">📝 Register</button>
+        </div>
+
+        <div class="scarlett-input-area">
+            <input type="text" id="scarlettChatInput" placeholder="Ask Scarlett about sports rules, squad limits...">
+            <button id="scarlettSendBtn" class="scarlett-send-btn" aria-label="Send query">
+                <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
