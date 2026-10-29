@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cultural Events | IGNITE 2026</title>
+    <meta name="description" content="Explore 12 premier cultural events at IGNITE 2026: Battle of the Bands, Wolf of Wall Street, Dyed in Crimson, Respawn, and more.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>try{if(sessionStorage.getItem("igniteBurn")){var d=document.documentElement;d.classList.add("fire-arriving");setTimeout(function(){d.classList.remove("fire-arriving")},2500)}}catch(e){}</script>
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
@@ -31,6 +33,7 @@
                 <a href="cultural.html" class="active">Cultural</a>
                 <a href="sports.html">Sports</a>
                 <a href="schedule.html">Schedule</a>
+                <a href="rules.html">Rules</a>
                 <a href="contact.html">Contact Us</a>
             </div>
 
@@ -43,22 +46,93 @@
     <!-- Cultural Events Page Section -->
     <section class="section-page">
         <div class="container">
-            <h2 class="section-title gradient-text">Cultural Events</h2>
-            <p class="section-subtitle">Ten premier cultural competitions testing stage charisma, intellect, mystery deduction, and artistic flair.</p>
+            <h1 class="section-title gradient-text">Cultural Events</h1>
+            <p class="section-subtitle">Twelve premier cultural competitions testing stage charisma, intellect, mystery deduction, and artistic flair.</p>
 
             <!-- Sub Filter Bar -->
             <div class="event-filter-bar">
-                <button class="sub-filter-btn active" data-filter="all">All Cultural (10)</button>
-                <button class="sub-filter-btn" data-filter="performing">Music & Drama</button>
-                <button class="sub-filter-btn" data-filter="mystery">Mystery & Mind</button>
-                <button class="sub-filter-btn" data-filter="creative">Visual & Design</button>
-                <button class="sub-filter-btn" data-filter="gaming">Gaming & Business</button>
+                <button class="sub-filter-btn active" data-filter="all">All Cultural (12)</button>
+                <button class="sub-filter-btn" data-filter="performing">Music &amp; Drama</button>
+                <button class="sub-filter-btn" data-filter="mystery">Mystery &amp; Mind</button>
+                <button class="sub-filter-btn" data-filter="creative">Visual &amp; Design</button>
+                <button class="sub-filter-btn" data-filter="gaming">Gaming &amp; Business</button>
             </div>
 
             <div class="events-grid" id="culturalGrid">
 
-                <!-- 1. Wolf of Wall Street -->
-                <div class="event-card" data-category="gaming">
+                <!-- 1. Battle of the Bands -->
+                <div class="event-card" id="battle-of-the-bands" data-category="performing">
+                    <div class="event-card-top">
+                        <div class="event-icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                            </svg>
+                        </div>
+                        <span class="event-participants-badge">🎸 2 to 7 per band</span>
+                    </div>
+                    <h3>Battle of the Bands</h3>
+                    <div class="event-tagline">"For whom the band tolls. 12–15 bands. The ultimate showdown."</div>
+                    <p>
+                        Battle of the Bands is a two-day interschool live music competition bringing together 12–15 student bands from across Bangalore.<br><br>
+                        Day 1 is a showcase round where every band plays a set to prove they belong on stage. The top bands advance to Day 2 for knockout head-to-head matches that decide who takes the title. Bring your best material, your tightest rhythms and your loudest sound.
+                    </p>
+                    <details class="event-rules-box">
+                        <summary>What to bring &amp; Rules</summary>
+                        <ul>
+                            <li>Bring your own instruments (guitars, keyboards, brass, pedals). Drum kit and piano are provided on stage.</li>
+                            <li>Sound check time limits strictly enforced before performance.</li>
+                            <li>Knockout format on Day 2 decides the champion band.</li>
+                        </ul>
+                    </details>
+                    <div class="event-meta">
+                        <dl class="event-facts">
+                            <dt>Fee</dt><dd>₹1,000 per band</dd>
+                            <dt>Per school</dt><dd>Up to 2 bands</dd>
+                            <dt>When</dt><dd>Showcase Day 1, finals Day 2</dd>
+                        </dl>
+                        <a href="contact.html#register" class="event-action">Register Band →</a>
+                    </div>
+                </div>
+
+                <!-- 2. Dyed in Crimson -->
+                <div class="event-card" id="dyed-in-crimson" data-category="mystery">
+                    <div class="event-card-top">
+                        <div class="event-icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                                <line x1="12" y1="9" x2="12" y2="13"></line>
+                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                            </svg>
+                        </div>
+                        <span class="event-participants-badge">🩸 1 to 3 per team</span>
+                    </div>
+                    <h3>Dyed in Crimson</h3>
+                    <div class="event-tagline">"One Murder, One Campus, Two days. Can you uncover what happened before the trail goes cold?"</div>
+                    <p>
+                        Something has gone wrong on the Greenwood High campus, and the truth has been buried. Over two days, Dyed in Crimson turns the school into a living crime scene. Teams of investigators piece together evidence, track down leads, interrogate student suspects played by actors, crack ciphers and untangle a web of secrets and misdirection.<br><br>
+                        Around 150–200 players, in about 80 teams, compete across both days to see who can solve the mystery before time runs out. The clock is ticking, the suspect is watching, and every detail matters.
+                    </p>
+                    <details class="event-rules-box">
+                        <summary>What to bring &amp; Rules</summary>
+                        <ul>
+                            <li>Carry notebooks, pens, and analytical wits.</li>
+                            <li>Respect actor boundaries and stay within active crime scene perimeters.</li>
+                            <li>Strictly no collusion between independent detective units.</li>
+                        </ul>
+                    </details>
+                    <div class="event-meta">
+                        <dl class="event-facts">
+                            <dt>Fee</dt><dd>₹600 per team</dd>
+                            <dt>Capacity</dt><dd>~80 teams (150–200 players)</dd>
+                            <dt>When</dt><dd>Both days (Two-day mystery)</dd>
+                        </dl>
+                        <a href="contact.html#register" class="event-action">Register Team →</a>
+                    </div>
+                </div>
+
+                <!-- 3. Wolf of Wall Street -->
+                <div class="event-card" id="wolf-of-wall-street" data-category="gaming">
                     <div class="event-card-top">
                         <div class="event-icon-box">
                             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -66,26 +140,34 @@
                                 <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                             </svg>
                         </div>
-                        <span class="event-participants-badge">👥 3 to 5 people per team</span>
+                        <span class="event-participants-badge">📈 3 to 5 per team</span>
                     </div>
                     <h3>Wolf of Wall Street</h3>
                     <div class="event-tagline">"Trade the market. Survive the chaos. Become the Wolf."</div>
                     <p>
                         Step into the fast-paced world of Wall Street, where fortunes can rise in seconds and one decision can change everything. In this two-day immersive business and trading simulation, teams take control of a struggling company, build their strategy, and enter a live fictional stock market where they trade, negotiate, compete, take risks and chase the biggest fortune.<br><br>
-                        From “Sell Me This Pen” and high-stakes Bidding Wars to confidential Insider Information and market-shaking Breaking News, every round puts your strategy to the test. As the market shifts and unexpected events unfold, teams must decide when to play it safe, when to take the risk, and when to make their move. The competition reaches its climax with the market's final shock, the closing bell, and a high-pressure IPO-style pitch where teams defend their company, strategy and valuation before the judges.
+                        From “Sell Me This Pen” and high-stakes Bidding Wars to confidential Insider Information and market-shaking Breaking News, every round puts your strategy to the test. The competition reaches its climax with the market's final shock, the closing bell, and a high-pressure IPO-style pitch where teams defend their company before the judges.
                     </p>
-                    <div class="event-rules-box">
-                        <strong>Additional Details & Rules</strong>
-                        Participants are also required to go through the case study and the background information provided prior to the event.
-                    </div>
+                    <details class="event-rules-box">
+                        <summary>What to bring &amp; Rules</summary>
+                        <ul>
+                            <li>Bring a charged laptop with spreadsheet capability.</li>
+                            <li>Review the case study and background info package sent prior to the fest.</li>
+                            <li>Unannounced flash crashes and breaking announcements occur in real time.</li>
+                        </ul>
+                    </details>
                     <div class="event-meta">
-                        <span>Format: 2-Day Live Market Simulation</span>
-                        <a href="contact.html" class="event-action">Register Team →</a>
+                        <dl class="event-facts">
+                            <dt>Fee</dt><dd>₹800 per team</dd>
+                            <dt>Per school</dt><dd>Up to 2 teams</dd>
+                            <dt>When</dt><dd>Both days (Live simulation)</dd>
+                        </dl>
+                        <a href="contact.html#register" class="event-action">Register Team →</a>
                     </div>
                 </div>
 
-                <!-- 2. Veritas -->
-                <div class="event-card" data-category="mystery">
+                <!-- 4. Veritas -->
+                <div class="event-card" id="veritas" data-category="mystery">
                     <div class="event-card-top">
                         <div class="event-icon-box">
                             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -93,139 +175,34 @@
                                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                             </svg>
                         </div>
-                        <span class="event-participants-badge">👥 3 to 6 people per team</span>
+                        <span class="event-participants-badge">🔍 3 to 6 per team</span>
                     </div>
                     <h3>Veritas</h3>
                     <div class="event-tagline">"Can you crack the case before it's too late?"</div>
                     <p>
-                        Veritas is an interactive escape-room-style investigation designed to test critical thinking, teamwork, observation, and problem-solving skills. Presented with a case, teams will investigate the room in groups of 3–6 detectives to uncover hidden clues, solve puzzles, crack codes, and piece together the evidence, making a final accusation before the one hour of time is up.<br><br>
-                        Winners will be decided based on correct suspects, motives, and hints used. Each day will have a different winner.
+                        Veritas is an interactive escape-room-style investigation designed to test critical thinking, teamwork, observation, and problem-solving skills.<br><br>
+                        Presented with a case, teams investigate the room in groups of 3–6 detectives to uncover hidden clues, solve puzzles, crack codes, and piece together the evidence, making a final accusation before the one hour of time is up. Winners are decided based on correct suspects, motives, and hints used. Each day has a different winner!
                     </p>
-                    <div class="event-rules-box">
-                        <strong>Additional Details & Rules</strong>
-                        1-hour time limit. No external mobile communication allowed inside investigation rooms.
-                    </div>
+                    <details class="event-rules-box">
+                        <summary>What to bring &amp; Rules</summary>
+                        <ul>
+                            <li>Strict 1-hour escape room time countdown.</li>
+                            <li>No external electronic communication allowed inside investigation rooms.</li>
+                            <li>Points scored for correct suspects, accurate motive, and minimal hint usage.</li>
+                        </ul>
+                    </details>
                     <div class="event-meta">
-                        <span>Format: Interactive Escape Room</span>
-                        <a href="contact.html" class="event-action">Register Team →</a>
+                        <dl class="event-facts">
+                            <dt>Fee</dt><dd>₹600 per team</dd>
+                            <dt>Per school</dt><dd>Up to 2 teams</dd>
+                            <dt>When</dt><dd>Both days, a winner each day</dd>
+                        </dl>
+                        <a href="contact.html#register" class="event-action">Register Team →</a>
                     </div>
                 </div>
 
-                <!-- 3. Through the Lens -->
-                <div class="event-card" data-category="creative">
-                    <div class="event-card-top">
-                        <div class="event-icon-box">
-                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-                                <circle cx="12" cy="13" r="4"></circle>
-                            </svg>
-                        </div>
-                        <span class="event-participants-badge">👤 Solo event (no teams)</span>
-                    </div>
-                    <h3>Through the Lens</h3>
-                    <div class="event-tagline">"Frame it. Feel it. Tell it."</div>
-                    <p>
-                        Photography: Three rounds. Three themes. One winner. From raw emotions to high-speed sports to the rhythm of music, each round challenges you to capture something new. Show us how you see the world, frame by frame, and prove you've got the eye to win.
-                    </p>
-                    <div class="event-rules-box">
-                        <strong>Additional Details & Rules</strong>
-                        Participants must use DSLR or mirrorless cameras. Smartphone photography is not permitted.
-                    </div>
-                    <div class="event-meta">
-                        <span>Format: 3 Themed Photo Rounds</span>
-                        <a href="contact.html" class="event-action">Register Solo →</a>
-                    </div>
-                </div>
-
-                <!-- 4. Respawn -->
-                <div class="event-card" data-category="gaming">
-                    <div class="event-card-top">
-                        <div class="event-icon-box">
-                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="2" y="6" width="20" height="12" rx="2"></rect>
-                                <circle cx="8" cy="12" r="2"></circle>
-                                <path d="M15 12h2m-1-1v2"></path>
-                            </svg>
-                        </div>
-                        <span class="event-participants-badge">🎮 Solo (Roblox/FIFA) & 4 per team (Minecraft)</span>
-                    </div>
-                    <h3>Respawn</h3>
-                    <div class="event-tagline">"Rise. Fall. Respawn."</div>
-                    <p>
-                        Respawn is the ultimate gaming showdown. Battle in teams of 4 through action-packed Minecraft minigames. Win the most mini-games in a match to earn 3 points, top the group, and advance to the knockout stage.<br><br>
-                        Individuals battle it out on the pitch with Champions League Format, with random clubs given for each match and knockouts leading to the final.<br><br>
-                        The Roblox segment will be a two-day challenge with an Obby race on Day 1 and Dress to Impress on Day 2. Players will have to adapt quickly to different games, teams, and surprise challenges. The best players and teams will make it to the final rounds and compete for the win.
-                    </p>
-                    <div class="event-rules-box">
-                        <strong>Additional Details & Rules</strong>
-                        Participants must bring their own laptops for Minecraft and devices for Roblox (including chargers).
-                    </div>
-                    <div class="event-meta">
-                        <span>Games: Minecraft, FIFA, Roblox</span>
-                        <a href="contact.html" class="event-action">Register Arena →</a>
-                    </div>
-                </div>
-
-                <!-- 5. Pitch Perfect -->
-                <div class="event-card" data-category="performing">
-                    <div class="event-card-top">
-                        <div class="event-icon-box">
-                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
-                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
-                                <line x1="12" y1="19" x2="12" y2="23"></line>
-                                <line x1="8" y1="23" x2="16" y2="23"></line>
-                            </svg>
-                        </div>
-                        <span class="event-participants-badge">👤 Solo event (no teams)</span>
-                    </div>
-                    <h3>Pitch Perfect</h3>
-                    <div class="event-tagline">"Every voice gets a chance. Every note is a statement. Step onto the stage and make it yours."</div>
-                    <p>
-                        Soloists will battle it out to steal the spotlight by showing off their vocal abilities, dominating the stage, and proving that one voice is all it takes. Every note is a chance to stand out, captivate the audience, and claim the crown as the most impressive voice.<br><br>
-                        Round one is your chance to stand out, and the final round is where legends are made. So take a look around and own the stage.
-                    </p>
-                    <div class="event-rules-box">
-                        <strong>Additional Details & Rules</strong>
-                        Solo vocalists. Backing tracks or acoustic accompaniment allowed. Time limit strictly enforced.
-                    </div>
-                    <div class="event-meta">
-                        <span>Format: 2 Knockout Rounds</span>
-                        <a href="contact.html" class="event-action">Register Solo →</a>
-                    </div>
-                </div>
-
-                <!-- 6. Kryptos Visos -->
-                <div class="event-card" data-category="creative">
-                    <div class="event-card-top">
-                        <div class="event-icon-box">
-                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
-                                <line x1="9" y1="9" x2="9.01" y2="9"></line>
-                                <line x1="15" y1="9" x2="15.01" y2="9"></line>
-                            </svg>
-                        </div>
-                        <span class="event-participants-badge">👥 2 people per team</span>
-                    </div>
-                    <h3>Kryptos Visos</h3>
-                    <div class="event-tagline">"Bring your brushes, beat the clock, and let your creativity IGNITE!"</div>
-                    <p>
-                        A face painting competition where teams of two, one model and one painter, take on a themed challenge and must create a face painting artwork based on it.<br><br>
-                        On Day 1, the theme is announced ahead of time, giving teams a chance to prepare. Teams that advance to the second round face a new twist, where the Day 2 theme is revealed just 10 minutes before painting begins and each duo gets a different theme, testing how well they can think and create on the spot.
-                    </p>
-                    <div class="event-rules-box">
-                        <strong>Additional Details & Rules</strong>
-                        Participants must bring their own skin-safe painting materials and clean-up supplies.
-                    </div>
-                    <div class="event-meta">
-                        <span>Team: 1 Painter + 1 Model</span>
-                        <a href="contact.html" class="event-action">Register Duo →</a>
-                    </div>
-                </div>
-
-                <!-- 7. Directors Cut -->
-                <div class="event-card" data-category="performing">
+                <!-- 5. Director's Cut -->
+                <div class="event-card" id="directors-cut" data-category="performing">
                     <div class="event-card-top">
                         <div class="event-icon-box">
                             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -239,26 +216,34 @@
                                 <line x1="17" y1="7" x2="22" y2="7"></line>
                             </svg>
                         </div>
-                        <span class="event-participants-badge">👥 4 to 5 people per team</span>
+                        <span class="event-participants-badge">🎬 4 to 5 per team</span>
                     </div>
-                    <h3>Directors Cut</h3>
+                    <h3>Director's Cut</h3>
                     <div class="event-tagline">"Create the story, adapt to the challenge, and own the final cut."</div>
                     <p>
-                        Step into the director’s chair, where every story can change in an instant. Teams of 4–5 will be given a creative brief and challenged to bring their own characters, plot, and vision to life through performance.<br><br>
-                        After their main performance on Day 1, teams will be given an unexpected scenario and challenged to improvise a brand-new scene with no preparation. Then, on Day 2, teams will face a fresh creative challenge: transforming a given genre and set of constraints into an original 3–7 minute short film. From the first line of the script to the final improvised scene, every moment is yours to shape.
+                        Step into the director’s chair, where every story is yours to shape. Day 1 tests your dramatic instincts: perform a prepared piece from a creative brief, then take on an unexpected, unscripted improvisation challenge.<br><br>
+                        On Day 2, bring your ideas to the screen. Conceive, shoot, and edit an original 3–7 minute short film that responds to a surprise prompt or constraint. From script to final screening, show us you can adapt, collaborate, and own the story.
                     </p>
-                    <div class="event-rules-box">
-                        <strong>Additional Details & Rules</strong>
-                        Day 1: Character performance & live improvisation. Day 2: 3–7 min original short film production.
-                    </div>
+                    <details class="event-rules-box">
+                        <summary>What to bring &amp; Rules</summary>
+                        <ul>
+                            <li>Bring all your own filming, audio recording, and video editing equipment.</li>
+                            <li>Day 1: Stage acting &amp; live improv; Day 2: 3–7 min short film screened before judges.</li>
+                            <li>All footage must be captured on campus during the allocated fest time window.</li>
+                        </ul>
+                    </details>
                     <div class="event-meta">
-                        <span>Format: Theater & Short Film</span>
-                        <a href="contact.html" class="event-action">Register Team →</a>
+                        <dl class="event-facts">
+                            <dt>Fee</dt><dd>₹600 per team</dd>
+                            <dt>Per school</dt><dd>1 team</dd>
+                            <dt>When</dt><dd>Both days</dd>
+                        </dl>
+                        <a href="contact.html#register" class="event-action">Register Team →</a>
                     </div>
                 </div>
 
-                <!-- 8. Insync -->
-                <div class="event-card" data-category="performing">
+                <!-- 6. Insync -->
+                <div class="event-card" id="insync" data-category="performing">
                     <div class="event-card-top">
                         <div class="event-icon-box">
                             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -267,108 +252,254 @@
                                 <circle cx="18" cy="16" r="3"></circle>
                             </svg>
                         </div>
-                        <span class="event-participants-badge">👥 1 to 9 people per team</span>
+                        <span class="event-participants-badge">💃 1 to 9 per team</span>
                     </div>
                     <h3>Insync</h3>
                     <div class="event-tagline">"Feel the beat. Move In Sync."</div>
                     <p>
-                        Take the stage at In Sync - An electrifying celebration of dance, expression, and creativity, bringing together dancers to experience the power of movement. From dance battles of creativity to timed choreography challenges, watch dancers push their limits, embrace the unexpected, and ignite the stage.<br><br>
-                        More than just a performance, InSync is a space where dancers can break free from boundaries and transform emotions and ideas into art.
+                        Take the stage at InSync, an electrifying celebration of dance, expression, and creativity, featuring diverse dance forms. Whether you bring raw energy, precision, or emotion, this is your moment to captivate the crowd and make the stage your own.<br><br>
+                        Round 1 showcases your planned routine, while the finals challenge crews to adapt and elevate their performance under intense competition lights.
                     </p>
-                    <div class="event-rules-box">
-                        <strong>Additional Details & Rules</strong>
-                        Open to soloists up to 9-member crews. Audio tracks must be submitted during morning briefing.
-                    </div>
+                    <details class="event-rules-box">
+                        <summary>What to bring &amp; Rules</summary>
+                        <ul>
+                            <li>Email your performance audio track to ignite@greenwoodhigh.edu.in at least one week prior.</li>
+                            <li>Costume changes permitted in designated campus green rooms only.</li>
+                            <li>Judged on sync, choreographic innovation, musicality, and stage presence.</li>
+                        </ul>
+                    </details>
                     <div class="event-meta">
-                        <span>Format: Choreography & Battles</span>
-                        <a href="contact.html" class="event-action">Register Crew →</a>
+                        <dl class="event-facts">
+                            <dt>Fee</dt><dd>₹800 per team</dd>
+                            <dt>Per school</dt><dd>Up to 2 teams</dd>
+                            <dt>When</dt><dd>Day 1 heats, finals Day 2</dd>
+                        </dl>
+                        <a href="contact.html#register" class="event-action">Register Crew →</a>
                     </div>
                 </div>
 
-                <!-- 9. Battle of the Bands -->
-                <div class="event-card" data-category="performing">
-                    <div class="event-card-top">
-                        <div class="event-icon-box">
-                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <polygon points="10 8 16 12 10 16 10 8"></polygon>
-                            </svg>
-                        </div>
-                        <span class="event-participants-badge">👥 3 to 8 people per team</span>
-                    </div>
-                    <h3>Battle of the Bands</h3>
-                    <div class="event-tagline">"For whom the band tolls. 12- 15 bands. The ultimate showdown."</div>
-                    <p>
-                        Bring your sound to Battle of the Bands, a two-day interschool live music competition that brings together student bands from across different schools in Bangalore.<br><br>
-                        Each performance is an electric display of courage, teamwork, and musicianship, get ready to compete with the city's best musicians and to be amongst the final champions of the showdown. 'Cause where words fail, music speaks.
-                    </p>
-                    <div class="event-rules-box">
-                        <strong>Additional Details & Rules</strong>
-                        Stage backline and drum kit provided. Bands must bring their own instruments, pedals, and accessories.
-                    </div>
-                    <div class="event-meta">
-                        <span>Slots: 12-15 Interschool Bands</span>
-                        <a href="contact.html" class="event-action">Register Band →</a>
-                    </div>
-                </div>
-
-                <!-- 10. Dyed in Crimson -->
-                <div class="event-card" data-category="mystery">
-                    <div class="event-card-top">
-                        <div class="event-icon-box">
-                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-                                <line x1="12" y1="9" x2="12" y2="13"></line>
-                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                            </svg>
-                        </div>
-                        <span class="event-participants-badge">👥 3 people per team</span>
-                    </div>
-                    <h3>Dyed in Crimson</h3>
-                    <div class="event-tagline">"One Murder, One Campus, Two days. Can you uncover what happened before the trail goes cold?"</div>
-                    <p>
-                        Something has gone wrong at Greenwood High, and the truth is hiding in plain sight. For two days, the whole campus becomes a live crime scene, and you are the detective. Watch the story unfold in live theatre, question people who all seem to be hiding something, and follow clues to corners of the school you thought you knew. Nobody is who they seem, and every answer raises a new question.<br><br>
-                        Gather your team of up to three and get ready to crack ciphers, solve riddles, test your memory, and sharpen your eyes. Surprises can arrive at any moment, so stay alert, because the case may change when you least expect it. This is far more than a treasure hunt. It rewards sharp thinking, teamwork, and the courage to change your mind. Come ready to look closer, because the case is open and we need detectives.
-                    </p>
-                    <div class="event-rules-box">
-                        <strong>Additional Details & Rules</strong>
-                        Campus-wide investigation over 2 days. Teams of exactly 3 detectives.
-                    </div>
-                    <div class="event-meta">
-                        <span>Format: 2-Day Live Campus Mystery</span>
-                        <a href="contact.html" class="event-action">Register Detectives →</a>
-                    </div>
-                </div>
-
-                <!-- 11. Dress to Impress -->
-                <div class="event-card" data-category="creative">
+                <!-- 7. Dress to Impress -->
+                <div class="event-card" id="dress-to-impress" data-category="creative">
                     <div class="event-card-top">
                         <div class="event-icon-box">
                             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                             </svg>
                         </div>
-                        <span class="event-participants-badge">👥 4 to 6 people per team</span>
+                        <span class="event-participants-badge">👗 4 to 6 per team</span>
                     </div>
                     <h3>Dress to Impress</h3>
-                    <div class="event-tagline">"Think beyond the theme — Where creativity meets competition."</div>
+                    <div class="event-tagline">"Think beyond the theme. Where creativity meets competition."</div>
                     <p>
-                        Fabric, myth, and tradition collide on the IGNITE runway. Dress to Impress challenges teams to reimagine ancient lore and iconic Indian eras through cutting-edge, sustainable fashion.<br><br>
-                        From breathing new life into repurposed materials to restyling legendary heritage looks, this is your chance to showcase your design process, captivate the spotlight, and prove that true style knows no boundaries.
+                        Teams of 4–6 take the stage for a 7-minute runway presentation followed by a short explanation of their designs.<br><br>
+                        <strong>Round 1 (Reforged):</strong> Craft outfits inspired by mythological houses, using at least 40% upcycled materials to bring ancient tales into contemporary fashion.<br>
+                        <strong>Round 2 (Legacy, Reworn):</strong> Reimagine traditional Indian attire across historical eras, balancing tradition and fresh interpretation.
                     </p>
-                    <div class="event-rules-box">
-                        <strong>Additional Details & Rules</strong>
-                        Sustainable and repurposed materials requirement. Concept briefing submitted prior to runway showcase.
-                    </div>
+                    <details class="event-rules-box">
+                        <summary>What to bring &amp; Rules</summary>
+                        <ul>
+                            <li>Prepare and bring all clothing, fabrics, makeup, and accessories from home.</li>
+                            <li>Round 1 requires minimum 40% certified upcycled / repurposed material.</li>
+                            <li>7-minute runway showcase followed by judges Q&amp;A on concept and design process.</li>
+                        </ul>
+                    </details>
                     <div class="event-meta">
-                        <span>Format: Sustainable Fashion Runway</span>
-                        <a href="contact.html" class="event-action">Register Team →</a>
+                        <dl class="event-facts">
+                            <dt>Fee</dt><dd>₹1,000 per team</dd>
+                            <dt>Per school</dt><dd>Up to 2 teams</dd>
+                            <dt>When</dt><dd>Day 1 showcase, finals Day 2</dd>
+                        </dl>
+                        <a href="contact.html#register" class="event-action">Register Team →</a>
+                    </div>
+                </div>
+
+                <!-- 8. Pitch Perfect -->
+                <div class="event-card" id="pitch-perfect" data-category="performing">
+                    <div class="event-card-top">
+                        <div class="event-icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                                <line x1="12" y1="19" x2="12" y2="23"></line>
+                                <line x1="8" y1="23" x2="16" y2="23"></line>
+                            </svg>
+                        </div>
+                        <span class="event-participants-badge">🎤 Solo Vocalist</span>
+                    </div>
+                    <h3>Pitch Perfect</h3>
+                    <div class="event-tagline">"Every voice gets a chance. Every note is a statement. Step onto the stage and make it yours."</div>
+                    <p>
+                        Soloists battle it out to see who can deliver the most unforgettable vocal performance.<br><br>
+                        The event runs over two rounds of solo vocals, pushing singers to show off their range, control and stage presence. Accompaniment tracks or single acoustic instruments permitted as vocalists compete for top honours.
+                    </p>
+                    <details class="event-rules-box">
+                        <summary>What to bring &amp; Rules</summary>
+                        <ul>
+                            <li>Email your backing track (MP3/WAV) to ignite@greenwoodhigh.edu.in at least 7 days before the event.</li>
+                            <li>Solo singers only. Acoustic self-accompaniment permitted.</li>
+                            <li>Strict time limits on performance per round.</li>
+                        </ul>
+                    </details>
+                    <div class="event-meta">
+                        <dl class="event-facts">
+                            <dt>Fee</dt><dd>₹600 per participant</dd>
+                            <dt>Per school</dt><dd>Up to 3 singers</dd>
+                            <dt>When</dt><dd>Day 1 only</dd>
+                        </dl>
+                        <a href="contact.html#register" class="event-action">Register Solo →</a>
+                    </div>
+                </div>
+
+                <!-- 9. Through the Lens -->
+                <div class="event-card" id="through-the-lens" data-category="creative">
+                    <div class="event-card-top">
+                        <div class="event-icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                                <circle cx="12" cy="13" r="4"></circle>
+                            </svg>
+                        </div>
+                        <span class="event-participants-badge">📷 Solo Photographer</span>
+                    </div>
+                    <h3>Through the Lens</h3>
+                    <div class="event-tagline">"Frame it. Feel it. Tell it."</div>
+                    <p>
+                        Three rounds. Three themes. One winner. From raw emotions to high-speed sports to the rhythm of music, each round challenges you to capture something new.<br><br>
+                        Show us how you see the world, frame by frame, and prove you have the eye to tell stories through compelling composition, lighting, and shutter timing across the campus.
+                    </p>
+                    <details class="event-rules-box">
+                        <summary>What to bring &amp; Rules</summary>
+                        <ul>
+                            <li>Bring your own DSLR or mirrorless camera and SD card reader.</li>
+                            <li>Phone cameras, drones, and post-capture generative AI are strictly forbidden.</li>
+                            <li>Photos submitted directly on SD cards after each theme deadline.</li>
+                        </ul>
+                    </details>
+                    <div class="event-meta">
+                        <dl class="event-facts">
+                            <dt>Fee</dt><dd>₹600 per participant</dd>
+                            <dt>Per school</dt><dd>Up to 3 photographers</dd>
+                            <dt>When</dt><dd>Both days</dd>
+                        </dl>
+                        <a href="contact.html#register" class="event-action">Register Solo →</a>
+                    </div>
+                </div>
+
+                <!-- 10. Kryptos Visos -->
+                <div class="event-card" id="kryptos-visos" data-category="creative">
+                    <div class="event-card-top">
+                        <div class="event-icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                                <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                                <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                            </svg>
+                        </div>
+                        <span class="event-participants-badge">🎨 2 per team (painter + model)</span>
+                    </div>
+                    <h3>Kryptos Visos</h3>
+                    <div class="event-tagline">"Bring your brushes, beat the clock, and let your creativity IGNITE!"</div>
+                    <p>
+                        A face painting competition where the human canvas transforms into living art.<br><br>
+                        Day 1 explores a theme revealed in advance, testing precision, color theory, and speed. On Day 2, finalists face a sudden-death challenge: a unique, different theme assigned to each team just 10 minutes before the clock starts.
+                    </p>
+                    <details class="event-rules-box">
+                        <summary>What to bring &amp; Rules</summary>
+                        <ul>
+                            <li>Bring your own skin-safe face paints, palettes, and brushes.</li>
+                            <li>Each team consists of exactly 1 painter and 1 model.</li>
+                            <li>Judged on creative interpretation, technique, detail, and theme adherence.</li>
+                        </ul>
+                    </details>
+                    <div class="event-meta">
+                        <dl class="event-facts">
+                            <dt>Fee</dt><dd>₹600 per team</dd>
+                            <dt>Per school</dt><dd>Up to 2 teams</dd>
+                            <dt>When</dt><dd>Day 1 heats, finals Day 2</dd>
+                        </dl>
+                        <a href="contact.html#register" class="event-action">Register Duo →</a>
+                    </div>
+                </div>
+
+                <!-- 11. Respawn -->
+                <div class="event-card" id="respawn" data-category="gaming">
+                    <div class="event-card-top">
+                        <div class="event-icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                                <circle cx="8" cy="12" r="2"></circle>
+                                <path d="M15 12h2m-1-1v2"></path>
+                            </svg>
+                        </div>
+                        <span class="event-participants-badge">🎮 Solo (FIFA, Roblox) · 4 (Minecraft)</span>
+                    </div>
+                    <h3>Respawn</h3>
+                    <div class="event-tagline">"Rise. Fall. Respawn."</div>
+                    <p>
+                        Three games. One arena. <strong>FIFA</strong>: Random clubs every match, Champions League format, knockout rounds to the final. <strong>Minecraft</strong>: Squads of 4 battle across up to five mini-games; winning the majority in a match earns 3 points towards knockout qualification. <strong>Roblox</strong>: Two-day challenge with a checkpoint race on Day 1 and runway fashion on Day 2.
+                    </p>
+                    <details class="event-rules-box">
+                        <summary>What to bring &amp; Rules</summary>
+                        <ul>
+                            <li>Bring your own laptops, mice, and power chargers for Minecraft and devices for Roblox.</li>
+                            <li>Consoles provided for FIFA tournaments with regulation controllers.</li>
+                            <li>Unsportsmanlike conduct or third-party exploits result in immediate disqualification.</li>
+                        </ul>
+                    </details>
+                    <div class="event-meta">
+                        <dl class="event-facts">
+                            <dt>Fee</dt><dd>₹600 per team/entry</dd>
+                            <dt>Per school</dt><dd>1 entry per game</dd>
+                            <dt>When</dt><dd>Day 1 heats, finals Day 2</dd>
+                        </dl>
+                        <a href="contact.html#register" class="event-action">Register Gaming Squad →</a>
+                    </div>
+                </div>
+
+                <!-- 12. Radioshack -->
+                <div class="event-card" id="radioshack" data-category="gaming">
+                    <div class="event-card-top">
+                        <div class="event-icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="2"></circle>
+                                <path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"></path>
+                            </svg>
+                        </div>
+                        <span class="event-participants-badge">⚡ 1 to 5 per team</span>
+                    </div>
+                    <h3>Radioshack</h3>
+                    <div class="event-tagline">"Drop in, beat the clock, and claim fast-paced arcade glory."</div>
+                    <p>
+                        Radioshack Games is a high-energy spot to get your groove on, enjoy the music, and experience the fun of rapid competition — whether you are walking in or taking a breather between other competitive events.<br><br>
+                        Take up the challenge and play one of three lightning mini-games: Cup Pong, Cup Stack Race, and Trivia Bottle Flip. Quick rounds, instant leaderboards, and energetic crowds!
+                    </p>
+                    <details class="event-rules-box">
+                        <summary>What to bring &amp; Rules</summary>
+                        <ul>
+                            <li>Drop in on either day at any time during active fest hours.</li>
+                            <li>Single players or groups of up to 5 can take on the mini-game challenges.</li>
+                            <li>Instant awards and spot tokens for high scores.</li>
+                        </ul>
+                    </details>
+                    <div class="event-meta">
+                        <dl class="event-facts">
+                            <dt>Fee</dt><dd>₹600 / team (or walk-in pass)</dd>
+                            <dt>Format</dt><dd>Arcade drop-in mini-games</dd>
+                            <dt>When</dt><dd>Both days, drop in any time</dd>
+                        </dl>
+                        <a href="contact.html#register" class="event-action">Register / Drop In →</a>
                     </div>
                 </div>
 
             </div>
         </div>
     </section>
+
+    <!-- Flying Phoenix Mascot Float Avatar -->
+    <a href="index.html#welcome" class="flying-phoenix-avatar" aria-label="IGNITE Phoenix Mascot Flying">
+        <img src="./images/mascot.jpeg" alt="Flying Phoenix Mascot">
+    </a>
 
     <!-- Footer -->
     <footer>
@@ -380,6 +511,7 @@
                 <li><a href="cultural.html">Cultural</a></li>
                 <li><a href="sports.html">Sports</a></li>
                 <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="rules.html">Rules</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
             </ul>
             <p style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; color: var(--text-subtle);">© 2026 Greenwood High International School</p>
@@ -422,7 +554,7 @@
         <div id="scarlettChatMessages" class="scarlett-chat-messages">
             <div class="scarlett-msg bot">
                 <div class="scarlett-msg-bubble">
-                    Hello! I'm <strong>Scarlett</strong>. Looking for rules, team limits, or guidelines on any of the 10 Cultural events? Ask away!
+                    Hello! I'm <strong>Scarlett</strong>. Looking for rules, team limits, fees, or what to bring for any of the 12 Cultural events? Ask away!
                 </div>
                 <span class="scarlett-msg-time">Just now</span>
             </div>
@@ -430,14 +562,15 @@
 
         <div class="scarlett-quick-chips">
             <button class="scarlett-chip" data-prompt="What are the rules for Wolf of Wall Street?">📈 Wall Street</button>
-            <button class="scarlett-chip" data-prompt="Tell me about Veritas escape room">🔍 Veritas</button>
+            <button class="scarlett-chip" data-prompt="Tell me about Battle of the Bands">🎸 Bands</button>
             <button class="scarlett-chip" data-prompt="What devices are needed for Respawn gaming?">🎮 Respawn</button>
             <button class="scarlett-chip" data-prompt="What is Dyed in Crimson about?">🩸 Crimson Mystery</button>
             <button class="scarlett-chip" data-prompt="What camera is allowed for Through the Lens?">📷 Photography</button>
+            <button class="scarlett-chip" data-prompt="Tell me about Radioshack">⚡ Radioshack</button>
         </div>
 
         <div class="scarlett-input-area">
-            <input type="text" id="scarlettChatInput" placeholder="Ask Scarlett about rules, events...">
+            <input type="text" id="scarlettChatInput" placeholder="Ask Scarlett about rules, events, fees...">
             <button id="scarlettSendBtn" class="scarlett-send-btn" aria-label="Send query">
                 <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
             </button>

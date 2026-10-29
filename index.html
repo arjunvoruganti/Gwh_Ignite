@@ -4,13 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IGNITE 2026 | Greenwood High Flagship Fest</title>
-    <meta name="description" content="IGNITE 2026 is Greenwood High's premier flagship festival bringing together 10+ legendary Cultural events and high-stakes Sports showdowns.">
+    <meta name="description" content="IGNITE 2026 is Greenwood High's premier interschool fest: 12 cultural events and 8 sports across two days, 13–14 November 2026.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>try{if(sessionStorage.getItem("igniteBurn")){var d=document.documentElement;d.classList.add("fire-arriving");setTimeout(function(){d.classList.remove("fire-arriving")},2500)}}catch(e){}</script>
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
+
+    <!-- Phoenix Welcome Flight Entrance Animation -->
+    <div id="phoenixWelcomeOverlay" class="phoenix-welcome-overlay">
+        <button id="welcomeSkipBtn" class="welcome-skip-btn" aria-label="Skip intro animation">Skip Intro ✕</button>
+        <div class="welcome-fire-ring"></div>
+        <div class="welcome-phoenix-actor">
+            <img src="./images/mascot-transparent.png" alt="IGNITE Phoenix Mascot Flying">
+        </div>
+        <div class="welcome-flight-text">
+            <span class="welcome-flight-tag">Greenwood High Presents</span>
+            <h2 class="welcome-flight-heading">IGNITE 2026</h2>
+        </div>
+    </div>
 
     <!-- Ambient Glowing Background Aura -->
     <div class="bg-ambient-glow">
@@ -19,7 +33,7 @@
         <div class="ambient-blob ambient-blob-3"></div>
     </div>
 
-    <!-- Navigation Header (GWHMUN Style) -->
+    <!-- Navigation Header -->
     <nav>
         <div class="container nav-content">
             <a href="index.html" class="logo-link">
@@ -32,6 +46,7 @@
                 <a href="cultural.html">Cultural</a>
                 <a href="sports.html">Sports</a>
                 <a href="schedule.html">Schedule</a>
+                <a href="rules.html">Rules</a>
                 <a href="contact.html">Contact Us</a>
             </div>
 
@@ -41,62 +56,164 @@
         </div>
     </nav>
 
-    <!-- Hero Section (GWHMUN Cinematic Style with Mascot) -->
+    <!-- Hero Section with Flying Phoenix Mascot Aura -->
     <header id="home" class="hero">
         <div class="container">
-            <span class="intro-text">Introducing</span>
+            <span class="intro-text">Greenwood High Presents</span>
             <h1><span class="gradient-text">IGNITE 2026</span></h1>
-            <p>October 24th - 25th, 2026</p>
+            <p>13th &amp; 14th November 2026</p>
 
             <div class="hero-actions-group">
-                <a href="cultural.html" class="btn-glow">Cultural Events</a>
-                <a href="sports.html" class="btn-glow" style="border-color: rgba(255, 140, 66, 0.6);">Sports Arena</a>
+                <a href="cultural.html" class="btn-glow">Cultural Events (12)</a>
+                <a href="sports.html" class="btn-glow" style="border-color: rgba(255, 140, 66, 0.6);">Sports (8)</a>
+            </div>
+
+            <!-- Countdown Timer inspired by Oakridge Codefest -->
+            <div class="hero-countdown-wrap" data-reveal>
+                <p class="countdown-label">Ignition In</p>
+                <div class="glass-countdown" data-target="2026-11-13T08:30:00+05:30" role="group" aria-label="Countdown to IGNITE 2026, 13th November 2026">
+                    <div class="countdown-unit-box">
+                        <span class="countdown-num" data-unit="days">00</span>
+                        <span class="countdown-tag">Days</span>
+                    </div>
+                    <div class="countdown-sep">:</div>
+                    <div class="countdown-unit-box">
+                        <span class="countdown-num" data-unit="hours">00</span>
+                        <span class="countdown-tag">Hours</span>
+                    </div>
+                    <div class="countdown-sep">:</div>
+                    <div class="countdown-unit-box">
+                        <span class="countdown-num" data-unit="minutes">00</span>
+                        <span class="countdown-tag">Minutes</span>
+                    </div>
+                    <div class="countdown-sep">:</div>
+                    <div class="countdown-unit-box">
+                        <span class="countdown-num" data-unit="seconds">00</span>
+                        <span class="countdown-tag">Seconds</span>
+                    </div>
+                </div>
             </div>
 
             <!-- Quick Metrics Strip -->
             <div class="hero-metrics">
                 <div class="metric-item">
-                    <div class="metric-num">10+</div>
-                    <div class="metric-label">Cultural Spectacles</div>
+                    <div class="metric-num">12</div>
+                    <div class="metric-label">Cultural Events</div>
                 </div>
                 <div class="metric-item">
-                    <div class="metric-num">6+</div>
-                    <div class="metric-label">Sports Showdowns</div>
+                    <div class="metric-num">8</div>
+                    <div class="metric-label">Sports</div>
                 </div>
                 <div class="metric-item">
-                    <div class="metric-num">800+</div>
-                    <div class="metric-label">Elite Competitors</div>
+                    <div class="metric-num">1000+</div>
+                    <div class="metric-label">Competitors</div>
                 </div>
                 <div class="metric-item">
                     <div class="metric-num">2 Days</div>
-                    <div class="metric-label">Fiery Passion</div>
+                    <div class="metric-label">13–14 Nov 2026</div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Welcome Address Section (GWHMUN Secretariat Card Format) -->
-    <section id="welcome" class="section">
+    <!-- What's On: Live Programme Overview -->
+    <section class="section">
         <div class="container">
-            <h2 class="section-title gradient-text">Welcome Address</h2>
+            <h2 class="section-title gradient-text">What's On</h2>
+            <p class="section-subtitle">A comprehensive lineup of fiery creative battles and athletic championships.</p>
+
+            <div class="programme-grid">
+                <!-- Cultural Programme Box -->
+                <div class="programme-box">
+                    <h3>Cultural <a href="cultural.html">All 12 details →</a></h3>
+                    <ul class="programme-list">
+                        <li><a href="cultural.html#battle-of-the-bands"><span class="name">Battle of the Bands</span><span class="size">2–7 per band</span></a></li>
+                        <li><a href="cultural.html#dyed-in-crimson"><span class="name">Dyed in Crimson</span><span class="size">1–3 per team</span></a></li>
+                        <li><a href="cultural.html#wolf-of-wall-street"><span class="name">Wolf of Wall Street</span><span class="size">3–5 per team</span></a></li>
+                        <li><a href="cultural.html#veritas"><span class="name">Veritas</span><span class="size">3–6 per team</span></a></li>
+                        <li><a href="cultural.html#directors-cut"><span class="name">Director's Cut</span><span class="size">4–5 per team</span></a></li>
+                        <li><a href="cultural.html#insync"><span class="name">Insync</span><span class="size">1–9 per team</span></a></li>
+                        <li><a href="cultural.html#dress-to-impress"><span class="name">Dress to Impress</span><span class="size">4–6 per team</span></a></li>
+                        <li><a href="cultural.html#pitch-perfect"><span class="name">Pitch Perfect</span><span class="size">Solo vocalist</span></a></li>
+                        <li><a href="cultural.html#through-the-lens"><span class="name">Through the Lens</span><span class="size">Solo photographer</span></a></li>
+                        <li><a href="cultural.html#kryptos-visos"><span class="name">Kryptos Visos</span><span class="size">2 per team (painter + model)</span></a></li>
+                        <li><a href="cultural.html#respawn"><span class="name">Respawn</span><span class="size">Solo or 4 per team</span></a></li>
+                        <li><a href="cultural.html#radioshack"><span class="name">Radioshack</span><span class="size">1–5, drop-in mini-games</span></a></li>
+                    </ul>
+                </div>
+
+                <!-- Sports Programme Box -->
+                <div class="programme-box">
+                    <h3>Sports <a href="sports.html">All 8 details →</a></h3>
+                    <ul class="programme-list">
+                        <li><a href="sports.html#basketball"><span class="name">Basketball</span><span class="size">Boys &amp; girls (10–12)</span></a></li>
+                        <li><a href="sports.html#football"><span class="name">Football</span><span class="size">Boys (11v11) &amp; girls (7v7)</span></a></li>
+                        <li><a href="sports.html#flag-football"><span class="name">Flag Football</span><span class="size">Mixed, 7-a-side</span></a></li>
+                        <li><a href="sports.html#volleyball"><span class="name">Volleyball</span><span class="size">Boys &amp; girls (up to 12)</span></a></li>
+                        <li><a href="sports.html#badminton"><span class="name">Badminton</span><span class="size">Boys &amp; girls (2–6)</span></a></li>
+                        <li><a href="sports.html#table-tennis"><span class="name">Table Tennis</span><span class="size">Boys &amp; girls (3–5)</span></a></li>
+                        <li><a href="sports.html#tennis"><span class="name">Tennis</span><span class="size">Boys &amp; girls (3 per team)</span></a></li>
+                        <li><a href="sports.html#shooting"><span class="name">Shooting</span><span class="size">10m air rifle &amp; pistol</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Welcome Letter from the Team Section -->
+    <section id="welcome" class="section section-darker">
+        <div class="container">
+            <h2 class="section-title gradient-text">A Welcome From The Team</h2>
             <p class="section-subtitle">A message from the student leadership leading IGNITE 2026.</p>
 
-            <div style="display: flex; flex-direction: column; gap: 30px; max-width: 900px; margin: 0 auto;">
+            <div style="max-width: 900px; margin: 0 auto;">
                 <div class="glass-card" style="display: flex; flex-direction: column; gap: 24px; text-align: left;">
-                    <div style="display: flex; align-items: center; gap: 24px;">
-                        <img src="./images/mascot.jpeg" alt="Phoenix Crest" style="width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent-gold); flex-shrink: 0;">
+                    <div style="display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
+                        <img src="./images/mascot.jpeg" alt="Phoenix Crest" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent-gold); flex-shrink: 0;">
                         <div>
-                            <h4 style="color: var(--accent-gold); text-transform: uppercase; letter-spacing: 2px; font-size: 0.95rem; margin-bottom: 4px;">Convenor & President</h4>
-                            <h3 style="font-size: 1.9rem; font-weight: 800;">IGNITE Executive Directorate</h3>
+                            <h4 style="color: var(--accent-gold); text-transform: uppercase; letter-spacing: 2px; font-size: 0.92rem; margin-bottom: 4px;">Student Leadership Directorate</h4>
+                            <h3 style="font-size: 1.8rem; font-weight: 800;">The IGNITE Heads</h3>
                         </div>
                     </div>
-                    <p style="color: var(--text-muted); font-size: 1.02rem; line-height: 1.8;">
-                        Dear Delegates, Performers, and Athletes,<br><br>
-                        It is our distinct privilege to welcome you to IGNITE 2026 — Greenwood High's crown jewel interschool fest.<br><br>
-                        Every great epoch of achievement begins with a single spark. This year, we have bridged the worlds of fiery creative expression and athletic dominance. Whether you are cracking campus-wide murder conspiracies in <em>Dyed in Crimson</em>, executing high-stakes trades in <em>Wolf of Wall Street</em>, tearing up the stage at <em>Battle of the Bands</em>, or sprinting toward the finish line on our athletic turf, IGNITE is your proving ground.<br><br>
-                        Step out of your comfort zone, represent your school with pride, and let your brilliance ignite.<br><br>
-                        <em>May the spirit of the Phoenix guide you.</em>
-                    </p>
+                    <div style="color: var(--text-muted); font-size: 1.02rem; line-height: 1.85; display: flex; flex-direction: column; gap: 14px;">
+                        <p>Dear Participants,</p>
+                        <p>It is with great pride and excitement that we welcome you to <strong>IGNITE 2026</strong>, on the <strong>13th and 14th of November</strong>. Across two action-packed days, our campus will host 12 cultural events and 8 sports tournaments, uniting creativity, talent, and sportsmanship under one unforgettable celebration.</p>
+                        <p>IGNITE is not just another fest. It is Bangalore's biggest student-run festival, and what makes it truly special is that it stands for something larger than itself. Every moment of celebration, every competition, and every memory created helps us raise funds for the <strong>education of underprivileged girls</strong>, a cause that fuels our passion to make IGNITE bigger and more impactful every year.</p>
+                        <p>At the heart of IGNITE is our beloved mascot, the <strong>Phoenix</strong>, a timeless symbol of resilience, rebirth, and boundless energy. Just like the phoenix, IGNITE rises each year, brighter and stronger, to inspire everyone who becomes part of it.</p>
+                        <p style="color: var(--accent-orange); font-weight: 700; margin-top: 8px;">Warm regards,<br>The IGNITE Heads<br><em style="font-size: 0.88rem; color: var(--text-subtle);">Greenwood High International School</em></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Before You Come Section -->
+    <section class="section">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; flex-wrap: wrap; gap: 16px;">
+                <div>
+                    <h2 class="section-title gradient-text" style="text-align: left; margin-bottom: 6px;">Before You Come</h2>
+                    <p class="section-subtitle" style="text-align: left; margin-bottom: 0;">Essential highlights every school contingent and visitor should keep in mind.</p>
+                </div>
+                <a href="rules.html" class="event-action" style="font-size: 1rem;">All fest rules →</a>
+            </div>
+
+            <div class="know-grid">
+                <div class="know-item">
+                    <h3>Registration</h3>
+                    <p>Open 2–10 November. Cultural events are registered and paid online. Sports are registered online and paid at the counter.</p>
+                </div>
+                <div class="know-item">
+                    <h3>Entry</h3>
+                    <p>Wear your regular school uniform and bring your 2026–27 school ID. You will receive an official wristband to wear all day.</p>
+                </div>
+                <div class="know-item">
+                    <h3>Food</h3>
+                    <p>No outside food or drinks. Gourmet food trucks and stalls on campus operate with coupons sold at venue counters.</p>
+                </div>
+                <div class="know-item">
+                    <h3>Prizes</h3>
+                    <p>Every event features winner trophies and certificates, awarded at the grand Day 2 valedictory ceremony.</p>
                 </div>
             </div>
         </div>
@@ -112,15 +229,14 @@
                 <li><a href="cultural.html">Cultural</a></li>
                 <li><a href="sports.html">Sports</a></li>
                 <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="rules.html">Rules</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
             </ul>
             <p style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; color: var(--text-subtle);">© 2026 Greenwood High International School</p>
         </div>
     </footer>
 
-    <!-- ==========================================================================
-         SCARLETT AI VOICE/CHAT BUTTON (Omnipresent matching user reference screenshot)
-         ========================================================================== -->
+    <!-- SCARLETT AI VOICE/CHAT BUTTON (Omnipresent) -->
     <div class="scarlett-omnipresent-container">
         <div class="scarlett-fab-tag">
             <span class="scarlett-status-dot"></span>
@@ -128,7 +244,6 @@
         </div>
         <button id="scarlettVoiceBtn" class="scarlett-voice-button" aria-label="Open Scarlett AI Assistant">
             <div class="scarlett-voice-pulse"></div>
-            <!-- Microphone Icon from screenshot -->
             <svg class="scarlett-mic-icon" viewBox="0 0 24 24">
                 <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
                 <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
@@ -157,19 +272,19 @@
         <div id="scarlettChatMessages" class="scarlett-chat-messages">
             <div class="scarlett-msg bot">
                 <div class="scarlett-msg-bubble">
-                    Hello! I'm <strong>Scarlett</strong>, your official assistant for Greenwood High's IGNITE 2026. Ask me anything about our 10 Cultural events, Sports tournaments, rules, or schedule!
+                    Hello! I'm <strong>Scarlett</strong>, your official assistant for Greenwood High's IGNITE 2026. Ask me anything about our 12 cultural events, 8 sports, rules, or registration!
                 </div>
                 <span class="scarlett-msg-time">Just now</span>
             </div>
         </div>
 
         <div class="scarlett-quick-chips">
+            <button class="scarlett-chip" data-prompt="What are the dates for IGNITE?">📅 Fest Dates</button>
             <button class="scarlett-chip" data-prompt="What are the rules for Wolf of Wall Street?">📈 Wall Street</button>
-            <button class="scarlett-chip" data-prompt="Tell me about Veritas escape room">🔍 Veritas</button>
-            <button class="scarlett-chip" data-prompt="What devices are needed for Respawn gaming?">🎮 Respawn</button>
+            <button class="scarlett-chip" data-prompt="Tell me about Battle of the Bands">🎸 Bands</button>
             <button class="scarlett-chip" data-prompt="What is Dyed in Crimson about?">🩸 Crimson Mystery</button>
-            <button class="scarlett-chip" data-prompt="What camera is allowed for Through the Lens?">📷 Photography</button>
             <button class="scarlett-chip" data-prompt="What sports tournaments are happening?">⚽ Sports</button>
+            <button class="scarlett-chip" data-prompt="What are the key rules for entry?">🎟️ Entry Rules</button>
         </div>
 
         <div class="scarlett-input-area">

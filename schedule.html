@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Schedule | IGNITE 2026</title>
+    <title>Event Days &amp; Schedule | IGNITE 2026</title>
+    <meta name="description" content="Chronological schedule and event days table for IGNITE 2026 at Greenwood High, 13–14 November 2026.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>try{if(sessionStorage.getItem("igniteBurn")){var d=document.documentElement;d.classList.add("fire-arriving");setTimeout(function(){d.classList.remove("fire-arriving")},2500)}}catch(e){}</script>
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
@@ -31,6 +33,7 @@
                 <a href="cultural.html">Cultural</a>
                 <a href="sports.html">Sports</a>
                 <a href="schedule.html" class="active">Schedule</a>
+                <a href="rules.html">Rules</a>
                 <a href="contact.html">Contact Us</a>
             </div>
 
@@ -43,16 +46,92 @@
     <!-- Schedule Page Section -->
     <section class="section-page">
         <div class="container">
-            <h2 class="section-title gradient-text">Event Schedule</h2>
-            <p class="section-subtitle">A two-day chronological timeline spanning opening torches, stage battles, crime scene investigations, and athletic championships.</p>
+            <h1 class="section-title gradient-text">Event Schedule &amp; Days</h1>
+            <p class="section-subtitle">Which cultural events run on which day across 13–14 November 2026. Sports fixtures and match timings are drawn once contingent registrations close.</p>
+
+            <!-- Add to Calendar Action Button & Modal -->
+            <div class="schedule-calendar-bar" data-reveal>
+                <div class="cal-dropdown-container">
+                    <button id="addToCalBtn" class="btn-glow cal-primary-btn" aria-haspopup="true" aria-expanded="false" data-magnetic="10">
+                        <svg class="cal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                            <line x1="12" y1="14" x2="12" y2="18"></line>
+                            <line x1="10" y1="16" x2="14" y2="16"></line>
+                        </svg>
+                        <span>Add to Calendar</span>
+                        <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <div id="calDropdownMenu" class="cal-dropdown-menu">
+                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=IGNITE+2026+%7C+Greenwood+High+Flagship+Fest&dates=20261113T083000/20261114T183000&details=Greenwood+High+International+School+Flagship+Inter-School+Fest+featuring+12+Cultural+Events+and+8+Sports+Tournaments.&location=Greenwood+High+International+School%2C+Heggondahalli%2C+Bengaluru%2C+Karnataka+560087&sf=true&output=xml" target="_blank" rel="noopener noreferrer" class="cal-dropdown-item">
+                            <span class="cal-item-dot google-dot"></span>
+                            <span>Google Calendar</span>
+                        </a>
+                        <a href="https://outlook.live.com/calendar/0/deeplink/compose?subject=IGNITE+2026+%7C+Greenwood+High+Flagship+Fest&startdt=2026-11-13T08:30:00&enddt=2026-11-14T18:30:00&body=Greenwood+High+Flagship+Inter-School+Fest.+12+Cultural+events+and+8+Sports+disciplines.&location=Greenwood+High+International+School%2C+Bengaluru" target="_blank" rel="noopener noreferrer" class="cal-dropdown-item">
+                            <span class="cal-item-dot outlook-dot"></span>
+                            <span>Outlook / Office 365</span>
+                        </a>
+                        <button id="downloadIcalBtn" type="button" class="cal-dropdown-item cal-item-btn">
+                            <span class="cal-item-dot ical-dot"></span>
+                            <span>Apple Calendar / iCal (.ics)</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="cal-dates-badge">
+                    <span class="pulse-dot"></span>
+                    <span>13th &amp; 14th November 2026 • 08:30 AM IST</span>
+                </div>
+            </div>
+
+            <!-- Event Days Table from Brochure -->
+            <div class="days-table-wrap">
+                <table class="days-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Cultural Event</th>
+                            <th scope="col">Day 1<span>Fri 13 Nov</span></th>
+                            <th scope="col">Day 2<span>Sat 14 Nov</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><th scope="row"><a href="cultural.html#insync">Insync</a></th><td>On (Heats)</td><td class="is-final">Finals</td></tr>
+                        <tr><th scope="row"><a href="cultural.html#dress-to-impress">Dress to Impress</a></th><td>On (Showcase)</td><td class="is-final">Finals</td></tr>
+                        <tr><th scope="row"><a href="cultural.html#battle-of-the-bands">Battle of the Bands</a></th><td>Showcase</td><td class="is-final">Knockout Finals</td></tr>
+                        <tr><th scope="row"><a href="cultural.html#directors-cut">Director's Cut</a></th><td>On (Stage &amp; Improv)</td><td>On (Short Film)</td></tr>
+                        <tr><th scope="row"><a href="cultural.html#through-the-lens">Through the Lens</a></th><td>On</td><td>On</td></tr>
+                        <tr><th scope="row"><a href="cultural.html#dyed-in-crimson">Dyed in Crimson</a></th><td>On (Investigation)</td><td>On (Conclusion)</td></tr>
+                        <tr><th scope="row"><a href="cultural.html#veritas">Veritas</a></th><td>On (Daily Winner)</td><td>On (Daily Winner)</td></tr>
+                        <tr><th scope="row"><a href="cultural.html#respawn">Respawn</a></th><td>On (Qualifiers)</td><td class="is-final">Finals</td></tr>
+                        <tr><th scope="row"><a href="cultural.html#radioshack">Radioshack</a></th><td>On (Drop-in)</td><td>On (Drop-in)</td></tr>
+                        <tr><th scope="row"><a href="cultural.html#wolf-of-wall-street">Wolf of Wall Street</a></th><td>On (Trading &amp; Bids)</td><td>On (IPO Pitch)</td></tr>
+                        <tr><th scope="row"><a href="cultural.html#kryptos-visos">Kryptos Visos</a></th><td>On (Theme Heats)</td><td class="is-final">Surprise Finals</td></tr>
+                        <tr><th scope="row"><a href="cultural.html#pitch-perfect">Pitch Perfect</a></th><td>On (Knockouts)</td><td class="is-off">—</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="page-note" style="margin-bottom: 50px;">
+                <h2>On the Day Guidelines</h2>
+                <ul>
+                    <li>Arrive at Greenwood High International School on time for smooth registration and credential distribution.</li>
+                    <li>Every attendee receives a coloured wristband at registration. Wear it visibly for the entire fest.</li>
+                    <li>Trophies, certificates, and prizes for every event are presented at the grand valedictory ceremony on Day 2.</li>
+                </ul>
+            </div>
+
+            <!-- Two-Day Chronological Timeline Section -->
+            <h2 class="section-title gradient-text" style="font-size: 2.2rem; margin-top: 40px;">Fest Timeline</h2>
+            <p class="section-subtitle">Chronological schedule spanning morning inaugurations, midday arenas, and evening championship showdowns.</p>
 
             <div class="timeline-container">
                 <div class="timeline-item">
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <span class="timeline-time">Day 1 • 08:30 AM - 09:45 AM</span>
-                        <h4>Opening Ceremony & Torch Lighting</h4>
-                        <p>Inaugural keynote, lighting of the summit cauldron, and introduction of participating schools and jury panels.</p>
+                        <h4>Opening Ceremony &amp; Summit Cauldron Lighting</h4>
+                        <p>Inaugural keynote, lighting of the IGNITE cauldron, and formal introduction of participating school contingents, delegates, and judicial panels.</p>
                     </div>
                 </div>
 
@@ -60,8 +139,8 @@
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <span class="timeline-time">Day 1 • 10:00 AM - 01:30 PM</span>
-                        <h4>Morning Round: Business, Mystery & Field Heats</h4>
-                        <p>Wolf of Wall Street opening bells & Bidding Wars, Veritas Room 1 investigations, Dyed in Crimson crime scene unlock, and Football 7v7 group fixtures.</p>
+                        <h4>Morning Arenas: Business, Mystery &amp; Sports Heats</h4>
+                        <p>Wolf of Wall Street opening bells &amp; Bidding Wars, Veritas Room 1 investigations, Dyed in Crimson crime scene unlock, Football group ties, and Basketball qualifiers.</p>
                     </div>
                 </div>
 
@@ -69,8 +148,8 @@
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <span class="timeline-time">Day 1 • 02:30 PM - 06:30 PM</span>
-                        <h4>Afternoon Arena: Battle of the Bands & Stage Jams</h4>
-                        <p>Battle of the Bands Day 1 qualifiers, Pitch Perfect Round 1 vocal knockouts, Respawn Minecraft minigame group matches, and Hoop Matrix basketball ties.</p>
+                        <h4>Afternoon Arena: Battle of the Bands &amp; Stage Jams</h4>
+                        <p>Battle of the Bands Day 1 qualifiers, Pitch Perfect solo vocal knockouts, Respawn Minecraft minigame group clashes, Badminton ties, and Radioshack mini-game challenges.</p>
                     </div>
                 </div>
 
@@ -78,8 +157,8 @@
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <span class="timeline-time">Day 2 • 09:00 AM - 01:00 PM</span>
-                        <h4>Day 2 Breakthrough: Improvisation & Knockouts</h4>
-                        <p>Directors Cut 3-7 min short film screenings, Kryptos Visos surprise 10-minute theme face painting, Respawn FIFA & Roblox finals, and Badminton & TT semifinals.</p>
+                        <h4>Day 2 Breakthrough: Improvisation, Films &amp; Semifinals</h4>
+                        <p>Director's Cut short film screenings, Kryptos Visos surprise 10-minute theme face painting, Respawn FIFA &amp; Roblox finals, Table Tennis, Tennis, and Shooting eliminations.</p>
                     </div>
                 </div>
 
@@ -87,8 +166,8 @@
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <span class="timeline-time">Day 2 • 02:00 PM - 04:30 PM</span>
-                        <h4>Grand Finals & Runway Spectacular</h4>
-                        <p>Dress to Impress sustainable couture runway walks, Insync dance crew showdowns, Wolf of Wall Street IPO final defense, and Football & Basketball Cup finals.</p>
+                        <h4>Grand Finals: Runway Spectacular &amp; Stadium Clashes</h4>
+                        <p>Dress to Impress sustainable runway showcases, Insync choreography crew finals, Wolf of Wall Street IPO final defense, and Football &amp; Basketball Cup finals.</p>
                     </div>
                 </div>
 
@@ -96,13 +175,18 @@
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
                         <span class="timeline-time">Day 2 • 05:00 PM - 06:30 PM</span>
-                        <h4>Valedictory & Awards Ceremony</h4>
-                        <p>Awarding of overall champion school rolling trophy, event medals, cash grants, and celebration of IGNITE 2026.</p>
+                        <h4>Valedictory &amp; Awards Ceremony</h4>
+                        <p>Conferring of the IGNITE 2026 Overall Champions School Rolling Trophy, individual event gold medals, cash awards, and celebration of the fest.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Flying Phoenix Mascot Float Avatar -->
+    <a href="index.html#welcome" class="flying-phoenix-avatar" aria-label="IGNITE Phoenix Mascot Flying">
+        <img src="./images/mascot.jpeg" alt="Flying Phoenix Mascot">
+    </a>
 
     <!-- Footer -->
     <footer>
@@ -114,6 +198,7 @@
                 <li><a href="cultural.html">Cultural</a></li>
                 <li><a href="sports.html">Sports</a></li>
                 <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="rules.html">Rules</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
             </ul>
             <p style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; color: var(--text-subtle);">© 2026 Greenwood High International School</p>
@@ -156,17 +241,17 @@
         <div id="scarlettChatMessages" class="scarlett-chat-messages">
             <div class="scarlett-msg bot">
                 <div class="scarlett-msg-bubble">
-                    Hello! I'm <strong>Scarlett</strong>. Have any questions about Day 1 or Day 2 timings, rounds, or event schedules? Just ask!
+                    Hello! I'm <strong>Scarlett</strong>. Have any questions about Day 1 or Day 2 timings, event days, or schedule fixtures? Just ask!
                 </div>
                 <span class="scarlett-msg-time">Just now</span>
             </div>
         </div>
 
         <div class="scarlett-quick-chips">
-            <button class="scarlett-chip" data-prompt="What happens on Day 1 morning?">🌅 Day 1 Morning</button>
+            <button class="scarlett-chip" data-prompt="When is IGNITE?">📅 Fest Dates</button>
             <button class="scarlett-chip" data-prompt="When is Battle of the Bands happening?">🎸 Bands Timing</button>
+            <button class="scarlett-chip" data-prompt="What happens on Day 1 morning?">🌅 Day 1 Morning</button>
             <button class="scarlett-chip" data-prompt="When are the grand finals?">🏆 Finals</button>
-            <button class="scarlett-chip" data-prompt="Where is the event hosted?">📍 Venue</button>
         </div>
 
         <div class="scarlett-input-area">

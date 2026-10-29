@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact & Registration | IGNITE 2026</title>
+    <title>Contact &amp; Registration | IGNITE 2026</title>
+    <meta name="description" content="Register school contingents, contact the IGNITE organizing team, teachers-in-charge, and get venue directions to Greenwood High.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>try{if(sessionStorage.getItem("igniteBurn")){var d=document.documentElement;d.classList.add("fire-arriving");setTimeout(function(){d.classList.remove("fire-arriving")},2500)}}catch(e){}</script>
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
@@ -31,6 +33,7 @@
                 <a href="cultural.html">Cultural</a>
                 <a href="sports.html">Sports</a>
                 <a href="schedule.html">Schedule</a>
+                <a href="rules.html">Rules</a>
                 <a href="contact.html" class="active">Contact Us</a>
             </div>
 
@@ -40,35 +43,44 @@
         </div>
     </nav>
 
-    <!-- Contact & Registration Page Section (GWHMUN Style) -->
+    <!-- Contact & Registration Page Section -->
     <section class="section-page">
         <div class="container">
             <div class="glass-card contact-card">
-                <h2 class="section-title gradient-text">Contact & Registration</h2>
-                <p class="section-subtitle">Reach out to the IGNITE Organizing Directorate or submit school delegation inquiries.</p>
+                <h1 class="section-title gradient-text">Contact &amp; Registration</h1>
+                <p class="section-subtitle">Reach out to the IGNITE Organizing Directorate, register your school contingent, or connect with our event leadership.</p>
 
+                <!-- Direct Contact Links -->
                 <div class="contact-details">
                     <a href="mailto:ignite@greenwoodhigh.edu.in" class="contact-link">
                         <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                         ignite@greenwoodhigh.edu.in
                     </a>
 
-                    <a href="https://instagram.com/gwh.ignite2026" target="_blank" class="contact-link">
+                    <a href="https://instagram.com/ignite.gwh" target="_blank" rel="noopener" class="contact-link">
                         <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                        @gwh.ignite2026
+                        @ignite.gwh
                     </a>
                 </div>
 
-                <!-- Registration Express Box -->
-                <div style="background: rgba(255, 75, 43, 0.08); border: 1px solid rgba(255, 75, 43, 0.25); border-radius: 12px; padding: 26px; text-align: center; margin-bottom: 40px;">
-                    <h3 style="color: var(--accent-gold); margin-bottom: 8px; font-size: 1.3rem;">School & Contingent Registrations Open</h3>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 18px; max-width: 600px; margin-left: auto; margin-right: auto;">
-                        Brochures, event guidelines, and delegate entry forms are dispatched directly to invited institutions. Independent participants can contact the registration desk below.
+                <!-- Registration Information Block -->
+                <div id="register" style="background: rgba(255, 75, 43, 0.08); border: 1px solid rgba(255, 75, 43, 0.25); border-radius: 12px; padding: 30px; text-align: left; margin-bottom: 40px;">
+                    <h3 style="color: var(--accent-gold); margin-bottom: 12px; font-size: 1.4rem; text-transform: uppercase;">How to Register</h3>
+                    <p style="color: #e2e8f0; font-size: 1rem; line-height: 1.7; margin-bottom: 14px;">
+                        <strong>Cultural events:</strong> Register and pay online.<br>
+                        <strong>Sports:</strong> Register online, then pay at the counter when you arrive on campus. You will receive an official receipt.
                     </p>
-                    <a href="mailto:ignite@greenwoodhigh.edu.in?subject=IGNITE%202026%20Contingent%20Registration%20Inquiry" class="btn-glow" style="padding: 12px 30px;">Express Registration Interest</a>
+                    <p style="color: var(--text-muted); font-size: 0.94rem; line-height: 1.6; margin-bottom: 22px;">
+                        Registrations run from <strong>2 to 10 November</strong>. Each school can enter one team per sport. Individual event limits, fees, and rules are detailed on the <a href="cultural.html" style="color: var(--accent-gold); text-decoration: underline;">Cultural</a> and <a href="sports.html" style="color: var(--accent-gold); text-decoration: underline;">Sports</a> pages.
+                    </p>
+                    <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+                        <a href="mailto:ignite@greenwoodhigh.edu.in?subject=IGNITE%202026%20Registration" class="btn-glow" style="padding: 12px 28px;">Email Registration Desk</a>
+                    </div>
                 </div>
 
                 <!-- Greenwood High Campus Map -->
+                <h3 style="color: #fff; font-size: 1.3rem; text-transform: uppercase; margin-bottom: 16px;">Campus Location</h3>
+                <p style="color: var(--text-muted); margin-bottom: 16px;">Greenwood High International School, Chikkawadavalli, Varthur Sarjapur Road, Bangalore</p>
                 <div class="map-wrapper">
                     <iframe 
                         src="https://maps.google.com/maps?q=Greenwood+High+Int'l+School+(IB%2FIGCSE)&t=&z=15&ie=UTF8&iwloc=&output=embed" 
@@ -80,9 +92,54 @@
                         referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
                 </div>
+
+                <!-- Organising Team Directory from Brochure -->
+                <div class="page-note page-note-wide" style="margin-top: 48px; text-align: left;">
+                    <h2 style="font-size: 1.6rem; color: var(--accent-gold); text-transform: uppercase; margin-bottom: 18px;">Organising Team</h2>
+                    <div class="people">
+                        <div>
+                            <h3>IGNITE Heads</h3>
+                            <ul>
+                                <li><a href="mailto:vikrant052641@greenwoodhigh.edu.in">Vikrant Shetty Tomar</a><span>School Captain</span></li>
+                                <li><a href="mailto:aarya022620@greenwoodhigh.edu.in">Aarya Poddar</a><span>School Vice Captain</span></li>
+                                <li><a href="mailto:anita052386@greenwoodhigh.edu.in">Anita Ganesh Bhat</a><span>Cultural Secretary</span></li>
+                                <li><a href="mailto:aarnavi052625@greenwoodhigh.edu.in">Aarnavi Nagendran</a><span>Cultural Prefect</span></li>
+                                <li><a href="mailto:miraya011106@greenwoodhigh.edu.in">Miraya Singh</a><span>Community Service Prefect</span></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>Teachers in Charge</h3>
+                            <ul>
+                                <li><a href="mailto:Sahelig@greenwoodhigh.edu.in">Ms. Saheli Gupta</a></li>
+                                <li><a href="mailto:sowmyas@greenwoodhigh.edu.in">Ms. Sowmya S</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>Cultural Heads</h3>
+                            <ul>
+                                <li><a href="mailto:suhani022478@greenwoodhigh.edu.in">Suhani Singh</a></li>
+                                <li><a href="mailto:koshika052630@greenwoodhigh.edu.in">Koshika Goel</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>Sports Heads</h3>
+                            <ul>
+                                <li><a href="mailto:hiba023322@greenwoodhigh.edu.in">Hiba Gabriel</a></li>
+                                <li><a href="mailto:rishabh052388@greenwoodhigh.edu.in">Rishabh Kamani</a></li>
+                            </ul>
+                            <p class="people-note">Each sport's event heads are listed directly on the <a href="sports.html">Sports</a> page.</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
+
+    <!-- Flying Phoenix Mascot Float Avatar -->
+    <a href="index.html#welcome" class="flying-phoenix-avatar" aria-label="IGNITE Phoenix Mascot Flying">
+        <img src="./images/mascot.jpeg" alt="Flying Phoenix Mascot">
+    </a>
 
     <!-- Footer -->
     <footer>
@@ -94,6 +151,7 @@
                 <li><a href="cultural.html">Cultural</a></li>
                 <li><a href="sports.html">Sports</a></li>
                 <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="rules.html">Rules</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
             </ul>
             <p style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; color: var(--text-subtle);">© 2026 Greenwood High International School</p>
@@ -146,6 +204,7 @@
             <button class="scarlett-chip" data-prompt="How do I register our school contingent?">📝 Contingent Registration</button>
             <button class="scarlett-chip" data-prompt="Where is Greenwood High located?">📍 Campus Location</button>
             <button class="scarlett-chip" data-prompt="Who do I contact for help?">✉️ Contact Email</button>
+            <button class="scarlett-chip" data-prompt="Who is the organising team?">👥 Organising Team</button>
         </div>
 
         <div class="scarlett-input-area">

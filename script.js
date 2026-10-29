@@ -4,6 +4,33 @@
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
+    // 0. Phoenix Flying Welcome Animation Handler (for index.html)
+    const welcomeOverlay = document.getElementById('phoenixWelcomeOverlay');
+    const welcomeSkipBtn = document.getElementById('welcomeSkipBtn');
+
+    if (welcomeOverlay) {
+        // If user already experienced it in this browsing session, dismiss immediately without flashing
+        const hasSeenIntro = sessionStorage.getItem('igniteWelcomeSeen');
+        if (hasSeenIntro) {
+            welcomeOverlay.style.display = 'none';
+        } else {
+            const dismissWelcome = () => {
+                welcomeOverlay.classList.add('dismissed');
+                sessionStorage.setItem('igniteWelcomeSeen', 'true');
+                setTimeout(() => {
+                    welcomeOverlay.style.display = 'none';
+                }, 800);
+            };
+
+            if (welcomeSkipBtn) {
+                welcomeSkipBtn.addEventListener('click', dismissWelcome);
+            }
+
+            // Auto dismiss smoothly after 3.2s flight
+            setTimeout(dismissWelcome, 3300);
+        }
+    }
+
     // 1. Sticky Navbar scroll effect
     const navbar = document.querySelector('nav');
     if (navbar) {
@@ -31,6 +58,125 @@ document.addEventListener('DOMContentLoaded', () => {
         el.style.transform = 'translateY(20px)';
         el.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
         revealObserver.observe(el);
+    });
+
+    // 2.1. Add to Calendar Dropdown & iCal Generator (for schedule.html)
+    const addToCalBtn = document.getElementById('addToCalBtn');
+    const calDropdownMenu = document.getElementById('calDropdownMenu');
+    const downloadIcalBtn = document.getElementById('downloadIcalBtn');
+
+    if (addToCalBtn && calDropdownMenu) {
+        addToCalBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = calDropdownMenu.classList.contains('show');
+            if (isOpen) {
+                calDropdownMenu.classList.remove('show');
+                addToCalBtn.setAttribute('aria-expanded', 'false');
+            } else {
+                calDropdownMenu.classList.add('show');
+                addToCalBtn.setAttribute('aria-expanded', 'true');
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!calDropdownMenu.contains(e.target) && e.target !== addToCalBtn) {
+                calDropdownMenu.classList.remove('show');
+                addToCalBtn.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+
+    if (downloadIcalBtn) {
+        downloadIcalBtn.addEventListener('click', () => {
+            // Generate official RFC 5545 .ics calendar event
+            const icsData = [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//Greenwood High//IGNITE 2026//EN',
+                'CALSCALE:GREGORIAN',
+                'METHOD:PUBLISH',
+                'BEGIN:VEVENT',
+                'UID:ignite-2026-' + Date.now() + '@greenwoodhigh.edu.in',
+                'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z',
+                'DTSTART;TZID=Asia/Kolkata:20261113T083000',
+                'DTEND;TZID=Asia/Kolkata:20261114T183000',
+                'SUMMARY:IGNITE 2026 | Greenwood High Flagship Fest',
+                'DESCRIPTION:IGNITE 2026 at Greenwood High International School: 12 cultural events and 8 sports tournaments across two electrifying days.',
+                'LOCATION:Greenwood High International School, Chikkawadayarapura, Heggondahalli, Bengaluru, Karnataka 560087',
+                'STATUS:CONFIRMED',
+                'END:VEVENT',
+                'END:VCALENDAR'
+            ].join('\r\n');
+
+            const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'IGNITE_2026_Schedule.ics');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        });
+    }
+
+    // 2.2. Countdown Timer Engine (Oakridge Codefest Style)
+    function initCountdown() {
+        const countdownEl = document.querySelector('[data-target]');
+        if (!countdownEl) return;
+
+        const targetTime = new Date(countdownEl.getAttribute('data-target')).getTime();
+        const daysEl = countdownEl.querySelector('[data-unit="days"]');
+        const hoursEl = countdownEl.querySelector('[data-unit="hours"]');
+        const minutesEl = countdownEl.querySelector('[data-unit="minutes"]');
+        const secondsEl = countdownEl.querySelector('[data-unit="seconds"]');
+
+        function pad(n) { return String(Math.max(0, n)).padStart(2, '0'); }
+
+        function update() {
+            const now = Date.now();
+            const diff = targetTime - now;
+
+            if (diff <= 0) {
+                if (daysEl) daysEl.textContent = '00';
+                if (hoursEl) hoursEl.textContent = '00';
+                if (minutesEl) minutesEl.textContent = '00';
+                if (secondsEl) secondsEl.textContent = '00';
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            if (daysEl) daysEl.textContent = pad(days);
+            if (hoursEl) hoursEl.textContent = pad(hours);
+            if (minutesEl) minutesEl.textContent = pad(minutes);
+            if (secondsEl) secondsEl.textContent = pad(seconds);
+        }
+
+        update();
+        setInterval(update, 1000);
+    }
+    initCountdown();
+
+    // 2.3. Oakridge-style Interactive 3D Card Hover Tilt
+    const interactiveCards = document.querySelectorAll('.event-card, .programme-box, .glass-card');
+    interactiveCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const cx = rect.width / 2;
+            const cy = rect.height / 2;
+            const rotX = ((y - cy) / cy) * -3;
+            const rotY = ((x - cx) / cx) * 3;
+            card.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) translateY(-3px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+        });
     });
 
     // 3. Cultural Events Filtering Logic (for cultural.html)
@@ -65,63 +211,87 @@ document.addEventListener('DOMContentLoaded', () => {
     const scarlettKnowledge = [
         {
             keywords: ['who are you', 'your name', 'what is your name', 'scarlett'],
-            response: "I'm **Scarlett**, the official omnipresent AI assistant for Greenwood High's IGNITE 2026! I can assist you with rules, team limits, schedules, formats, and registration for every single Cultural and Sports event."
+            response: "I'm **Scarlett**, the official assistant for Greenwood High's IGNITE 2026. Ask me about any event's team size, fee, rules or schedule days, or about registration, food, and entry!"
         },
         {
-            keywords: ['wolf of wall street', 'wall street', 'stock', 'trading', 'pen'],
-            response: "**Wolf of Wall Street**:\n• **Participants**: Teams of 3 to 5 people\n• **Tagline**: *'Trade the market. Survive the chaos. Become the Wolf.'*\n• **Format**: 2-day live market simulation with 'Sell Me This Pen', Bidding Wars, Insider Info, Breaking News, and a final IPO pitch.\n• **Rule**: Review the provided case study and background info prior to the event."
+            keywords: ['fee', 'fees', 'cost', 'price', 'pay', 'payment', 'how much'],
+            response: "**Fees per team**:\n• Battle of the Bands, Dress to Impress: ₹1,000\n• Insync, Wolf of Wall Street: ₹800\n• All other cultural events: ₹600 (Pitch Perfect and Through the Lens are per participant)\n• Basketball, Football: ₹1,300 · Volleyball: ₹1,000 · Flag Football: ₹800 · Badminton: ₹700 · Table Tennis, Tennis: ₹600 · Shooting: ₹500\nCultural events are paid online. Sports are paid at the counter."
+        },
+        {
+            keywords: ['wolf of wall street', 'wall street', 'stock', 'trading', 'sell me this pen', 'bidding'],
+            response: "**Wolf of Wall Street**:\n• **Team**: 3 to 5 · **Fee**: ₹800 · **Per school**: up to 2 teams\n• **Format**: 2-day live market simulation with Sell Me This Pen, Bidding Wars, Insider Info, Breaking News, and a final IPO pitch.\n• **Bring**: A laptop. Read the case study and background info we send before the event."
         },
         {
             keywords: ['veritas', 'escape room', 'clues', 'detective', 'investigation'],
-            response: "**Veritas**:\n• **Participants**: Teams of 3 to 6 people\n• **Tagline**: *'Can you crack the case before it's too late?'*\n• **Format**: Escape-room investigation testing critical thinking & deduction under a strict 1-hour time limit. Different winner each day!"
+            response: "**Veritas**:\n• **Team**: 3 to 6 · **Fee**: ₹600 · **Per school**: up to 2 teams\n• **Format**: Escape-room investigation with a 1-hour time limit. Judged on correct suspect, motive and hints used. A different winner each day!"
         },
         {
-            keywords: ['through the lens', 'photography', 'photo', 'camera', 'dslr'],
-            response: "**Through the Lens**:\n• **Participants**: Solo event (no teams)\n• **Tagline**: *'Frame it. Feel it. Tell it.'*\n• **Format**: 3 rounds across 3 themes (raw emotions, high-speed sports, rhythm of music).\n• **Strict Rule**: Participants must use DSLR or mirrorless cameras only (no smartphone cameras)."
+            keywords: ['through the lens', 'photography', 'photographer', 'camera', 'dslr'],
+            response: "**Through the Lens**:\n• **Solo** · **Fee**: ₹600 · **Per school**: up to 3 photographers\n• **Format**: 3 rounds, 3 themes (raw emotions, high-speed sports, rhythm of music).\n• **Bring**: Your own DSLR or mirrorless camera. Smartphone photography is not permitted."
+        },
+        {
+            keywords: ['radioshack', 'cup pong', 'bottle flip', 'walk-in', 'walk in'],
+            response: "**Radioshack Games**:\n• **Team**: 1 to 5 · **Fee**: ₹600, or included in the walk-in fee\n• Drop in on either day and play Cup Pong, Cup Stack Race or Trivia Bottle Flip."
+        },
+        {
+            keywords: ['dress to impress', 'fashion', 'runway', 'outfit', 'sustainable', 'upcycl'],
+            response: "**Dress to Impress**:\n• **Team**: 4 to 6 · **Fee**: ₹1,000 · **Per school**: up to 2 teams\n• **Format**: 7-minute runway plus a short design explanation. Round 1 (Reforged): mythological houses, at least 40% upcycled materials. Round 2 (Legacy, Reworn): traditional Indian attire through historical eras.\n• **Bring**: All clothing and accessories from home."
         },
         {
             keywords: ['respawn', 'gaming', 'minecraft', 'fifa', 'roblox', 'esports'],
-            response: "**Respawn (Gaming Arena)**:\n• **Participants**: Roblox and FIFA are solo; Minecraft requires 4 players per team\n• **Tagline**: *'Rise. Fall. Respawn.'*\n• **Games**: Minecraft action minigames knockouts, FIFA Champions League tournament with random clubs, and 2-day Roblox challenges (Obby race Day 1, Dress to Impress Day 2).\n• **Rule**: Bring your own laptops for Minecraft and devices/chargers for Roblox!"
+            response: "**Respawn**:\n• **Team**: FIFA and Roblox solo, Minecraft 4 · **Fee**: ₹600 · **Per school**: 1 entry per game\n• **Games**: FIFA knockouts with random clubs, Minecraft squads over up to five mini-games, Roblox checkpoint race on Day 1 and runway on Day 2.\n• **Bring**: Your own gaming equipment for Minecraft and Roblox."
         },
         {
-            keywords: ['pitch perfect', 'singing', 'vocal', 'voice', 'song', 'sing'],
-            response: "**Pitch Perfect**:\n• **Participants**: Solo event (no teams)\n• **Tagline**: *'Every voice gets a chance. Every note is a statement. Step onto the stage and make it yours.'*\n• **Format**: 2 rounds of knockout vocal battles to determine the summit's finest voice."
+            keywords: ['pitch perfect', 'singing', 'singer', 'vocal', 'voice', 'song'],
+            response: "**Pitch Perfect**:\n• **Solo** · **Fee**: ₹600 · **Per school**: up to 3 singers · **Day 1 only**\n• **Format**: Two rounds of solo vocals.\n• **Send**: Your backing track to ignite@greenwoodhigh.edu.in at least a week before."
         },
         {
             keywords: ['kryptos visos', 'face paint', 'painting', 'brushes'],
-            response: "**Kryptos Visos**:\n• **Participants**: 2 people per team (1 painter + 1 model)\n• **Tagline**: *'Bring your brushes, beat the clock, and let your creativity IGNITE!'*\n• **Details**: Day 1 theme pre-announced; Day 2 theme revealed 10 minutes prior with custom themes per duo.\n• **Rule**: Bring your own skin-safe paints and brushes."
+            response: "**Kryptos Visos**:\n• **Team**: 2 (painter + model) · **Fee**: ₹600 · **Per school**: up to 2 teams\n• **Format**: Day 1 theme announced in advance. Day 2 finalists get a different theme each, revealed 10 minutes before painting.\n• **Bring**: Your own skin-safe paints and brushes."
         },
         {
-            keywords: ['directors cut', 'director', 'film', 'drama', 'theater', 'acting', 'short film'],
-            response: "**Directors Cut**:\n• **Participants**: 4 to 5 people per team\n• **Tagline**: *'Create the story, adapt to the challenge, and own the final cut.'*\n• **Details**: Day 1 live theatrical performance & surprise unscripted improvisation; Day 2 original 3–7 min short film under genre constraints."
+            keywords: ['directors cut', "director's cut", 'director', 'film', 'drama', 'theater', 'theatre', 'acting'],
+            response: "**Director's Cut**:\n• **Team**: 4 to 5 · **Fee**: ₹600 · **Per school**: 1 team\n• **Format**: Day 1 performance from a creative brief, then an improvisation challenge. Day 2 an original 3–7 minute short film.\n• **Bring**: All your filming equipment."
         },
         {
             keywords: ['insync', 'dance', 'choreography', 'dancer'],
-            response: "**Insync**:\n• **Participants**: 1 to 9 people per team\n• **Tagline**: *'Feel the beat. Move In Sync.'*\n• **Details**: High-voltage dance celebration, choreography rounds, and creative movement battles."
+            response: "**Insync**:\n• **Team**: 1 to 9 · **Fee**: ₹800 · **Per school**: up to 2 teams\n• **Days**: Day 1 heats, finals on Day 2.\n• **Send**: Your music to ignite@greenwoodhigh.edu.in at least a week before."
         },
         {
-            keywords: ['battle of the bands', 'band', 'bands', 'music', 'live music', 'rock'],
-            response: "**Battle of the Bands**:\n• **Participants**: 3 to 8 people per team\n• **Tagline**: *'For whom the band tolls. 12-15 bands. The ultimate showdown.'*\n• **Details**: 2-day live outdoor musical clash for Bangalore's top 12–15 student bands. Backline amps & drum kit provided; bring guitars, pedals, & sticks."
+            keywords: ['battle of the bands', 'my band', 'our band', 'live music', 'rock', 'band'],
+            response: "**Battle of the Bands**:\n• **Team**: 2 to 7 · **Fee**: ₹1,000 · **Per school**: up to 2 bands\n• **Format**: 12–15 bands. Showcase round on Day 1, knockouts on Day 2.\n• **Bring**: Your own instruments. Drums and piano are provided."
         },
         {
-            keywords: ['dyed in crimson', 'murder', 'crime scene', 'trail', 'crimson'],
-            response: "**Dyed in Crimson**:\n• **Participants**: Exactly 3 people per team\n• **Tagline**: *'One Murder, One Campus, Two days. Can you uncover what happened before the trail goes cold?'*\n• **Details**: The whole Greenwood High campus transforms into a 2-day live crime scene with actor interrogations, hidden ciphers, and forensic evidence analysis."
+            keywords: ['dyed in crimson', 'murder', 'crime scene', 'detective', 'crimson'],
+            response: "**Dyed in Crimson**:\n• **Team**: 1 to 3 · **Fee**: ₹600\n• **Format**: A two-day murder mystery across the whole campus, with live theatre, puzzles, ciphers and investigation. Around 150–200 players in about 80 teams."
         },
         {
-            keywords: ['dress to impress', 'fashion', 'runway', 'outfit', 'sustainable'],
-            response: "**Dress to Impress**:\n• **Participants**: 4 to 6 people per team\n• **Tagline**: *'Think beyond the theme — Where creativity meets competition.'*\n• **Details**: Sustainable runway competition reimagining ancient lore and Indian heritage eras through repurposed and upcycled couture design."
+            keywords: ['flag football'],
+            response: "**Flag Football**: 7 a side plus 2 subs, mixed teams, ₹800. Four 12-minute quarters, no kickoffs, no field goals, and tackling is an automatic ejection. Full rules are on the Sports page."
         },
         {
-            keywords: ['sport', 'sports', 'football', 'basketball', 'badminton', 'table tennis', 'swimming', 'athletics'],
-            response: "IGNITE 2026 features 6 premier sports arenas:\n1) **7v7 Football Cup** on astro turf\n2) **Hoop Matrix Basketball** (5v5 Boys & Girls)\n3) **Shuttle Smash Badminton** (Singles/Doubles)\n4) **Spin Clash Table Tennis**\n5) **AquaIgnite Swimming Meet** (50m/100m/Relays)\n6) **Sprint & Field Invitational** (100m, 200m, 400m, relays)."
+            keywords: ['table tennis', 'ping pong'],
+            response: "**Table Tennis**: Teams of 3 to 5, boys and girls, ₹600. Singles, doubles, then a deciding reverse singles. Bring your own ITTF-approved paddle if you like; balls are provided."
         },
         {
-            keywords: ['mascot', 'phoenix', 'symbol'],
-            response: "Our official mascot is the **Ignite Phoenix** — representing resurrection, fiery passion, and daring creativity across both our Cultural stages and Sports colosseums!"
+            keywords: ['sport', 'sports', 'football', 'basketball', 'badminton', 'tennis', 'volleyball', 'shooting'],
+            response: "IGNITE 2026 has **8 sports**:\n• Basketball (10–12, ₹1,300)\n• Football (boys 14–18, girls 9–12, ₹1,300)\n• Flag Football (7 + 2 subs, mixed, ₹800)\n• Volleyball (up to 12, ₹1,000)\n• Badminton (2–6, ₹700)\n• Table Tennis (3–5, ₹600)\n• Tennis (3, ₹600)\n• Shooting (up to 3 per event, ₹500)\nEach school can enter one team per sport. Register online and pay at the counter."
         },
         {
-            keywords: ['register', 'registration', 'email', 'contact', 'venue', 'location'],
-            response: "IGNITE 2026 takes place on October 24th - 25th, 2026 at the Greenwood High International Campus, Sarjapur, Bangalore! You can register by emailing **ignite@greenwoodhigh.edu.in** or visiting our **contact.html** page."
+            keywords: ['rule', 'rules', 'uniform', 'id card', 'photo id', 'school id', 'food', 'lunch', 'wristband', 'medicine'],
+            response: "**Key rules**:\n• Wear your school uniform (PE kit for sports) and bring your 2026–27 school ID.\n• Wear your wristband all day.\n• No outside food or drink, only empty water bottles. Food stalls on campus take coupons.\n• Carrying medicine? Email ignite@greenwoodhigh.edu.in first.\n• Zero tolerance for drugs and alcohol.\nThe full list is on the Rules page."
+        },
+        {
+            keywords: ['mascot', 'phoenix', 'symbol', 'cause', 'charity', 'fundrais'],
+            response: "Our mascot is the **Phoenix**, a symbol of resilience, rebirth and energy. IGNITE is Bangalore's biggest student-run fest, and it raises funds for the education of underprivileged girls."
+        },
+        {
+            keywords: ['when is ignite', 'what date', 'dates', 'which day', 'schedule', 'event days'],
+            response: "IGNITE 2026 is on **Friday 13 and Saturday 14 November**. The Schedule page shows which cultural events run on which day. Sports fixtures are set once registrations close."
+        },
+        {
+            keywords: ['register', 'registration', 'sign up', 'email', 'contact', 'venue', 'location', 'where'],
+            response: "IGNITE 2026 is on 13–14 November at Greenwood High International School, Sarjapur, Bangalore.\n• **Registrations**: 2 to 10 November.\n• **Cultural**: Register and pay online. **Sports**: Register online, pay at the counter.\n• **Questions**: ignite@greenwoodhigh.edu.in or @ignite.gwh on Instagram."
         }
     ];
 
@@ -132,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return item.response;
             }
         }
-        return "I'm Scarlett, your IGNITE 2026 copilot! I have full information on all 10 Cultural events and our 6 Sports arenas. Ask me about any event's rules, team sizes, schedule, or details!";
+        return "I'm Scarlett, your IGNITE 2026 assistant! I have full information on all 12 Cultural events and 8 Sports tournaments. Ask me about any event's rules, team sizes, schedule, or details!";
     }
 
     // Scarlett Chat Widget DOM Elements
@@ -211,7 +381,244 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 5. Page transitions between HTML files (identical to GWHMUN 2026)
+    // 5. Fire & Flying Phoenix Page Transitions between HTML files
+    // Leaving: flames sweep up and burn the page away.
+    // Arriving: the dark curtain burns off to reveal the new page.
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const EMBER = '#120504';
+    const TONGUE = 240;   // px of flame above the burn line
+    const BODY = 160;     // px of glowing body below the burn line
+    const COL = 4;        // column width in px
+    const COVER_MS = 750;
+    const REVEAL_MS = 850;
+
+    // Spark engine
+    const GLOW = (() => {
+        const c = document.createElement('canvas');
+        c.width = c.height = 32;
+        const g = c.getContext('2d');
+        const gr = g.createRadialGradient(16, 16, 0, 16, 16, 16);
+        gr.addColorStop(0.00, 'rgba(255,240,200,1)');
+        gr.addColorStop(0.25, 'rgba(255,160,50,0.7)');
+        gr.addColorStop(1.00, 'rgba(255,60,10,0)');
+        g.fillStyle = gr;
+        g.fillRect(0, 0, 32, 32);
+        return c;
+    })();
+
+    function newSpark(x, y, vx, vy, size, maxLife, gravity, drag) {
+        return {
+            x: x, y: y, vx: vx, vy: vy, size: size,
+            life: 0, max: maxLife, g: gravity, drag: drag,
+            seed: Math.random() * 100,
+            fl: 0.4 + Math.random() * 0.5
+        };
+    }
+
+    function stepSpark(s, dt) {
+        s.life += dt;
+        if (s.life >= s.max) return false;
+        const d = Math.pow(s.drag, dt);
+        s.vx *= d;
+        s.vy = s.vy * d + s.g * dt;
+        s.vx += Math.sin(s.seed + s.life * 0.35) * 0.12 * dt;
+        s.x += s.vx * dt;
+        s.y += s.vy * dt;
+        return true;
+    }
+
+    function drawSpark(c, s) {
+        const p = s.life / s.max;
+        const flicker = 0.75 + 0.25 * Math.sin(s.life * s.fl * 12);
+        const alpha = Math.max(0, (1 - p * p) * flicker);
+        c.globalAlpha = alpha;
+        c.globalCompositeOperation = 'lighter';
+        c.drawImage(GLOW, s.x - s.size * 2, s.y - s.size * 2, s.size * 4, s.size * 4);
+    }
+
+    let canvas = null, ctx = null, W = 0, H = 0;
+    let strips = null;
+    let particles = [];
+    let transitioning = false;
+
+    function makeStrip(mode) {
+        const c = document.createElement('canvas');
+        c.width = 1;
+        c.height = TONGUE + BODY;
+        const g = c.getContext('2d');
+        const grad = g.createLinearGradient(0, 0, 0, TONGUE + BODY);
+        if (mode === 'cover') {
+            grad.addColorStop(0.00, 'rgba(196,36,26,0)');
+            grad.addColorStop(0.30, 'rgba(255,61,46,0.55)');
+            grad.addColorStop(0.52, 'rgba(255,120,30,0.95)');
+            grad.addColorStop(0.60, 'rgba(255,200,70,1)');
+            grad.addColorStop(0.78, 'rgba(190,45,20,1)');
+            grad.addColorStop(1.00, EMBER);
+        } else {
+            grad.addColorStop(0.00, EMBER);
+            grad.addColorStop(0.30, 'rgba(120,20,10,1)');
+            grad.addColorStop(0.50, 'rgba(255,61,46,1)');
+            grad.addColorStop(0.60, 'rgba(255,200,70,1)');
+            grad.addColorStop(0.80, 'rgba(255,100,30,0.6)');
+            grad.addColorStop(1.00, 'rgba(255,61,46,0)');
+        }
+        g.fillStyle = grad;
+        g.fillRect(0, 0, 1, TONGUE + BODY);
+        return c;
+    }
+
+    function resizeCanvas() {
+        if (!canvas) return;
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        W = window.innerWidth;
+        H = window.innerHeight;
+        canvas.width = Math.round(W * dpr);
+        canvas.height = Math.round(H * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function setupCanvas() {
+        if (canvas) return;
+        canvas = document.createElement('canvas');
+        canvas.className = 'fire-canvas';
+        canvas.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(canvas);
+        ctx = canvas.getContext('2d');
+        strips = { cover: makeStrip('cover'), reveal: makeStrip('reveal') };
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+    }
+
+    function noise(x, t) {
+        return (Math.sin(x * 0.07 + t * 0.012) +
+                Math.sin(x * 0.13 - t * 0.019) +
+                Math.sin(x * 0.23 + t * 0.031)) / 3;
+    }
+
+    function drawFire(mode, p, t, dt) {
+        const amp = 50;
+        const startY = H + TONGUE * 1.4 + amp;
+        const endY = -BODY * 1.4 - amp;
+        const base = startY - p * (startY - endY);
+        const strip = strips[mode];
+
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.clearRect(0, 0, W, H);
+
+        for (let x = 0; x < W; x += COL) {
+            const wave = Math.sin(x * 0.012 + t * 0.004) * 0.6 + Math.sin(x * 0.031 - t * 0.007) * 0.4;
+            const front = base + amp * wave;
+            const s = 1 + 0.3 * noise(x, t);
+            const top = front - TONGUE * s;
+            const bottom = front + BODY * s;
+
+            if (mode === 'cover') {
+                if (bottom < H) {
+                    ctx.fillStyle = EMBER;
+                    ctx.fillRect(x, Math.max(bottom - 1, 0), COL, H - Math.max(bottom - 1, 0));
+                }
+            } else if (top > 0) {
+                ctx.fillStyle = EMBER;
+                ctx.fillRect(x, 0, COL, Math.min(top + 1, H));
+            }
+            if (bottom > 0 && top < H) {
+                ctx.drawImage(strip, 0, 0, 1, TONGUE + BODY, x, top, COL, (TONGUE + BODY) * s);
+            }
+        }
+
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.globalAlpha = 0.35;
+        for (let x = -40; x < W + 80; x += 80) {
+            const wv = Math.sin(x * 0.012 + t * 0.004) * 0.6 + Math.sin(x * 0.031 - t * 0.007) * 0.4;
+            ctx.drawImage(GLOW, x - 110, base + amp * wv - 110, 220, 220);
+        }
+        ctx.globalAlpha = 1;
+
+        if (p > 0.02 && p < 0.98) {
+            const count = Math.round((9 + 10 * Math.sin(p * Math.PI)) * dt);
+            for (let i = 0; i < count && particles.length < 420; i++) {
+                const x = Math.random() * W;
+                const wv = Math.sin(x * 0.012 + t * 0.004) * 0.6 + Math.sin(x * 0.031 - t * 0.007) * 0.4;
+                const y = base + amp * wv + (Math.random() - 0.3) * BODY * 0.6;
+                const big = Math.random() < 0.2;
+                const speed = big ? 6 + Math.random() * 10 : 2.5 + Math.random() * 7;
+                const ang = -Math.PI / 2 + (Math.random() - 0.5) * 1.1;
+                particles.push(newSpark(
+                    x, y,
+                    Math.cos(ang) * speed + 0.8, Math.sin(ang) * speed,
+                    big ? 1.8 + Math.random() * 1.6 : 0.8 + Math.random() * 1.0,
+                    big ? 45 + Math.random() * 40 : 24 + Math.random() * 26,
+                    0.1, 0.982
+                ));
+            }
+        }
+        for (let i = particles.length - 1; i >= 0; i--) {
+            if (!stepSpark(particles[i], dt)) { particles.splice(i, 1); continue; }
+            drawSpark(ctx, particles[i]);
+        }
+        ctx.globalCompositeOperation = 'source-over';
+    }
+
+    function runFire(mode, duration, done) {
+        setupCanvas();
+        resizeCanvas();
+        particles = [];
+        canvas.classList.add('active');
+        const start = performance.now();
+        let last = start;
+        function frame(now) {
+            const p = Math.min((now - start) / duration, 1);
+            const eased = 0.5 - Math.cos(p * Math.PI) / 2;
+            drawFire(mode, eased, now, Math.min((now - last) / 16.7, 3));
+            last = now;
+            if (p < 1) {
+                requestAnimationFrame(frame);
+            } else {
+                if (mode === 'reveal') {
+                    canvas.classList.remove('active');
+                    ctx.clearRect(0, 0, W, H);
+                }
+                if (done) done();
+            }
+        }
+        requestAnimationFrame(frame);
+    }
+
+    let arrivedByFire = false;
+    try { arrivedByFire = sessionStorage.getItem('igniteBurn') === '1'; } catch (err) { /* ignore */ }
+    if (arrivedByFire) {
+        try { sessionStorage.removeItem('igniteBurn'); } catch (err) { /* ignore */ }
+    }
+    if (arrivedByFire && !reduceMotion) {
+        setupCanvas();
+        canvas.classList.add('active');
+        drawFire('reveal', 0, 0, 1);
+        document.documentElement.classList.remove('fire-arriving');
+        let started = false;
+        const beginReveal = () => {
+            if (started) return;
+            started = true;
+            setTimeout(() => runFire('reveal', REVEAL_MS), 120);
+        };
+        if (document.readyState === 'complete') beginReveal();
+        else {
+            window.addEventListener('load', beginReveal);
+            setTimeout(beginReveal, 1000);
+        }
+    } else {
+        document.documentElement.classList.remove('fire-arriving');
+    }
+
+    window.addEventListener('pageshow', (e) => {
+        document.body.classList.remove('fade-out');
+        document.documentElement.classList.remove('fire-arriving');
+        if (e.persisted && canvas) {
+            canvas.classList.remove('active');
+            ctx.clearRect(0, 0, W, H);
+        }
+        transitioning = false;
+    });
+
     const links = document.querySelectorAll('a[href]');
     links.forEach(link => {
         link.addEventListener('click', (e) => {
@@ -220,8 +627,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const hrefAttribute = link.getAttribute('href');
 
             if (
+                e.defaultPrevented ||
+                e.ctrlKey || e.metaKey || e.shiftKey || e.altKey ||
                 link.getAttribute('target') === '_blank' || 
+                link.hasAttribute('download') ||
                 hrefAttribute.startsWith('mailto:') || 
+                hrefAttribute.startsWith('tel:') ||
                 hrefAttribute.startsWith('javascript:') ||
                 hrefAttribute.startsWith('#') ||
                 targetUrl.split('#')[0] === currentUrl
@@ -230,11 +641,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             e.preventDefault();
-            document.body.classList.add('fade-out');
+            if (transitioning) return;
+            transitioning = true;
 
-            setTimeout(() => {
+            if (reduceMotion) {
+                document.body.classList.add('fade-out');
+                setTimeout(() => { window.location.href = hrefAttribute; }, 180);
+                return;
+            }
+
+            runFire('cover', COVER_MS, () => {
+                try { sessionStorage.setItem('igniteBurn', '1'); } catch (err) { /* ignore */ }
                 window.location.href = hrefAttribute;
-            }, 380);
+            });
         });
     });
 });
