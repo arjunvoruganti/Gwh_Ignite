@@ -381,7 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 5. Fire & Flying Phoenix Page Transitions between HTML files
+    // 5. Fire page transitions between HTML files
     // Leaving: flames sweep up and burn the page away.
     // Arriving: the dark curtain burns off to reveal the new page.
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -427,13 +427,27 @@ document.addEventListener('DOMContentLoaded', () => {
         return true;
     }
 
+    // Draws a spark as a streak stretched along its velocity, plus a halo on big ones.
     function drawSpark(c, s) {
-        const p = s.life / s.max;
-        const flicker = 0.75 + 0.25 * Math.sin(s.life * s.fl * 12);
-        const alpha = Math.max(0, (1 - p * p) * flicker);
-        c.globalAlpha = alpha;
-        c.globalCompositeOperation = 'lighter';
-        c.drawImage(GLOW, s.x - s.size * 2, s.y - s.size * 2, s.size * 4, s.size * 4);
+        const k = s.life / s.max;                                  // 0 new, 1 gone
+        const flicker = 0.6 + 0.4 * Math.sin(s.life * s.fl * 3 + s.seed);
+        const a = Math.max(0, (1 - k) * flicker);
+        const g = Math.round(240 - 190 * k);                       // white-yellow -> red
+        const b = Math.round(170 * (1 - k) * (1 - k));
+        const w = s.size * (1 - 0.55 * k);
+        c.strokeStyle = 'rgba(255,' + g + ',' + b + ',' + a.toFixed(2) + ')';
+        c.lineWidth = w;
+        c.lineCap = 'round';
+        c.beginPath();
+        c.moveTo(s.x, s.y);
+        c.lineTo(s.x - s.vx * 2.2 - 0.01, s.y - s.vy * 2.2);
+        c.stroke();
+        if (s.size > 1.5) {
+            const r = w * 4;
+            c.globalAlpha = a * 0.7;
+            c.drawImage(GLOW, s.x - r, s.y - r, r * 2, r * 2);
+            c.globalAlpha = 1;                                     // always restore it
+        }
     }
 
     let canvas = null, ctx = null, W = 0, H = 0;
@@ -497,12 +511,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function drawFire(mode, p, t, dt) {
         const amp = 50;
-        const startY = H + TONGUE * 1.4 + amp;
+        const startY = H + TONGUE + amp;
         const endY = -BODY * 1.4 - amp;
         const base = startY - p * (startY - endY);
         const strip = strips[mode];
 
         ctx.globalCompositeOperation = 'source-over';
+        ctx.globalAlpha = 1;
         ctx.clearRect(0, 0, W, H);
 
         for (let x = 0; x < W; x += COL) {
@@ -589,6 +604,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (arrivedByFire) {
         try { sessionStorage.removeItem('igniteBurn'); } catch (err) { /* ignore */ }
     }
+    if (arrivedByFire && welcomeOverlay) {
+        welcomeOverlay.classList.add('dismissed');
+        welcomeOverlay.style.display = 'none';
+        try { sessionStorage.setItem('igniteWelcomeSeen', 'true'); } catch (err) { /* ignore */ }
+    }
     if (arrivedByFire && !reduceMotion) {
         setupCanvas();
         canvas.classList.add('active');
@@ -635,6 +655,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 hrefAttribute.startsWith('tel:') ||
                 hrefAttribute.startsWith('javascript:') ||
                 hrefAttribute.startsWith('#') ||
+                link.origin !== window.location.origin ||
                 targetUrl.split('#')[0] === currentUrl
             ) {
                 return;
