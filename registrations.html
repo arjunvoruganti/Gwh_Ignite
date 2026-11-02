@@ -1,301 +1,110 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrations | IGNITE</title>
-
-    <!-- Exact fonts used by IGNITE main website -->
+    <title>Registrations | IGNITE 2026</title>
+    <meta name="description" content="Register for Cultural and Sports events at IGNITE 2026. Internal and External registration forms for Greenwood High's flagship inter-school fest.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --bg-color: #070709;
-            --surface-color: rgba(18, 18, 24, 0.65);
-            --surface-card: rgba(22, 22, 30, 0.75);
-            --border-color: rgba(255, 255, 255, 0.08);
-            --border-glow: rgba(255, 75, 43, 0.3);
-
-            --text-main: #ffffff;
-            --text-muted: #9ca3af;
-            --text-subtle: #6b7280;
-
-            --accent-gold: #f59e0b;
-            --accent-orange: #ff4b2b;
-            --accent-fire: #ff416c;
-            --accent-crimson: #e11d48;
-
-            --gradient-glow: linear-gradient(
-                135deg,
-                #ff416c 0%,
-                #ff4b2b 45%,
-                #f59e0b 100%
-            );
-
-            --gradient-fire: linear-gradient(
-                135deg,
-                #ff416c 0%,
-                #ff4b2b 45%,
-                #f59e0b 100%
-            );
-
-            --radius-sm: 8px;
-            --radius-md: 14px;
-            --radius-lg: 20px;
-            --radius-full: 9999px;
-
-            --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Space Grotesk', sans-serif;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Main registration page layout */
-
-        .regs-container {
-            max-width: 1300px;
-            min-height: 85vh;
-            margin: 0 auto;
-            padding: 150px 24px 100px;
-        }
-
-        /* Main heading - matching IGNITE section titles */
-
-        .regs-container h1 {
-            font-size: clamp(2.4rem, 5vw, 3.5rem);
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: -1px;
-            margin-bottom: 20px;
-            text-align: center;
-
-            background: var(--gradient-glow);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: block;
-        }
-
-        .regs-container > p {
-            color: var(--text-muted);
-            font-size: 1.15rem;
-            margin-bottom: 50px;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
-        }
-
-        /* Registration sections - matching .glass-card */
-
-        .regs-section {
-            max-width: 900px;
-            margin: 0 auto 28px;
-            padding: 40px;
-
-            background: var(--surface-color);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .regs-section::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-
-            background: var(--gradient-glow);
-
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.4s ease;
-        }
-
-        .regs-section:hover {
-            transform: translateY(-8px);
-            background: rgba(30, 30, 30, 0.8);
-            border-color: rgba(255, 75, 43, 0.3);
-        }
-
-        .regs-section:hover::after {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-
-        /* Section headings */
-
-        .regs-section h2 {
-            font-size: 1.55rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            color: var(--text-main);
-            letter-spacing: 0.3px;
-        }
-
-        /* Registration buttons - matching .btn-glow */
-
-        .reg-link {
-            position: relative;
-            display: block;
-            padding: 16px 30px;
-            margin: 14px 0;
-
-            color: var(--text-main);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            font-size: 0.88rem;
-            text-decoration: none;
-            text-align: center;
-
-            background: rgba(0, 0, 0, 0.8);
-            border: 1px solid rgba(255, 75, 43, 0.45);
-            border-radius: 30px;
-
-            transition: var(--transition);
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-
-        .reg-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-
-            background: var(--gradient-glow);
-            z-index: -1;
-
-            transition: opacity 0.4s ease;
-            opacity: 0;
-        }
-
-        .reg-link:hover {
-            border-color: transparent;
-            transform: scale(1.05);
-        }
-
-        .reg-link:hover::before {
-            opacity: 1;
-        }
-
-        /* Responsive styling */
-
-        @media (max-width: 768px) {
-
-            .regs-container {
-                padding: 120px 20px 70px;
-            }
-
-            .regs-container h1 {
-                font-size: 2.4rem;
-            }
-
-            .regs-container > p {
-                font-size: 1rem;
-                margin-bottom: 35px;
-            }
-
-            .regs-section {
-                padding: 28px 22px;
-                margin-bottom: 22px;
-            }
-
-            .regs-section h2 {
-                font-size: 1.3rem;
-            }
-
-            .reg-link {
-                padding: 14px 18px;
-                font-size: 0.78rem;
-                letter-spacing: 0.7px;
-            }
-        }
-
-    </style>
+    <script>try{if(sessionStorage.getItem("igniteBurn")==="1")document.documentElement.classList.add("fire-arriving")}catch(e){}</script>
+    <link rel="stylesheet" href="./styles.css">
 </head>
-
 <body>
 
-    <!-- Insert your site Navigation Bar here -->
+    <!-- Ambient Glowing Background Aura -->
+    <div class="bg-ambient-glow">
+        <div class="ambient-blob ambient-blob-1"></div>
+        <div class="ambient-blob ambient-blob-2"></div>
+        <div class="ambient-blob ambient-blob-3"></div>
+    </div>
 
+    <!-- Navigation Header -->
+    <nav>
+        <div class="container nav-content">
+            <a href="index.html" class="logo-link">
+                <img src="WhatsApp Image 2026-10-20 at 10.38.51 PM.png" alt="IGNITE Phoenix Mascot" class="nav-logo">
+                <span class="logo-text">IGNITE</span>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="cultural.html">Cultural</a>
+                <a href="sports.html">Sports</a>
+                <a href="schedule.html">Schedule</a>
+                <a href="rules.html">Rules</a>
+                <a href="registrations.html" class="active">Registrations</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+
+            <div class="nav-cta-group">
+                <a href="registrations.html" class="btn-register-nav">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Registration Section -->
     <main class="regs-container">
+        <h1 class="section-title gradient-text">IGNITE Registrations</h1>
+        <p class="section-subtitle">Please select the appropriate form below to register for the Cultural and Sports events.</p>
 
-        <h1>IGNITE Registrations</h1>
-
-        <p>Please select the appropriate form below to register for the Cultural and Sports events.</p>
+        <!-- Clean Notice -->
+        <div class="regs-notice">
+            <strong>Notice:</strong> BGT and SJP ICSE campuses can register using the internal forms.
+        </div>
 
         <div class="regs-section">
-
             <h2>Cultural Events</h2>
-
             <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=aCQie8M0_kqLKG-GTvOs8eliUCe96EBLjMm9ltWc_D9UNVJFV05ZR1c0SDZNQ0NFVVhJQ05SMjFJUS4u"
                target="_blank"
                rel="noopener noreferrer"
                class="reg-link">
                 Internal Cultural Registration Form
             </a>
-
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSf7Qx9YZfmhNyU7XzXcaIyCXeOdyOzJ3tWl7-anwxPLo6BP4g/viewform?usp=header"
                target="_blank"
                rel="noopener noreferrer"
                class="reg-link">
                 External Cultural Registration Form
             </a>
-
         </div>
 
         <div class="regs-section">
-
             <h2>Sports Events</h2>
-
             <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=aCQie8M0_kqLKG-GTvOs8bSKK20ya4dFvGMd6K-dTP1UNlBZMkg2V0cyRjM1OUhLMVdZQ1lCMU8wVS4u"
                target="_blank"
                rel="noopener noreferrer"
                class="reg-link">
                 Internal Sports Registration Form
             </a>
-
             <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=aCQie8M0_kqLKG-GTvOs8QXE6bmoZHBAlFDUkLZU5I9UQ1ZLMU82NkxLV0JTSFlaQzU2VjZJUEkyVS4u"
                target="_blank"
                rel="noopener noreferrer"
                class="reg-link">
                 External Sports Registration Form
             </a>
-
         </div>
-
     </main>
 
-    <!-- Insert your site Footer here -->
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <img src="WhatsApp Image 2026-10-20 at 10.38.51 PM.png" alt="IGNITE Crest">
+            <div class="logo-text gradient-text" style="font-size: 1.5rem; margin-bottom: 10px;">IGNITE 2026</div>
+            <ul class="footer-nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cultural.html">Cultural</a></li>
+                <li><a href="sports.html">Sports</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="rules.html">Rules</a></li>
+                <li><a href="registrations.html">Registrations</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+            <p style="text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; color: var(--text-subtle);">© 2026 Greenwood High International School</p>
+        </div>
+    </footer>
 
+    <script src="./script.js"></script>
 </body>
 </html>

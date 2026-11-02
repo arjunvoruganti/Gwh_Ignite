@@ -581,10 +581,15 @@ document.addEventListener('DOMContentLoaded', () => {
         canvas.classList.add('active');
         const start = performance.now();
         let last = start;
+        let isFirstFrame = true;
         function frame(now) {
             const p = Math.min((now - start) / duration, 1);
             const eased = 0.5 - Math.cos(p * Math.PI) / 2;
             drawFire(mode, eased, now, Math.min((now - last) / 16.7, 3));
+            if (isFirstFrame) {
+                isFirstFrame = false;
+                document.documentElement.classList.remove('fire-arriving');
+            }
             last = now;
             if (p < 1) {
                 requestAnimationFrame(frame);
@@ -610,20 +615,18 @@ document.addEventListener('DOMContentLoaded', () => {
         try { sessionStorage.setItem('igniteWelcomeSeen', 'true'); } catch (err) { /* ignore */ }
     }
     if (arrivedByFire && !reduceMotion) {
-        setupCanvas();
-        canvas.classList.add('active');
-        drawFire('reveal', 0, 0, 1);
-        document.documentElement.classList.remove('fire-arriving');
         let started = false;
         const beginReveal = () => {
             if (started) return;
             started = true;
-            setTimeout(() => runFire('reveal', REVEAL_MS), 120);
+            runFire('reveal', REVEAL_MS);
         };
-        if (document.readyState === 'complete') beginReveal();
-        else {
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            requestAnimationFrame(beginReveal);
+        } else {
+            window.addEventListener('DOMContentLoaded', beginReveal);
             window.addEventListener('load', beginReveal);
-            setTimeout(beginReveal, 1000);
+            setTimeout(beginReveal, 300);
         }
     } else {
         document.documentElement.classList.remove('fire-arriving');
@@ -646,6 +649,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentUrl = window.location.href.split('#')[0];
             const hrefAttribute = link.getAttribute('href');
 
+            const isExternal = (hrefAttribute.startsWith('http://') || hrefAttribute.startsWith('https://')) && link.origin !== window.location.origin;
             if (
                 e.defaultPrevented ||
                 e.ctrlKey || e.metaKey || e.shiftKey || e.altKey ||
@@ -655,7 +659,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 hrefAttribute.startsWith('tel:') ||
                 hrefAttribute.startsWith('javascript:') ||
                 hrefAttribute.startsWith('#') ||
-                link.origin !== window.location.origin ||
+                isExternal ||
                 targetUrl.split('#')[0] === currentUrl
             ) {
                 return;
