@@ -31,6 +31,241 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // 0.5 Interactive Sparks & Ember Particle Field Engine (Hero Background)
+    const sparksCanvas = document.getElementById('heroSparksCanvas');
+    const heroEl = document.querySelector('.hero');
+
+    if (sparksCanvas && heroEl) {
+        const sCtx = sparksCanvas.getContext('2d');
+        let width = 0;
+        let height = 0;
+        let dpr = 1;
+        let isHeroVisible = true;
+        let animId = null;
+
+        // Mouse tracking for interactive heat wave / wind draft
+        const mouse = {
+            x: -9999,
+            y: -9999,
+            prevX: -9999,
+            prevY: -9999,
+            vx: 0,
+            vy: 0,
+            active: false,
+            idleTimer: null
+        };
+
+        function resizeSparks() {
+            dpr = Math.min(window.devicePixelRatio || 1, 2);
+            width = heroEl.clientWidth;
+            height = heroEl.clientHeight;
+            sparksCanvas.width = width * dpr;
+            sparksCanvas.height = height * dpr;
+            sparksCanvas.style.width = width + 'px';
+            sparksCanvas.style.height = height + 'px';
+            sCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+
+        window.addEventListener('resize', resizeSparks);
+        resizeSparks();
+
+        function updateMousePosition(clientX, clientY) {
+            const rect = heroEl.getBoundingClientRect();
+            const currX = clientX - rect.left;
+            const currY = clientY - rect.top;
+
+            if (mouse.prevX !== -9999) {
+                mouse.vx = currX - mouse.prevX;
+                mouse.vy = currY - mouse.prevY;
+            } else {
+                mouse.vx = 0;
+                mouse.vy = 0;
+            }
+
+            mouse.prevX = mouse.x = currX;
+            mouse.prevY = mouse.y = currY;
+            mouse.active = true;
+
+            clearTimeout(mouse.idleTimer);
+            mouse.idleTimer = setTimeout(() => {
+                mouse.active = false;
+                mouse.vx = 0;
+                mouse.vy = 0;
+            }, 120);
+        }
+
+        heroEl.addEventListener('mousemove', (e) => {
+            updateMousePosition(e.clientX, e.clientY);
+        });
+
+        heroEl.addEventListener('mouseleave', () => {
+            mouse.active = false;
+            mouse.x = -9999;
+            mouse.y = -9999;
+            mouse.prevX = -9999;
+            mouse.prevY = -9999;
+            mouse.vx = 0;
+            mouse.vy = 0;
+        });
+
+        heroEl.addEventListener('touchmove', (e) => {
+            if (e.touches.length > 0) {
+                updateMousePosition(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        }, { passive: true });
+
+        heroEl.addEventListener('touchend', () => {
+            mouse.active = false;
+        });
+
+        // Ember Particle Definition
+        const PARTICLE_COUNT = 70;
+        const particles = [];
+
+        function spawnEmber(bottomOnly = true) {
+            const life = 0;
+            const maxLife = 160 + Math.random() * 220; // 3 to 6.5 seconds
+            const size = Math.random() < 0.75 ? (1.2 + Math.random() * 1.6) : (2.8 + Math.random() * 1.8);
+            const x = Math.random() * (width || 1200);
+            const y = bottomOnly ? (height * 0.75 + Math.random() * height * 0.25) : (Math.random() * (height || 800));
+            const baseVy = -(0.55 + Math.random() * 1.15); // gentle upward drift
+            const vx = (Math.random() - 0.5) * 0.7;
+            const seed = Math.random() * 100;
+            const swaySpeed = 0.02 + Math.random() * 0.025;
+            const swayAmp = 0.35 + Math.random() * 0.55;
+
+            return {
+                x, y, vx, vy: baseVy, baseVy, size, life, maxLife, seed, swaySpeed, swayAmp,
+                heatBoost: 0
+            };
+        }
+
+        // Pre-populate particles so screen is alive immediately
+        for (let i = 0; i < PARTICLE_COUNT; i++) {
+            const p = spawnEmber(false);
+            p.life = Math.random() * p.maxLife * 0.85;
+            particles.push(p);
+        }
+
+        let lastTime = performance.now();
+
+        function renderSparks(now) {
+            if (!isHeroVisible) {
+                animId = null;
+                return;
+            }
+
+            const dt = Math.min((now - lastTime) / 1000, 0.05);
+            lastTime = now;
+
+            sCtx.clearRect(0, 0, width, height);
+
+            mouse.vx *= 0.88;
+            mouse.vy *= 0.88;
+
+            for (let i = 0; i < particles.length; i++) {
+                const p = particles[i];
+                p.life += 1;
+
+                if (p.life >= p.maxLife || p.y < -30 || p.x < -40 || p.x > width + 40) {
+                    particles[i] = spawnEmber(true);
+                    continue;
+                }
+
+                // Upward drift and natural wind sway
+                p.y += p.vy;
+                p.x += p.vx + Math.sin(p.seed + p.life * p.swaySpeed) * p.swayAmp;
+
+                // Restoring natural upward velocity
+                p.vy = p.vy * 0.985 + p.baseVy * 0.015;
+                p.vx *= 0.975;
+                p.heatBoost = Math.max(0, p.heatBoost - 0.02);
+
+                // Interactive Heat Wave / Cursor Wind Draft
+                if (mouse.active) {
+                    const dx = p.x - mouse.x;
+                    const dy = p.y - mouse.y;
+                    const distSq = dx * dx + dy * dy;
+                    const radius = 135;
+
+                    if (distSq < radius * radius && distSq > 0.1) {
+                        const dist = Math.sqrt(distSq);
+                        const force = (1 - dist / radius);
+                        const angle = Math.atan2(dy, dx);
+
+                        const pushStrength = force * 2.2;
+                        p.vx += Math.cos(angle) * pushStrength + mouse.vx * 0.08 * force;
+                        p.vy += Math.sin(angle) * pushStrength + mouse.vy * 0.08 * force;
+
+                        p.vy -= force * 0.75;
+                        p.heatBoost = Math.min(1, p.heatBoost + force * 0.6);
+                    }
+                }
+
+                // Visual color & flicker based on lifetime
+                const progress = p.life / p.maxLife;
+                
+                let baseAlpha = 1;
+                if (progress < 0.12) {
+                    baseAlpha = progress / 0.12;
+                } else if (progress > 0.75) {
+                    baseAlpha = Math.max(0, (1 - progress) / 0.25);
+                }
+
+                const flicker = 0.72 + 0.28 * Math.sin(p.seed * 11 + p.life * 0.3);
+                const finalAlpha = Math.min(1, Math.max(0, baseAlpha * flicker + p.heatBoost * 0.3));
+
+                let r, g, b;
+                if (progress < 0.25 || p.heatBoost > 0.4) {
+                    r = 255;
+                    g = Math.round(220 + 35 * (1 - progress));
+                    b = Math.round(140 * (1 - progress));
+                } else if (progress < 0.65) {
+                    r = 255;
+                    g = Math.round(120 + 80 * (1 - (progress - 0.25) / 0.4));
+                    b = 20;
+                } else {
+                    r = Math.round(210 + 45 * (1 - progress));
+                    g = Math.round(45 + 50 * (1 - progress));
+                    b = 10;
+                }
+
+                const currentSize = p.size * (1 - 0.25 * progress);
+                sCtx.fillStyle = `rgba(${r}, ${g}, ${b}, ${finalAlpha.toFixed(2)})`;
+
+                if (currentSize > 2.4 || p.heatBoost > 0.3) {
+                    sCtx.shadowColor = `rgba(${r}, ${Math.max(60, g)}, 10, ${Math.min(1, finalAlpha * 0.9)})`;
+                    sCtx.shadowBlur = currentSize * 3;
+                    sCtx.beginPath();
+                    sCtx.arc(p.x, p.y, currentSize / 2, 0, Math.PI * 2);
+                    sCtx.fill();
+                    sCtx.shadowBlur = 0;
+                } else {
+                    sCtx.beginPath();
+                    sCtx.arc(p.x, p.y, currentSize / 2, 0, Math.PI * 2);
+                    sCtx.fill();
+                }
+            }
+
+            animId = requestAnimationFrame(renderSparks);
+        }
+
+        if ('IntersectionObserver' in window) {
+            const heroObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    isHeroVisible = entry.isIntersecting;
+                    if (isHeroVisible && !animId) {
+                        lastTime = performance.now();
+                        animId = requestAnimationFrame(renderSparks);
+                    }
+                });
+            }, { threshold: 0.05 });
+            heroObserver.observe(heroEl);
+        } else {
+            animId = requestAnimationFrame(renderSparks);
+        }
+    }
+
     // 1. Sticky Navbar scroll effect
     const navbar = document.querySelector('nav');
     if (navbar) {
@@ -161,46 +396,108 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     initCountdown();
 
-    // 2.3. Oakridge-style Interactive 3D Card Hover Tilt
-    const interactiveCards = document.querySelectorAll('.event-card, .programme-box, .glass-card');
-    interactiveCards.forEach(card => {
+    // 2.3. Interactive 3D Card Tilt with Cursor Spotlight (Stripe & Apple style)
+    const eventCards = document.querySelectorAll('.event-card, .moment-card');
+    eventCards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
+            
+            // Set dynamic spotlight coordinates
+            card.style.setProperty('--spot-x', `${x}px`);
+            card.style.setProperty('--spot-y', `${y}px`);
+
             const cx = rect.width / 2;
             const cy = rect.height / 2;
-            const rotX = ((y - cy) / cy) * -3;
-            const rotY = ((x - cx) / cx) * 3;
-            card.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) translateY(-3px)`;
+            const rotX = ((y - cy) / cy) * -6.5;
+            const rotY = ((x - cx) / cx) * 6.5;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) translateY(-6px)`;
         });
+
         card.addEventListener('mouseleave', () => {
+            card.style.setProperty('--spot-x', '-999px');
+            card.style.setProperty('--spot-y', '-999px');
             card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
         });
     });
 
-    // 3. Cultural Events Filtering Logic (for cultural.html)
+    // 2.4. Magnetic Navbar "Register" Button and Hero CTAs
+    const magneticBtns = document.querySelectorAll('.btn-register-nav, .hero-actions-group .btn-glow');
+    magneticBtns.forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            const pullX = x * 0.36;
+            const pullY = y * 0.36;
+            btn.style.transform = `translate(${pullX.toFixed(1)}px, ${pullY.toFixed(1)}px) scale(1.05)`;
+        });
+
+        btn.addEventListener('mouseleave', () => {
+            btn.style.transform = 'translate(0px, 0px) scale(1)';
+        });
+    });
+
+    // 3. Cultural Events Filtering Logic with Smooth Sliding Pill (iOS Native feel)
+    const filterBar = document.querySelector('.event-filter-bar');
     const subFilterBtns = document.querySelectorAll('.sub-filter-btn');
     const culturalCards = document.querySelectorAll('#culturalGrid .event-card');
 
-    if (subFilterBtns.length > 0) {
+    if (filterBar && subFilterBtns.length > 0) {
+        // Create or acquire the sliding pill indicator
+        let pill = filterBar.querySelector('.filter-pill-indicator');
+        if (!pill) {
+            pill = document.createElement('div');
+            pill.className = 'filter-pill-indicator';
+            filterBar.insertBefore(pill, filterBar.firstChild);
+        }
+
+        const updatePill = (targetBtn) => {
+            if (!pill || !targetBtn) return;
+            pill.style.transform = `translateX(${targetBtn.offsetLeft}px)`;
+            pill.style.width = `${targetBtn.offsetWidth}px`;
+        };
+
+        // Initialize pill position to the active tab
+        const initialActive = filterBar.querySelector('.sub-filter-btn.active') || subFilterBtns[0];
+        if (initialActive) {
+            // Quick delayed position on load to ensure fonts/layout are calculated
+            setTimeout(() => updatePill(initialActive), 40);
+        }
+
+        window.addEventListener('resize', () => {
+            const currentActive = filterBar.querySelector('.sub-filter-btn.active');
+            if (currentActive) updatePill(currentActive);
+        });
+
         subFilterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 subFilterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
+                updatePill(btn);
 
                 const filterValue = btn.getAttribute('data-filter');
 
                 culturalCards.forEach(card => {
                     const category = card.getAttribute('data-category');
-                    if (filterValue === 'all' || category === filterValue) {
+                    const matches = filterValue === 'all' || category === filterValue;
+
+                    if (matches) {
                         card.style.display = 'flex';
-                        setTimeout(() => {
+                        // Quick animation frame for smooth entry
+                        requestAnimationFrame(() => {
                             card.style.opacity = '1';
-                            card.style.transform = 'translateY(0)';
-                        }, 40);
+                            card.style.transform = 'perspective(1000px) scale(1) translateY(0px)';
+                        });
                     } else {
-                        card.style.display = 'none';
+                        card.style.opacity = '0';
+                        card.style.transform = 'perspective(1000px) scale(0.95) translateY(12px)';
+                        setTimeout(() => {
+                            if (!btn.classList.contains('active')) return;
+                            card.style.display = 'none';
+                        }, 220);
                     }
                 });
             });
@@ -210,98 +507,515 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Omnipresent AI Assistant "SCARLETT" Knowledge Engine
     const scarlettKnowledge = [
         {
-            keywords: ['who are you', 'your name', 'what is your name', 'scarlett'],
-            response: "I'm **Scarlett**, the official assistant for Greenwood High's IGNITE 2026. Ask me about any event's team size, fee, rules or schedule days, or about registration, food, and entry!"
+            name: 'who are you',
+            phrases: ['who are you', 'your name', 'what is your name', 'about you', 'who made you'],
+            primaryKeywords: ['scarlett'],
+            keywords: ['assistant', 'ai', 'bot', 'help'],
+            response: "I'm **Scarlett**, the official AI assistant for Greenwood High's **IGNITE 2026**! 🔥\n\nAsk me about any of our **8 sports tournaments** or **12 cultural competitions**, rules, fees, event heads, schedule days, registrations, or campus entry guidelines."
+        },
+        // --- 8 SPORTS DISCIPLINES (INDIVIDUAL DEDICATED CARDS) ---
+        {
+            name: 'basketball',
+            phrases: [
+                'event details for basketball', 'details for basketball', 'basketball details',
+                'basketball rules', 'basketball event', 'basketball heads', 'basketball fee', 'basketball info'
+            ],
+            primaryKeywords: ['basketball', 'b-ball', 'bball', 'hoops'],
+            keywords: ['sagar simha', 'asmi nigam', 'fiba', 'overtime'],
+            response: "**Basketball (IGNITE 2026)**\n" +
+                      "🏀 **Format**: Full-court championship featuring boys & girls divisions in the indoor arena.\n" +
+                      "👥 **Squad Size**: 10 to 12 players per team (8 teams total).\n" +
+                      "💰 **Fee**: ₹1,300 per team (Register online, pay at the counter).\n" +
+                      "👤 **Event Heads**: Sagar Simha & Asmi Nigam\n" +
+                      "📋 **Key Rules**:\n" +
+                      "• Follows standard FIBA rules in a knockout bracket (win to advance).\n" +
+                      "• Four 10-minute quarters with rolling substitutions.\n" +
+                      "• In case of a tie, 5-minute overtime periods are played until a winner emerges.\n" +
+                      "• Referees' decisions are strictly final."
         },
         {
-            keywords: ['fee', 'fees', 'cost', 'price', 'pay', 'payment', 'how much'],
-            response: "**Fees per team**:\n• Battle of the Bands, Dress to Impress: ₹1,000\n• Insync, Wolf of Wall Street: ₹800\n• All other cultural events: ₹600 (Pitch Perfect and Through the Lens are per participant)\n• Basketball, Football: ₹1,300 · Volleyball: ₹1,000 · Flag Football: ₹800 · Badminton: ₹700 · Table Tennis, Tennis: ₹600 · Shooting: ₹500\nCultural events are paid online. Sports are paid at the counter."
+            name: 'football',
+            phrases: [
+                'event details for football', 'details for football', 'football details',
+                'football rules', 'football event', 'football heads', 'football fee', 'football info', 'soccer details'
+            ],
+            primaryKeywords: ['football', 'soccer'],
+            keywords: ['aarav kohle', 'atharva limaye', 'fifa', 'astro turf', '11v11', '7v7', 'penalties'],
+            response: "**Football (IGNITE 2026)**\n" +
+                      "⚽ **Venue**: Greenwood High FIFA-standard astro turf under the floodlights.\n" +
+                      "👥 **Squad Size**: Boys 11-a-side (squad 14–18) · Girls 7-a-side (squad 9–12).\n" +
+                      "💰 **Fee**: ₹1,300 per team (Register online, pay at the counter).\n" +
+                      "👤 **Event Heads**: Aarav Kohle & Atharva Limaye\n" +
+                      "📋 **Key Rules**:\n" +
+                      "• Standard FIFA rules. Boys: 25-minute halves; Girls: 20-minute halves with 5-min half-time.\n" +
+                      "• Knockout format. If drawn at full-time: 5 penalties, then sudden death.\n" +
+                      "• Rolling substitutions allowed. Yellow/red cards carry FIFA suspensions."
         },
         {
-            keywords: ['wolf of wall street', 'wall street', 'stock', 'trading', 'sell me this pen', 'bidding'],
-            response: "**Wolf of Wall Street**:\n• **Team**: 3 to 5 · **Fee**: ₹800 · **Per school**: up to 2 teams\n• **Format**: 2-day live market simulation with Sell Me This Pen, Bidding Wars, Insider Info, Breaking News, and a final IPO pitch.\n• **Bring**: A laptop. Read the case study and background info we send before the event."
+            name: 'flag football',
+            phrases: [
+                'event details for flag football', 'details for flag football', 'flag football details',
+                'flag football rules', 'flag football event', 'flag football heads', 'flag football fee'
+            ],
+            primaryKeywords: ['flag football', 'gridiron'],
+            keywords: ['prithvi gowda', 'talin krishna', 'american football', 'touchdown'],
+            response: "**Flag Football (IGNITE 2026)**\n" +
+                      "🏈 **Format**: Non-contact American football on the open gridiron turf.\n" +
+                      "👥 **Squad Size**: 7-a-side mixed teams + 2 substitutes (minimum 2 female players on field at all times).\n" +
+                      "💰 **Fee**: ₹800 per team (Register online, pay at the counter).\n" +
+                      "👤 **Event Heads**: Prithvi Gowda & Talin Krishna\n" +
+                      "📋 **Key Rules**:\n" +
+                      "• Four 12-minute quarters with a 5-minute half-time break.\n" +
+                      "• No kickoffs: offensive team starts from their own 5-yard line, 4 downs to cross midfield.\n" +
+                      "• Physical tackling, tripping, or roughness results in immediate ejection.\n" +
+                      "• Touchdowns: 6 pts. Extra point: 1 pt (from 5-yd line) or 2 pts (from 10-yd line)."
         },
         {
-            keywords: ['veritas', 'escape room', 'clues', 'detective', 'investigation'],
-            response: "**Veritas**:\n• **Team**: 3 to 6 · **Fee**: ₹600 · **Per school**: up to 2 teams\n• **Format**: Escape-room investigation with a 1-hour time limit. Judged on correct suspect, motive and hints used. A different winner each day!"
+            name: 'volleyball',
+            phrases: [
+                'event details for volleyball', 'details for volleyball', 'volleyball details',
+                'volleyball rules', 'volleyball event', 'volleyball heads', 'volleyball fee'
+            ],
+            primaryKeywords: ['volleyball', 'volley'],
+            keywords: ['preyasi', 'vachhrajani', 'aarav gokul', 'fivb', 'spikes'],
+            response: "**Volleyball (IGNITE 2026)**\n" +
+                      "🏐 **Format**: High-flying spikes, rock-solid blocks & rallies in the indoor sports complex.\n" +
+                      "👥 **Squad Size**: Up to 12 players per team (Boys & girls divisions, 8 teams cap).\n" +
+                      "💰 **Fee**: ₹1,000 per team (Register online, pay at the counter).\n" +
+                      "👤 **Event Heads**: Preyasi Jignesh Vachhrajani & Aarav Gokul\n" +
+                      "📋 **Key Rules**:\n" +
+                      "• Follows FIVB rules. Knockout tournament.\n" +
+                      "• Best of 3 sets: First two sets to 25 points; deciding 3rd set to 15 points (must win by 2).\n" +
+                      "• Standard rotation and substitution rules apply."
         },
         {
-            keywords: ['through the lens', 'photography', 'photographer', 'camera', 'dslr'],
-            response: "**Through the Lens**:\n• **Solo** · **Fee**: ₹600 · **Per school**: up to 3 photographers\n• **Format**: 3 rounds, 3 themes (raw emotions, high-speed sports, rhythm of music).\n• **Bring**: Your own DSLR or mirrorless camera. Smartphone photography is not permitted."
+            name: 'badminton',
+            phrases: [
+                'event details for badminton', 'details for badminton', 'badminton details',
+                'badminton rules', 'badminton event', 'badminton heads', 'badminton fee', 'badminton head'
+            ],
+            primaryKeywords: ['badminton', 'shuttlecock', 'shuttlers'],
+            keywords: ['sashrik ranjith', 'bwf', 'non-marking', 'singles', 'doubles'],
+            response: "**Badminton (IGNITE 2026)**\n" +
+                      "🏸 **Format**: Interschool team ties on synthetic indoor courts.\n" +
+                      "👥 **Squad Size**: 2 to 6 players per team (Boys & girls).\n" +
+                      "💰 **Fee**: ₹700 per team (Register online, pay at the counter).\n" +
+                      "👤 **Event Head**: Sashrik Ranjith\n" +
+                      "📋 **Key Rules**:\n" +
+                      "• Follows BWF rules. Knockout format.\n" +
+                      "• Each tie consists of: Singles 1, Singles 2, and deciding Doubles if required.\n" +
+                      "• 21 points rally-point system. Feather shuttlecocks provided by committee.\n" +
+                      "• Bring your own rackets. Non-marking shoes are strictly mandatory."
         },
         {
-            keywords: ['radioshack', 'cup pong', 'bottle flip', 'walk-in', 'walk in'],
-            response: "**Radioshack Games**:\n• **Team**: 1 to 5 · **Fee**: ₹600, or included in the walk-in fee\n• Drop in on either day and play Cup Pong, Cup Stack Race or Trivia Bottle Flip."
+            name: 'table tennis',
+            phrases: [
+                'event details for table tennis', 'details for table tennis', 'table tennis details',
+                'table tennis rules', 'table tennis event', 'table tennis heads', 'table tennis fee', 'ping pong'
+            ],
+            primaryKeywords: ['table tennis', 'ping pong', 'tt'],
+            keywords: ['shaurya grover', 'ittf', 'paddle', 'paddles'],
+            response: "**Table Tennis (IGNITE 2026)**\n" +
+                      "🏓 **Format**: High-velocity spin, precision loops, and lightning reactions.\n" +
+                      "👥 **Squad Size**: 3 to 5 players per team (Boys & girls).\n" +
+                      "💰 **Fee**: ₹600 per team (Register online, pay at the counter).\n" +
+                      "👤 **Event Head**: Shaurya Grover\n" +
+                      "📋 **Key Rules**:\n" +
+                      "• Follows ITTF rules. Knockout format.\n" +
+                      "• Ties consist of: Singles 1, Doubles, and Singles 2 (first to 2 matches wins).\n" +
+                      "• Matches are best of 5 games to 11 points (must win by 2 points).\n" +
+                      "• ITTF-approved paddles allowed. Official balls provided."
         },
         {
-            keywords: ['dress to impress', 'fashion', 'runway', 'outfit', 'sustainable', 'upcycl'],
-            response: "**Dress to Impress**:\n• **Team**: 4 to 6 · **Fee**: ₹1,000 · **Per school**: up to 2 teams\n• **Format**: 7-minute runway plus a short design explanation. Round 1 (Reforged): mythological houses, at least 40% upcycled materials. Round 2 (Legacy, Reworn): traditional Indian attire through historical eras.\n• **Bring**: All clothing and accessories from home."
+            name: 'tennis',
+            phrases: [
+                'event details for tennis', 'details for tennis', 'tennis details',
+                'tennis rules', 'tennis event', 'tennis heads', 'tennis fee', 'lawn tennis'
+            ],
+            primaryKeywords: ['tennis', 'lawn tennis'],
+            keywords: ['vihaan bhatt', 'itf', 'hard courts', 'racquet'],
+            response: "**Tennis (IGNITE 2026)**\n" +
+                      "🎾 **Venue**: Greenwood High championship hard courts.\n" +
+                      "👥 **Squad Size**: 3 players per team (Boys & girls).\n" +
+                      "💰 **Fee**: ₹600 per team (Register online, pay at the counter).\n" +
+                      "👤 **Event Head**: Vihaan Bhatt\n" +
+                      "📋 **Key Rules**:\n" +
+                      "• Follows ITF rules. Knockout format.\n" +
+                      "• Tie format: Singles 1, Singles 2, and deciding Doubles match if needed.\n" +
+                      "• Matches are one set to 6 games with 7-point tiebreak at 6-all (finals best of 3 sets).\n" +
+                      "• Non-marking tennis shoes mandatory. Bring your own racquets; balls provided."
         },
         {
-            keywords: ['respawn', 'gaming', 'minecraft', 'fifa', 'roblox', 'esports'],
-            response: "**Respawn**:\n• **Team**: FIFA and Roblox solo, Minecraft 4 · **Fee**: ₹600 · **Per school**: 1 entry per game\n• **Games**: FIFA knockouts with random clubs, Minecraft squads over up to five mini-games, Roblox checkpoint race on Day 1 and runway on Day 2.\n• **Bring**: Your own gaming equipment for Minecraft and Roblox."
+            name: 'shooting',
+            phrases: [
+                'event details for shooting', 'details for shooting', 'shooting details',
+                'shooting rules', 'shooting event', 'shooting heads', 'shooting fee', 'air rifle', 'air pistol'
+            ],
+            primaryKeywords: ['shooting', 'air rifle', 'air pistol', 'marksman', 'shooters'],
+            keywords: ['kashvi mahesh', 'sasha roshan', 'issf', '10m', 'target'],
+            response: "**Shooting (IGNITE 2026)**\n" +
+                      "🎯 **Venue**: Greenwood High indoor 10m shooting range.\n" +
+                      "🎯 **Categories**: 10m Air Rifle & 10m Air Pistol (Boys & girls).\n" +
+                      "👥 **Cap**: 24 shooters per event (up to 3 shooters per school).\n" +
+                      "💰 **Fee**: ₹500 per shooter (Register online, pay at the counter).\n" +
+                      "👤 **Event Heads**: Kashvi Mahesh & Sasha Roshan\n" +
+                      "📋 **Key Rules**:\n" +
+                      "• ISSF rules apply. 30 shots in 45 minutes after a 15-minute sighting period.\n" +
+                      "• Top 8 shooters advance to the elimination final.\n" +
+                      "• Bring your own weapon, pellets, and shooting jacket/gear (strict safety inspection).\n" +
+                      "• Range Safety Officers' instructions must be obeyed immediately."
         },
         {
-            keywords: ['pitch perfect', 'singing', 'singer', 'vocal', 'voice', 'song'],
-            response: "**Pitch Perfect**:\n• **Solo** · **Fee**: ₹600 · **Per school**: up to 3 singers · **Day 1 only**\n• **Format**: Two rounds of solo vocals.\n• **Send**: Your backing track to ignite@greenwoodhigh.edu.in at least a week before."
+            name: 'all sports overview',
+            phrases: [
+                'all sports', 'sports list', 'list of sports', 'what sports', 'which sports',
+                'sports events', 'sports overview', 'sports tournaments', 'tell me about sports'
+            ],
+            primaryKeywords: ['sports', 'athletics'],
+            keywords: ['championship', 'fixtures', 'tournaments'],
+            response: "IGNITE 2026 features **8 championship sports tournaments**:\n\n" +
+                      "• **Basketball**: 10–12 per squad · ₹1,300 (Indoor arena)\n" +
+                      "• **Football**: Boys 11v11, Girls 7v7 · ₹1,300 (FIFA astro turf)\n" +
+                      "• **Flag Football**: Mixed 7v7 + 2 subs · ₹800 (Gridiron)\n" +
+                      "• **Volleyball**: Up to 12 per squad · ₹1,000 (Indoor complex)\n" +
+                      "• **Badminton**: 2–6 per team · ₹700 (Synthetic courts)\n" +
+                      "• **Table Tennis**: 3–5 per team · ₹600\n" +
+                      "• **Tennis**: 3 per team · ₹600 (Hard courts)\n" +
+                      "• **Shooting**: 10m Air Rifle & Pistol · ₹500 per shooter\n\n" +
+                      "Register online and pay fees at the venue counter on Day 1!"
+        },
+
+        // --- 12 CULTURAL EVENTS (INDIVIDUAL DEDICATED CARDS) ---
+        {
+            name: 'battle of the bands',
+            phrases: ['battle of the bands', 'botb', 'band event', 'rock band', 'live music'],
+            primaryKeywords: ['battle of the bands', 'botb'],
+            keywords: ['srisha suresh', 'mihir kulkarni', 'krithick satish', 'drums', 'amps', 'bands'],
+            response: "**Battle of the Bands (Cultural)**\n" +
+                      "🎸 **Category**: Performing Arts · Showcase Day 1, Finals Day 2\n" +
+                      "👥 **Band Size**: 2 to 7 members (12–15 bands total, up to 2 bands per school).\n" +
+                      "💰 **Fee**: ₹1,000 per band (Paid online).\n" +
+                      "👤 **Event Heads**: Srisha Suresh, Mihir Kulkarni & Krithick Satish\n" +
+                      "📋 **Details**:\n" +
+                      "• Day 1 showcase round, Day 2 knockout-style head-to-head competition.\n" +
+                      "• Bring your own guitars, effect pedals, and instruments. Full drum kit and piano provided."
         },
         {
-            keywords: ['kryptos visos', 'face paint', 'painting', 'brushes'],
-            response: "**Kryptos Visos**:\n• **Team**: 2 (painter + model) · **Fee**: ₹600 · **Per school**: up to 2 teams\n• **Format**: Day 1 theme announced in advance. Day 2 finalists get a different theme each, revealed 10 minutes before painting.\n• **Bring**: Your own skin-safe paints and brushes."
+            name: 'dyed in crimson',
+            phrases: ['dyed in crimson', 'murder mystery', 'crime scene', 'detective event'],
+            primaryKeywords: ['dyed in crimson', 'crimson'],
+            keywords: ['eric leene', 'niyati kasu', 'charanjit harshvardhan', 'mystery', 'deduction', 'murder'],
+            response: "**Dyed in Crimson (Cultural)**\n" +
+                      "🩸 **Category**: Strategy and Logic · Both Days\n" +
+                      "👥 **Team Size**: 1 to 3 participants (150–200 participants across ~80 teams).\n" +
+                      "💰 **Fee**: ₹600 per team (Paid online).\n" +
+                      "👤 **Event Heads**: Eric Leene, Niyati Kasu & Charanjit Harshvardhan\n" +
+                      "📋 **Details**:\n" +
+                      "• Large-scale 2-day murder mystery across the Greenwood High campus combining theatrical storytelling, puzzles, ciphers, scavenger elements, and live interrogation."
         },
         {
-            keywords: ['directors cut', "director's cut", 'director', 'film', 'drama', 'theater', 'theatre', 'acting'],
-            response: "**Director's Cut**:\n• **Team**: 4 to 5 · **Fee**: ₹600 · **Per school**: 1 team\n• **Format**: Day 1 performance from a creative brief, then an improvisation challenge. Day 2 an original 3–7 minute short film.\n• **Bring**: All your filming equipment."
+            name: 'wolf of wall street',
+            phrases: ['wolf of wall street', 'wall street', 'stock market', 'trading event', 'sell me this pen'],
+            primaryKeywords: ['wolf of wall street', 'trading', 'stocks'],
+            keywords: ['sara partiban', 'manusri devineni', 'bidding', 'ipo', 'insider'],
+            response: "**Wolf of Wall Street (Cultural)**\n" +
+                      "📈 **Category**: Strategy and Logic · Both Days\n" +
+                      "👥 **Team Size**: 3 to 5 members (up to 2 teams per school).\n" +
+                      "💰 **Fee**: ₹800 per team (Paid online).\n" +
+                      "👤 **Event Heads**: Sara Partiban & Manusri Devineni\n" +
+                      "📋 **Details**:\n" +
+                      "• 2-day live market simulation with Sell Me This Pen, Bidding Wars, Confidential Insider Information, market-shaking Breaking News, and a final IPO pitch.\n" +
+                      "• Bring your laptops and prepare from the case studies sent beforehand."
         },
         {
-            keywords: ['insync', 'dance', 'choreography', 'dancer'],
-            response: "**Insync**:\n• **Team**: 1 to 9 · **Fee**: ₹800 · **Per school**: up to 2 teams\n• **Days**: Day 1 heats, finals on Day 2.\n• **Send**: Your music to ignite@greenwoodhigh.edu.in at least a week before."
+            name: 'veritas',
+            phrases: ['veritas', 'escape room', 'escape room event'],
+            primaryKeywords: ['veritas', 'escape room'],
+            keywords: ['riddhi kamani', 'ishita de', 'shreya mathur', 'clues', 'suspect'],
+            response: "**Veritas (Cultural)**\n" +
+                      "🔍 **Category**: Strategy and Logic · Days 1 & 2\n" +
+                      "👥 **Team Size**: 3 to 6 participants (up to 2 teams per school).\n" +
+                      "💰 **Fee**: ₹600 per team (Paid online).\n" +
+                      "👤 **Event Heads**: Riddhi Kamani, Ishita De & Shreya Mathur\n" +
+                      "📋 **Details**:\n" +
+                      "• Immersive escape-room investigation under a strict 1-hour countdown.\n" +
+                      "• Teams solve intricate puzzles and deduce suspect identity and motive. A distinct winner is crowned each day!"
         },
         {
-            keywords: ['battle of the bands', 'my band', 'our band', 'live music', 'rock', 'band'],
-            response: "**Battle of the Bands**:\n• **Team**: 2 to 7 · **Fee**: ₹1,000 · **Per school**: up to 2 bands\n• **Format**: 12–15 bands. Showcase round on Day 1, knockouts on Day 2.\n• **Bring**: Your own instruments. Drums and piano are provided."
+            name: 'dress to impress',
+            phrases: ['dress to impress', 'fashion show', 'fashion runway', 'fashion event'],
+            primaryKeywords: ['dress to impress', 'dti'],
+            keywords: ['sayesha dod', 'bhaavika vukku', 'ananya pandey', 'runway', 'couture', 'upcycled'],
+            response: "**Dress to Impress (Cultural)**\n" +
+                      "👗 **Category**: Visual Arts · Both Days\n" +
+                      "👥 **Team Size**: 4 to 6 models/designers (up to 2 teams per school).\n" +
+                      "💰 **Fee**: ₹1,000 per team (Paid online).\n" +
+                      "👤 **Event Heads**: Sayesha Dod, Bhaavika Vukku & Ananya Pandey\n" +
+                      "📋 **Details**:\n" +
+                      "• 7-minute runway walk plus design concept presentation.\n" +
+                      "• Round 1 (Reforged): Mythological houses featuring at least 40% upcycled materials.\n" +
+                      "• Round 2 (Legacy, Reworn): Traditional Indian attire through historical eras.\n" +
+                      "• Bring all garments, accessories, and styling gear from home."
         },
         {
-            keywords: ['dyed in crimson', 'murder', 'crime scene', 'detective', 'crimson'],
-            response: "**Dyed in Crimson**:\n• **Team**: 1 to 3 · **Fee**: ₹600\n• **Format**: A two-day murder mystery across the whole campus, with live theatre, puzzles, ciphers and investigation. Around 150–200 players in about 80 teams."
+            name: 'pitch perfect',
+            phrases: ['pitch perfect', 'singing event', 'solo singing', 'vocals'],
+            primaryKeywords: ['pitch perfect', 'singing', 'singer', 'vocal', 'vocals'],
+            keywords: ['backing track', 'song', 'solo vocal'],
+            response: "**Pitch Perfect (Cultural)**\n" +
+                      "🎤 **Category**: Performing Arts · Day 1 Only\n" +
+                      "👥 **Format**: Solo vocals (up to 3 singers per school).\n" +
+                      "💰 **Fee**: ₹600 per participant (Paid online).\n" +
+                      "📋 **Details**:\n" +
+                      "• Two competitive rounds of live solo vocal performances.\n" +
+                      "• Backing tracks must be submitted to ignite@greenwoodhigh.edu.in at least 1 week prior."
         },
         {
-            keywords: ['flag football'],
-            response: "**Flag Football**: 7 a side plus 2 subs, mixed teams, ₹800. Four 12-minute quarters, no kickoffs, no field goals, and tackling is an automatic ejection. Full rules are on the Sports page."
+            name: 'respawn',
+            phrases: ['respawn', 'gaming event', 'esports', 'minecraft', 'fifa', 'roblox'],
+            primaryKeywords: ['respawn', 'esports', 'fifa', 'minecraft', 'roblox'],
+            keywords: ['vivaan srivastava', 'arpit kumar', 'tabashmi bhattacharya', 'gaming'],
+            response: "**Respawn (Cultural)**\n" +
+                      "🎮 **Category**: Strategy and Logic · Both Days\n" +
+                      "👥 **Format**: Solo (FIFA, Roblox) · Squad of 4 (Minecraft). 1 entry per game per school.\n" +
+                      "💰 **Fee**: ₹600 per team/game (Paid online).\n" +
+                      "👤 **Event Heads**: Vivaan Srivastava, Arpit Kumar & Tabashmi Bhattacharya\n" +
+                      "📋 **Details**:\n" +
+                      "• FIFA: Random club draws every knockout match.\n" +
+                      "• Minecraft: 4-player squads through up to 5 intense mini-game challenges.\n" +
+                      "• Roblox: Checkpoint time trials on Day 1; runway showcase on Day 2. Bring your own gaming laptops."
         },
         {
-            keywords: ['table tennis', 'ping pong'],
-            response: "**Table Tennis**: Teams of 3 to 5, boys and girls, ₹600. Singles, doubles, then a deciding reverse singles. Bring your own ITTF-approved paddle if you like; balls are provided."
+            name: 'radioshack',
+            phrases: ['radioshack', 'radioshack games', 'arcade games', 'cup pong', 'bottle flip'],
+            primaryKeywords: ['radioshack'],
+            keywords: ['nimrit kaur', 'reina chatterjee', 'mini-games', 'walk-in', 'cup stack'],
+            response: "**Radioshack Games (Cultural)**\n" +
+                      "⚡ **Category**: Strategy and Logic · Drop in Both Days\n" +
+                      "👥 **Format**: 1 to 5 players per team.\n" +
+                      "💰 **Fee**: ₹600 per team (or included with general walk-in festival pass).\n" +
+                      "👤 **Event Heads**: Nimrit Kaur & Reina Chatterjee\n" +
+                      "📋 **Details**:\n" +
+                      "• Drop in between events and play fast-paced arcade mini-games: Cup Pong, Cup Stack Race, and Trivia Bottle Flip!"
         },
         {
-            keywords: ['sport', 'sports', 'football', 'basketball', 'badminton', 'tennis', 'volleyball', 'shooting'],
-            response: "IGNITE 2026 has **8 sports**:\n• Basketball (10–12, ₹1,300)\n• Football (boys 14–18, girls 9–12, ₹1,300)\n• Flag Football (7 + 2 subs, mixed, ₹800)\n• Volleyball (up to 12, ₹1,000)\n• Badminton (2–6, ₹700)\n• Table Tennis (3–5, ₹600)\n• Tennis (3, ₹600)\n• Shooting (up to 3 per event, ₹500)\nEach school can enter one team per sport. Register online and pay at the counter."
+            name: 'kryptos visos',
+            phrases: ['kryptos visos', 'face painting', 'body painting', 'face paint'],
+            primaryKeywords: ['kryptos visos', 'face paint'],
+            keywords: ['arohi tiwari', 'deeksha nalluri', 'painter', 'brushes', 'skin-safe'],
+            response: "**Kryptos Visos (Cultural)**\n" +
+                      "🎨 **Category**: Visual Arts · Both Days\n" +
+                      "👥 **Team Size**: 2 participants (1 painter + 1 model, up to 2 teams per school).\n" +
+                      "💰 **Fee**: ₹600 per team (Paid online).\n" +
+                      "👤 **Event Heads**: Arohi Tiwari & Deeksha Nalluri\n" +
+                      "📋 **Details**:\n" +
+                      "• Day 1 theme announced in advance.\n" +
+                      "• Day 2 finalists receive surprise individual themes 10 minutes before the painting timer starts.\n" +
+                      "• Bring your own skin-safe paints and brushes."
         },
         {
-            keywords: ['rule', 'rules', 'uniform', 'id card', 'photo id', 'school id', 'food', 'lunch', 'wristband', 'medicine'],
-            response: "**Key rules**:\n• Wear your school uniform (PE kit for sports) and bring your 2026–27 school ID.\n• Wear your wristband all day.\n• No outside food or drink, only empty water bottles. Food stalls on campus take coupons.\n• Carrying medicine? Email ignite@greenwoodhigh.edu.in first.\n• Zero tolerance for drugs and alcohol.\nThe full list is on the Rules page."
+            name: 'through the lens',
+            phrases: ['through the lens', 'photography event', 'photo contest', 'photographer'],
+            primaryKeywords: ['through the lens', 'photography', 'photographer'],
+            keywords: ['anvitha bakshi', 'mahira karan', 'camera', 'dslr', 'mirrorless'],
+            response: "**Through the Lens (Cultural)**\n" +
+                      "📷 **Category**: Visual Arts · Both Days\n" +
+                      "👥 **Format**: Solo photography (up to 3 photographers per school).\n" +
+                      "💰 **Fee**: ₹600 per participant (Paid online).\n" +
+                      "👤 **Event Heads**: Anvitha Bakshi & Mahira Karan\n" +
+                      "📋 **Details**:\n" +
+                      "• 3 rounds covering 3 distinct themes: raw human emotion, high-speed sports motion, and the rhythm of live music.\n" +
+                      "• Bring your own DSLR or mirrorless camera (smartphone photography is strictly disqualified)."
         },
         {
-            keywords: ['mascot', 'phoenix', 'symbol', 'cause', 'charity', 'fundrais'],
-            response: "Our mascot is the **Phoenix**, a symbol of resilience, rebirth and energy. IGNITE is Bangalore's biggest student-run fest, and it raises funds for the education of underprivileged girls."
+            name: "director's cut",
+            phrases: ["director's cut", 'directors cut', 'short film', 'drama event', 'film making'],
+            primaryKeywords: ["director's cut", 'directors cut'],
+            keywords: ['lavya sen', 'navaneeth sreenath', 'theater', 'acting', 'film'],
+            response: "**Director's Cut (Cultural)**\n" +
+                      "🎬 **Category**: Performing Arts · Both Days\n" +
+                      "👥 **Team Size**: 4 to 5 members (1 team per school).\n" +
+                      "💰 **Fee**: ₹600 per team (Paid online).\n" +
+                      "👤 **Event Heads**: Lavya Sen & Navaneeth Sreenath\n" +
+                      "📋 **Details**:\n" +
+                      "• Day 1 live theatrical performance from creative brief + improvisation challenge.\n" +
+                      "• Day 2 screening of an original 3–7 minute short film. Bring your own cameras and editing gear."
         },
         {
-            keywords: ['when is ignite', 'what date', 'dates', 'which day', 'schedule', 'event days'],
-            response: "IGNITE 2026 is on **Friday 13 and Saturday 14 November**. The Schedule page shows which cultural events run on which day. Sports fixtures are set once registrations close."
+            name: 'insync',
+            phrases: ['insync', 'dance event', 'group dance', 'dance competition', 'choreography'],
+            primaryKeywords: ['insync', 'dance', 'dancer', 'choreography'],
+            keywords: ['divija attaluri', 'akshata naveen', 'heats'],
+            response: "**Insync (Cultural)**\n" +
+                      "💃 **Category**: Performing Arts · Heats Day 1, Finals Day 2\n" +
+                      "👥 **Team Size**: 1 to 9 dancers (up to 2 teams per school).\n" +
+                      "💰 **Fee**: ₹800 per team (Paid online).\n" +
+                      "👤 **Event Heads**: Divija Attaluri & Akshata Naveen\n" +
+                      "📋 **Details**:\n" +
+                      "• Premier dance showdown. Heats on Day 1, high-octane finals on Day 2.\n" +
+                      "• Performance audio tracks must be submitted to ignite@greenwoodhigh.edu.in 1 week in advance."
         },
         {
-            keywords: ['register', 'registration', 'sign up', 'email', 'contact', 'venue', 'location', 'where'],
-            response: "IGNITE 2026 is on 13–14 November at Greenwood High International School, Sarjapur, Bangalore.\n• **Registrations**: 2 to 10 November.\n• **Cultural**: Register and pay online. **Sports**: Register online, pay at the counter.\n• **Questions**: ignite@greenwoodhigh.edu.in or @ignite.gwh on Instagram."
+            name: 'all cultural overview',
+            phrases: [
+                'all cultural', 'cultural list', 'list of cultural', 'what cultural',
+                'cultural events', 'cultural overview', 'tell me about cultural'
+            ],
+            primaryKeywords: ['cultural'],
+            keywords: ['performing arts', 'visual arts', 'strategy'],
+            response: "IGNITE 2026 features **12 premier cultural competitions** across three categories:\n\n" +
+                      "🎭 **Performing Arts**:\n• Battle of the Bands (₹1,000) · In Sync (₹800) · Pitch Perfect (₹600) · Director's Cut (₹600)\n\n" +
+                      "🎨 **Visual Arts**:\n• Dress to Impress (₹1,000) · Kryptos Visos (₹600) · Through the Lens (₹600)\n\n" +
+                      "🧠 **Strategy & Logic**:\n• Dyed in Crimson (₹600) · Wolf of Wall Street (₹800) · Veritas Escape Room (₹600) · Respawn Gaming (₹600) · Radioshack (₹600)\n\n" +
+                      "All cultural registrations are submitted and paid online!"
+        },
+
+        // --- REGISTRATION & CAMPUS NOTICE ---
+        {
+            name: 'registrations',
+            phrases: [
+                'how to register', 'register', 'registration', 'sign up', 'internal forms',
+                'internal form', 'bgt', 'sjp', 'icse campus', 'registration link'
+            ],
+            primaryKeywords: ['register', 'registration', 'registrations'],
+            keywords: ['fee', 'payment', 'portal', 'deadline', 'dates'],
+            response: "**Registrations for IGNITE 2026**\n" +
+                      "📅 **Window**: Open 2 November – 10 November 2026.\n" +
+                      "🔗 **Portal**: Head to the [Registrations page](registrations.html) to submit your school delegation.\n" +
+                      "💳 **Payment Methods**:\n" +
+                      "• **Cultural Events**: Registered and paid online via the portal.\n" +
+                      "• **Sports Tournaments**: Registered online, payment made at the venue counter on Day 1.\n" +
+                      "📌 **Notice**: Students from **Greenwood High BGT and SJP ICSE campuses** can register directly using their internal campus forms!"
+        },
+
+        // --- GENERAL FEES ---
+        {
+            name: 'fees overview',
+            phrases: ['fee overview', 'all fees', 'how much does it cost', 'cost of events', 'pricing'],
+            primaryKeywords: ['fee', 'fees', 'cost', 'price', 'pricing', 'payment'],
+            keywords: ['pay', 'charges'],
+            response: "**IGNITE 2026 Fee Structure**:\n\n" +
+                      "🏆 **Sports Tournaments** (Pay at Counter):\n" +
+                      "• Basketball & Football: ₹1,300 per team\n" +
+                      "• Volleyball: ₹1,000 per team\n" +
+                      "• Flag Football: ₹800 per team\n" +
+                      "• Badminton: ₹700 per team\n" +
+                      "• Table Tennis & Tennis: ₹600 per team\n" +
+                      "• Shooting: ₹500 per shooter\n\n" +
+                      "🎭 **Cultural Events** (Pay Online):\n" +
+                      "• Battle of the Bands & Dress to Impress: ₹1,000 per team\n" +
+                      "• In Sync & Wolf of Wall Street: ₹800 per team\n" +
+                      "• All other cultural events: ₹600 per team/entry"
+        },
+
+        // --- LEADERSHIP & ORGANISING TEAM ---
+        {
+            name: 'organising team',
+            phrases: [
+                'organising team', 'organizing team', 'ignite heads', 'student heads',
+                'who is organizing', 'leadership', 'teachers in charge', 'cultural heads', 'sports heads'
+            ],
+            primaryKeywords: ['heads', 'organisers', 'organizers', 'captains', 'prefects'],
+            keywords: ['vikrant', 'aarya', 'anita', 'aarnavi', 'miraya', 'saheli', 'sowmya', 'suhani', 'koshika', 'hiba', 'rishabh', 'akshita', 'nivaan'],
+            response: "**IGNITE 2026 Leadership Directorate**\n\n" +
+                      "👑 **IGNITE Heads**:\n" +
+                      "• Vikrant Shetty Tomar\n• Aarya Poddar\n• Anita Ganesh Bhat\n• Aarnavi Nagendran\n• Miraya Singh\n\n" +
+                      "👩‍🏫 **Teachers in Charge**:\n" +
+                      "• Ms. Saheli Gupta · Ms. Sowmya S\n\n" +
+                      "🎭 **Cultural Heads**: Suhani Singh & Koshika Goel\n" +
+                      "🏆 **Sports Heads**: Hiba Gabriel, Rishabh Kamani, Akshita Rai, Nivaan Abraham"
+        },
+
+        // --- DATES & SCHEDULE ---
+        {
+            name: 'dates and schedule',
+            phrases: [
+                'when is ignite', 'dates of ignite', 'event dates', 'which day', 'what time', 'schedule matrix'
+            ],
+            primaryKeywords: ['schedule', 'dates', 'when'],
+            keywords: ['november', 'friday', 'saturday', 'day 1', 'day 2', 'matrix'],
+            response: "IGNITE 2026 takes place on **Friday, 13 November and Saturday, 14 November 2026** at Greenwood High International School, Sarjapur, Bangalore.\n\n" +
+                      "Check out the **[Schedule page](schedule.html)** for the full matrix of Day 1 and Day 2 event timings and rounds!"
+        },
+
+        // --- GENERAL RULES & ENTRY ---
+        {
+            name: 'rules and conduct',
+            phrases: [
+                'fest rules', 'dress code', 'what to wear', 'uniform', 'id card', 'food rules', 'guidelines'
+            ],
+            primaryKeywords: ['rules', 'conduct', 'uniform', 'entry', 'wristband', 'food', 'medicine'],
+            keywords: ['id', 'regulations', 'discipline', 'prohibited'],
+            response: "**Key Rules & Code of Conduct for IGNITE 2026**:\n\n" +
+                      "• **Uniform**: Wear your official school uniform (or official school PE sports kit for athletic events).\n" +
+                      "• **ID Card**: Bring your valid 2026–27 school photo ID. Official wristbands must be worn at all times.\n" +
+                      "• **Food & Drinks**: No outside food or beverages allowed. Campus food stalls operate on event food coupons.\n" +
+                      "• **Medication**: Essential medicine must be declared by email to ignite@greenwoodhigh.edu.in beforehand.\n" +
+                      "• **Strict Zero Tolerance**: Drugs, alcohol, vaping, or unsporting conduct will result in immediate disqualification and campus removal."
+        },
+
+        // --- MASCOT & CAUSE ---
+        {
+            name: 'mascot and charity',
+            phrases: ['mascot', 'phoenix', 'charity', 'cause', 'girls education', 'fundraising'],
+            primaryKeywords: ['mascot', 'phoenix', 'cause'],
+            keywords: ['charity', 'symbol', 'purpose'],
+            response: "The emblem of IGNITE 2026 is the **Phoenix**, symbolizing resilience, rebirth, and boundless fiery passion.\n\n" +
+                      "IGNITE is Bangalore's largest student-driven festival, and proceeds go towards funding the **education and empowerment of underprivileged girls**."
         }
     ];
 
     function getScarlettReply(userQuery) {
-        const queryLower = userQuery.toLowerCase().trim();
+        if (!userQuery) return "I'm Scarlett, your IGNITE 2026 assistant! Ask me about any event's rules, fees, schedule, or team sizes!";
+        
+        const raw = userQuery.toLowerCase().trim();
+        const clean = raw.replace(/[?!.,;:()\[\]"']/g, ' ');
+
+        let bestItem = null;
+        let highestScore = 0;
+
         for (const item of scarlettKnowledge) {
-            if (item.keywords.some(kw => queryLower.includes(kw))) {
-                return item.response;
+            let score = 0;
+
+            // 1. Exact phrase matches (highest confidence: 80 pts)
+            if (item.phrases) {
+                for (const phrase of item.phrases) {
+                    if (raw.includes(phrase)) {
+                        score += 80;
+                        break;
+                    }
+                }
+            }
+
+            // 2. Primary keyword match (strong signal: 45 pts each)
+            if (item.primaryKeywords) {
+                for (const pk of item.primaryKeywords) {
+                    const regex = new RegExp('\\b' + pk.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') + '\\b', 'i');
+                    if (regex.test(clean)) {
+                        score += 45;
+                    }
+                }
+            }
+
+            // 3. Secondary keywords (supporting signal: 10 pts each)
+            if (item.keywords) {
+                for (const kw of item.keywords) {
+                    if (clean.includes(kw)) {
+                        score += 10;
+                    }
+                }
+            }
+
+            if (score > highestScore) {
+                highestScore = score;
+                bestItem = item;
             }
         }
+
+        if (bestItem && highestScore >= 25) {
+            return bestItem.response;
+        }
+
         return "I'm Scarlett, your IGNITE 2026 assistant! I have full information on all 12 Cultural events and 8 Sports tournaments. Ask me about any event's rules, team sizes, schedule, or details!";
     }
 

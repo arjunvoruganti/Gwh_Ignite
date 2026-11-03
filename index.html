@@ -59,6 +59,7 @@
 
     <!-- Hero Section with Flying Phoenix Mascot Aura -->
     <header id="home" class="hero">
+        <canvas id="heroSparksCanvas" class="hero-sparks-canvas" aria-hidden="true"></canvas>
         <div class="container">
             <span class="intro-text">Greenwood High Presents</span>
             <h1><span class="gradient-text">IGNITE 2026</span></h1>
@@ -213,6 +214,211 @@
                 <div class="know-item">
                     <h3>Prizes</h3>
                     <p>Every event features winner trophies and certificates, awarded at the grand Day 2 valedictory ceremony.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Moments of IGNITE - Rolling Best Moments Gallery -->
+    <section class="section moments-section" id="moments">
+        <div class="container text-center">
+            <h2 class="section-title gradient-text">Moments of IGNITE</h2>
+            <p class="section-subtitle">Reliving the electrifying energy, championship showdowns, and unforgettable memories from last year.</p>
+        </div>
+
+        <div class="moments-marquee-wrapper">
+            <div class="moments-track">
+                <!-- Card 1 -->
+                <div class="moment-card">
+                    <div class="moment-img-box">
+                        <img src="images/football.png" alt="Floodlight Football" class="moment-img">
+                        <div class="moment-badge">Championship Turf</div>
+                    </div>
+                    <div class="moment-info">
+                        <h4>Floodlight Football Showdown</h4>
+                        <p>High-stakes tactical passing and thunderous cheers on Greenwood High's FIFA-standard astro turf.</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="moment-card">
+                    <div class="moment-img-box">
+                        <img src="WhatsApp Image 2026-10-20 at 10.38.51 PM.png" alt="Battle of the Bands" class="moment-img">
+                        <div class="moment-badge">Live Amphitheatre</div>
+                    </div>
+                    <div class="moment-info">
+                        <h4>Battle of the Bands Finale</h4>
+                        <p>Distorted guitar riffs, thunderous drum solos, and thousands singing along as the arena lit up.</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="moment-card">
+                    <div class="moment-img-box">
+                        <img src="images/basketball.png" alt="Basketball Hoop" class="moment-img">
+                        <div class="moment-badge">Indoor Arena</div>
+                    </div>
+                    <div class="moment-info">
+                        <h4>Buzzer-Beater Hoops</h4>
+                        <p>Clutch three-pointers and deafening student sections during the final four minutes of overtime.</p>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="moment-card">
+                    <div class="moment-img-box">
+                        <img src="WhatsApp Image 2026-10-20 at 10.38.51 PM.png" alt="Runway Couture" class="moment-img">
+                        <div class="moment-badge">Runway Couture</div>
+                    </div>
+                    <div class="moment-info">
+                        <h4>Dress to Impress Glow</h4>
+                        <p>Mythological house couture handcrafted with over 40% upcycled materials dominating the catwalk.</p>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="moment-card">
+                    <div class="moment-img-box">
+                        <img src="images/mascot-transparent.png" alt="Lighting the Flame" class="moment-img">
+                        <div class="moment-badge">Valedictory</div>
+                    </div>
+                    <div class="moment-info">
+                        <h4>Lighting the Flame for a Cause</h4>
+                        <p>Every ticket and tournament fee directly funding the education of underprivileged young girls.</p>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="moment-card">
+                    <div class="moment-img-box">
+                        <img src="images/badminton.png" alt="Badminton Shuttlers" class="moment-img">
+                        <div class="moment-badge">Synthetic Courts</div>
+                    </div>
+                    <div class="moment-info">
+                        <h4>Smash Returns &amp; Deciding Ties</h4>
+                        <p>Lightning-fast reflexes and diving saves on the synthetic championship courts.</p>
+                    </div>
+                </div>
+
+                <!-- Card 7 -->
+                <div class="moment-card">
+                    <div class="moment-img-box">
+                        <img src="images/shooting.png" alt="Shooting Marksman" class="moment-img">
+                        <div class="moment-badge">Target Arena</div>
+                    </div>
+                    <div class="moment-info">
+                        <h4>Bullseye at the 10m Range</h4>
+                        <p>Unshakable concentration and pinpoint marksmanship down to the final millimeter.</p>
+                    </div>
+                </div>
+
+                <!-- Card 8 -->
+                <div class="moment-card">
+                    <div class="moment-img-box">
+                        <img src="WhatsApp Image 2026-10-20 at 10.38.51 PM.png" alt="Trophy Presentation" class="moment-img">
+                        <div class="moment-badge">Champions</div>
+                    </div>
+                    <div class="moment-info">
+                        <h4>Overall Rolling Trophy Lift</h4>
+                        <p>School flags waving high as the overall IGNITE championship cup was hoisted in celebration.</p>
+                    </div>
+                </div>
+
+                <!-- Duplicated set for seamless infinite loop -->
+                <!-- Card 1 Duplicate -->
+                <div class="moment-card" aria-hidden="true">
+                    <div class="moment-img-box">
+                        <img src="images/football.png" alt="Floodlight Football" class="moment-img">
+                        <div class="moment-badge">Championship Turf</div>
+                    </div>
+                    <div class="moment-info">
+                        <h4>Floodlight Football Showdown</h4>
+                        <p>High-stakes tactical passing and thunderous cheers on Greenwood High's FIFA-standard astro turf.</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 Duplicate -->
+                <div class="moment-card" aria-hidden="true">
+                    <div class="moment-img-box">
+                        <img src="WhatsApp Image 2026-10-20 at 10.38.51 PM.png" alt="Battle of the Bands" class="moment-img">
+                        <div class="moment-badge">Live Amphitheatre</div>
+                    </div>
+                    <div class="moment-info">
+                        <h4>Battle of the Bands Finale</h4>
+                        <p>Distorted guitar riffs, thunderous drum solos, and thousands singing along as the arena lit up.</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 Duplicate -->
+                <div class="moment-card" aria-hidden="true">
+                    <div class="moment-img-box">
+                        <img src="images/basketball.png" alt="Basketball Hoop" class="moment-img">
+                        <div class="moment-badge">Indoor Arena</div>
+                    </div>
+                    <div class="moment-info">
+                        <h4>Buzzer-Beater Hoops</h4>
+                        <p>Clutch three-pointers and deafening student sections during the final four minutes of overtime.</p>
+                    </div>
+                </div>
+
+                <!-- Card 4 Duplicate -->
+                <div class="moment-card" aria-hidden="true">
+                    <div class="moment-img-box">
+                        <img src="WhatsApp Image 2026-10-20 at 10.38.51 PM.png" alt="Runway Couture" class="moment-img">
+                        <div class="moment-badge">Runway Couture</div>
+                    </div>
+                    <div class="moment-info">
+                        <h4>Dress to Impress Glow</h4>
+                        <p>Mythological house couture handcrafted with over 40% upcycled materials dominating the catwalk.</p>
+                    </div>
+                </div>
+
+                <!-- Card 5 Duplicate -->
+                <div class="moment-card" aria-hidden="true">
+                    <div class="moment-img-box">
+                        <img src="images/mascot-transparent.png" alt="Lighting the Flame" class="moment-img">
+                        <div class="moment-badge">Valedictory</div>
+                    </div>
+                    <div class="moment-info">
+                        <h4>Lighting the Flame for a Cause</h4>
+                        <p>Every ticket and tournament fee directly funding the education of underprivileged young girls.</p>
+                    </div>
+                </div>
+
+                <!-- Card 6 Duplicate -->
+                <div class="moment-card" aria-hidden="true">
+                    <div class="moment-img-box">
+                        <img src="images/badminton.png" alt="Badminton Shuttlers" class="moment-img">
+                        <div class="moment-badge">Synthetic Courts</div>
+                    </div>
+                    <div class="moment-info">
+                        <h4>Smash Returns &amp; Deciding Ties</h4>
+                        <p>Lightning-fast reflexes and diving saves on the synthetic championship courts.</p>
+                    </div>
+                </div>
+
+                <!-- Card 7 Duplicate -->
+                <div class="moment-card" aria-hidden="true">
+                    <div class="moment-img-box">
+                        <img src="images/shooting.png" alt="Shooting Marksman" class="moment-img">
+                        <div class="moment-badge">Target Arena</div>
+                    </div>
+                    <div class="moment-info">
+                        <h4>Bullseye at the 10m Range</h4>
+                        <p>Unshakable concentration and pinpoint marksmanship down to the final millimeter.</p>
+                    </div>
+                </div>
+
+                <!-- Card 8 Duplicate -->
+                <div class="moment-card" aria-hidden="true">
+                    <div class="moment-img-box">
+                        <img src="WhatsApp Image 2026-10-20 at 10.38.51 PM.png" alt="Trophy Presentation" class="moment-img">
+                        <div class="moment-badge">Champions</div>
+                    </div>
+                    <div class="moment-info">
+                        <h4>Overall Rolling Trophy Lift</h4>
+                        <p>School flags waving high as the overall IGNITE championship cup was hoisted in celebration.</p>
+                    </div>
                 </div>
             </div>
         </div>

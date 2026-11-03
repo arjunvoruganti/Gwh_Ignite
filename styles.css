@@ -188,12 +188,13 @@ nav.scrolled {
     font-weight: 700 !important;
     text-decoration: none;
     box-shadow: 0 4px 15px rgba(255, 65, 108, 0.4);
-    transition: var(--transition);
+    display: inline-block;
+    will-change: transform;
+    transition: transform 0.22s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
 }
 
 .btn-register-nav:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 25px rgba(255, 75, 43, 0.6);
+    box-shadow: 0 8px 28px rgba(255, 75, 43, 0.7);
 }
 
 /* --- Hero Section --- */
@@ -229,6 +230,17 @@ nav.scrolled {
     mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 1) 25%, rgba(0, 0, 0, 0.7) 48%, rgba(0, 0, 0, 0) 68%);
     filter: drop-shadow(0 0 60px rgba(255, 75, 43, 0.8)) drop-shadow(0 0 100px rgba(245, 158, 11, 0.5));
     /* Bird stays static */
+}
+
+.hero-sparks-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: screen;
 }
 
 @keyframes heroBirdFlight {
@@ -407,39 +419,61 @@ nav.scrolled {
     text-align: center;
 }
 
-/* --- Filter Bar --- */
+/* --- Filter Bar with Sliding Pill --- */
 .event-filter-bar {
-    display: flex;
+    position: relative;
+    display: inline-flex;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 40px;
+    gap: 4px;
+    margin: 0 auto 40px;
     flex-wrap: wrap;
+    background: rgba(22, 16, 20, 0.7);
+    border: 1px solid rgba(255, 75, 43, 0.22);
+    border-radius: var(--radius-full);
+    padding: 5px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+.filter-pill-indicator {
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 0;
+    width: 0;
+    background: var(--gradient-fire);
+    border-radius: var(--radius-full);
+    box-shadow: 0 4px 18px rgba(255, 75, 43, 0.45);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+    z-index: 1;
 }
 
 .sub-filter-btn {
+    position: relative;
+    z-index: 2;
     padding: 9px 22px;
     border-radius: var(--radius-full);
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--border-color);
+    background: transparent;
+    border: none;
     color: var(--text-muted);
     font-size: 0.85rem;
     font-weight: 700;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
     cursor: pointer;
-    transition: var(--transition);
+    transition: color 0.25s ease;
 }
 
 .sub-filter-btn:hover {
     color: #fff;
-    background: rgba(255, 255, 255, 0.08);
 }
 
 .sub-filter-btn.active {
-    background: var(--gradient-fire);
     color: #fff;
-    border-color: transparent;
-    box-shadow: 0 4px 18px rgba(255, 75, 43, 0.4);
+    background: transparent;
+    box-shadow: none;
 }
 
 /* --- Event Cards Grid --- */
@@ -459,7 +493,9 @@ nav.scrolled {
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(12px);
-    transition: var(--transition);
+    transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s ease, box-shadow 0.3s ease, opacity 0.35s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
 }
 
 .event-card::before {
@@ -470,17 +506,38 @@ nav.scrolled {
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.4s ease;
+    z-index: 4;
+}
+
+/* 3D Cursor Spotlight Reflection Overlay */
+.event-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+        500px circle at var(--spot-x, -999px) var(--spot-y, -999px),
+        rgba(255, 120, 50, 0.16),
+        rgba(255, 65, 108, 0.05) 40%,
+        transparent 70%
+    );
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    z-index: 3;
 }
 
 .event-card:hover {
-    transform: translateY(-8px);
-    background: rgba(26, 26, 36, 0.85);
-    border-color: rgba(255, 75, 43, 0.35);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 75, 43, 0.15);
+    border-color: rgba(255, 75, 43, 0.4);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 75, 43, 0.2);
 }
 
 .event-card:hover::before {
     transform: scaleX(1);
+}
+
+.event-card:hover::after {
+    opacity: 1;
 }
 
 .event-card-top {
@@ -2156,4 +2213,116 @@ html.fire-arriving::after {
         padding: 14px 18px;
         font-size: 0.8rem;
     }
+}
+
+/* ==========================================================================
+   MOMENTS OF IGNITE - ROLLING GALLERY
+   ========================================================================== */
+.moments-section {
+    padding: 90px 0 60px;
+    overflow: hidden;
+    position: relative;
+}
+
+.moments-marquee-wrapper {
+    width: 100%;
+    overflow: hidden;
+    margin-top: 40px;
+    position: relative;
+    padding: 24px 0 30px;
+    mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 6%, #000 94%, transparent 100%);
+}
+
+.moments-track {
+    display: flex;
+    gap: 24px;
+    width: max-content;
+    animation: rollMoments 40s linear infinite;
+}
+
+.moments-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes rollMoments {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.moment-card {
+    width: 320px;
+    flex-shrink: 0;
+    background: rgba(20, 15, 18, 0.72);
+    border: 1px solid rgba(255, 75, 43, 0.22);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.moment-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--accent-orange);
+    box-shadow: 0 14px 35px rgba(255, 75, 43, 0.32);
+}
+
+.moment-img-box {
+    width: 100%;
+    height: 195px;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 75, 43, 0.16), #090608 85%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.moment-img {
+    width: 78%;
+    height: 78%;
+    object-fit: contain;
+    transition: transform 0.4s ease;
+    filter: drop-shadow(0 0 14px rgba(255, 75, 43, 0.45));
+}
+
+.moment-card:hover .moment-img {
+    transform: scale(1.12);
+}
+
+.moment-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(12, 8, 10, 0.88);
+    border: 1px solid rgba(255, 75, 43, 0.55);
+    color: var(--accent-orange);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+}
+
+.moment-info {
+    padding: 18px 20px 22px;
+}
+
+.moment-info h4 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 8px;
+    line-height: 1.35;
+}
+
+.moment-info p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+    margin: 0;
 }
