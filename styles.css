@@ -502,9 +502,40 @@ nav.scrolled {
     transition: var(--transition);
 }
 
+.event-icon-box.has-image,
+.event-icon-box:has(img) {
+    width: 62px;
+    height: 62px;
+    background: #000000;
+    border: 1px solid rgba(255, 75, 43, 0.35);
+    overflow: hidden;
+    padding: 2px;
+}
+
 .event-card:hover .event-icon-box {
     background: var(--gradient-fire);
     transform: scale(1.08) rotate(3deg);
+}
+
+.event-card:hover .event-icon-box.has-image,
+.event-card:hover .event-icon-box:has(img) {
+    background: #000000;
+    border-color: var(--accent-orange);
+    box-shadow: 0 0 16px rgba(255, 75, 43, 0.5);
+    transform: scale(1.08) rotate(2deg);
+}
+
+.event-icon-box img.event-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: calc(var(--radius-sm) - 2px);
+    display: block;
+    transition: transform var(--transition);
+}
+
+.event-card:hover .event-icon-box img.event-logo-img {
+    transform: scale(1.06);
 }
 
 .event-icon-box svg {
