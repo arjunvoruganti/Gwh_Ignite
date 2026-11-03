@@ -558,12 +558,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 'flag football rules', 'flag football event', 'flag football heads', 'flag football fee'
             ],
             primaryKeywords: ['flag football', 'gridiron'],
-            keywords: ['prithvi gowda', 'talin krishna', 'american football', 'touchdown'],
+            keywords: ['prithvi gowda', 'american football', 'touchdown'],
             response: "**Flag Football (IGNITE 2026)**\n" +
                       "🏈 **Format**: Non-contact American football on the open gridiron turf.\n" +
-                      "👥 **Squad Size**: 7-a-side mixed teams + 2 substitutes (minimum 2 female players on field at all times).\n" +
+                      "👥 **Squad Size**: 7-a-side mixed teams + 2 substitutes (maximum 2 female players on field at any time).\n" +
                       "💰 **Fee**: ₹800 per team (Register online, pay at the counter).\n" +
-                      "👤 **Event Heads**: Prithvi Gowda & Talin Krishna\n" +
+                      "👤 **Event Head**: Prithvi Gowda\n" +
                       "📋 **Key Rules**:\n" +
                       "• Four 12-minute quarters with a 5-minute half-time break.\n" +
                       "• No kickoffs: offensive team starts from their own 5-yard line, 4 downs to cross midfield.\n" +
@@ -595,12 +595,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 'badminton rules', 'badminton event', 'badminton heads', 'badminton fee', 'badminton head'
             ],
             primaryKeywords: ['badminton', 'shuttlecock', 'shuttlers'],
-            keywords: ['sashrik ranjith', 'bwf', 'non-marking', 'singles', 'doubles'],
+            keywords: ['shashrik ranjith', 'bwf', 'non-marking', 'singles', 'doubles'],
             response: "**Badminton (IGNITE 2026)**\n" +
                       "🏸 **Format**: Interschool team ties on synthetic indoor courts.\n" +
                       "👥 **Squad Size**: 2 to 6 players per team (Boys & girls).\n" +
                       "💰 **Fee**: ₹700 per team (Register online, pay at the counter).\n" +
-                      "👤 **Event Head**: Sashrik Ranjith\n" +
+                      "👤 **Event Head**: Shashrik Ranjith\n" +
                       "📋 **Key Rules**:\n" +
                       "• Follows BWF rules. Knockout format.\n" +
                       "• Each tie consists of: Singles 1, Singles 2, and deciding Doubles if required.\n" +
@@ -761,11 +761,12 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'pitch perfect',
             phrases: ['pitch perfect', 'singing event', 'solo singing', 'vocals'],
             primaryKeywords: ['pitch perfect', 'singing', 'singer', 'vocal', 'vocals'],
-            keywords: ['backing track', 'song', 'solo vocal'],
+            keywords: ['mahira karan', 'shivansi gudla', 'backing track', 'song', 'solo vocal'],
             response: "**Pitch Perfect (Cultural)**\n" +
                       "🎤 **Category**: Performing Arts · Day 1 Only\n" +
                       "👥 **Format**: Solo vocals (up to 3 singers per school).\n" +
                       "💰 **Fee**: ₹600 per participant (Paid online).\n" +
+                      "👤 **Event Heads**: Mahira Karan & Shivansi Gudla\n" +
                       "📋 **Details**:\n" +
                       "• Two competitive rounds of live solo vocal performances.\n" +
                       "• Backing tracks must be submitted to ignite@greenwoodhigh.edu.in at least 1 week prior."
@@ -817,12 +818,12 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'through the lens',
             phrases: ['through the lens', 'photography event', 'photo contest', 'photographer'],
             primaryKeywords: ['through the lens', 'photography', 'photographer'],
-            keywords: ['anvitha bakshi', 'mahira karan', 'camera', 'dslr', 'mirrorless'],
+            keywords: ['siddharth venkatesh', 'anvitha bakshi', 'camera', 'dslr', 'mirrorless'],
             response: "**Through the Lens (Cultural)**\n" +
                       "📷 **Category**: Visual Arts · Both Days\n" +
                       "👥 **Format**: Solo photography (up to 3 photographers per school).\n" +
                       "💰 **Fee**: ₹600 per participant (Paid online).\n" +
-                      "👤 **Event Heads**: Anvitha Bakshi & Mahira Karan\n" +
+                      "👤 **Event Heads**: Siddharth Venkatesh & Anvitha Bakshi\n" +
                       "📋 **Details**:\n" +
                       "• 3 rounds covering 3 distinct themes: raw human emotion, high-speed sports motion, and the rhythm of live music.\n" +
                       "• Bring your own DSLR or mirrorless camera (smartphone photography is strictly disqualified)."
@@ -916,10 +917,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 'who is organizing', 'leadership', 'teachers in charge', 'cultural heads', 'sports heads'
             ],
             primaryKeywords: ['heads', 'organisers', 'organizers', 'captains', 'prefects'],
-            keywords: ['vikrant', 'aarya', 'anita', 'aarnavi', 'miraya', 'saheli', 'sowmya', 'suhani', 'koshika', 'hiba', 'rishabh', 'akshita', 'nivaan'],
+            keywords: ['vikrant', 'aarya', 'anita', 'aarnavi', 'miraya', 'akanksha', 'anaahira', 'saheli', 'sowmya', 'suhani', 'koshika', 'hiba', 'rishabh', 'akshita', 'nivaan'],
             response: "**IGNITE 2026 Leadership Directorate**\n\n" +
                       "👑 **IGNITE Heads**:\n" +
-                      "• Vikrant Shetty Tomar\n• Aarya Poddar\n• Anita Ganesh Bhat\n• Aarnavi Nagendran\n• Miraya Singh\n\n" +
+                      "• Vikrant Shetty Tomar\n• Aarya Poddar\n• Anita Ganesh Bhat\n• Aarnavi Nagendran\n• Miraya Singh\n• Akanksha Ajith Karimpana\n• Anaahira Bansod\n\n" +
                       "👩‍🏫 **Teachers in Charge**:\n" +
                       "• Ms. Saheli Gupta · Ms. Sowmya S\n\n" +
                       "🎭 **Cultural Heads**: Suhani Singh & Koshika Goel\n" +
