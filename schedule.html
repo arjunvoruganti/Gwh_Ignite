@@ -85,29 +85,1025 @@
                 </div>
             </div>
 
-            <!-- Event Days Table from Brochure -->
-            <div class="days-table-wrap">
+            <!-- Ceremony Highlights -->
+            <div class="ceremony-banner" data-reveal>
+                <div class="ceremony-card">
+                    <div class="ceremony-icon">🌟</div>
+                    <div class="ceremony-content">
+                        <span class="badge-category badge-ceremony">Inauguration</span>
+                        <h3>Opening Ceremony</h3>
+                        <div class="ceremony-time">Friday, 13 Nov 2026 • 08:30 AM – 09:15 AM</div>
+                        <div class="ceremony-venue">📍 IB Amphitheatre</div>
+                    </div>
+                </div>
+                <div class="ceremony-card">
+                    <div class="ceremony-icon">🏆</div>
+                    <div class="ceremony-content">
+                        <span class="badge-category badge-ceremony">Valedictory &amp; Awards</span>
+                        <h3>Closing Ceremony</h3>
+                        <div class="ceremony-time">Saturday, 14 Nov 2026 • 02:45 PM – 03:30 PM</div>
+                        <div class="ceremony-venue">📍 IB Amphitheatre <span style="font-size: 0.75rem; opacity: 0.75;">(ICSE Old Auditorium backup)</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Schedule Filter & View Controls -->
+            <div class="schedule-controls-wrapper" data-reveal>
+                <div class="schedule-control-group">
+                    <span class="schedule-filter-label">Filter Category</span>
+                    <div class="event-filter-bar schedule-category-filter">
+                        <button class="sub-filter-btn active" data-schedule-category="all">All Events (22)</button>
+                        <button class="sub-filter-btn" data-schedule-category="sports">🏆 Sports Tournaments (8)</button>
+                        <button class="sub-filter-btn" data-schedule-category="cultural">🎭 Cultural Events (12)</button>
+                    </div>
+                </div>
+
+                <div class="schedule-control-group">
+                    <span class="schedule-filter-label">Select Day</span>
+                    <div class="schedule-day-filter">
+                        <button class="day-tab-btn active" data-schedule-day="day1">
+                            <span class="day-title">Day 1</span>
+                            <span class="day-sub">Fri 13 Nov</span>
+                        </button>
+                        <button class="day-tab-btn" data-schedule-day="day2">
+                            <span class="day-title">Day 2</span>
+                            <span class="day-sub">Sat 14 Nov</span>
+                        </button>
+                        <button class="day-tab-btn" data-schedule-day="both">
+                            <span class="day-title">Full Fest</span>
+                            <span class="day-sub">Both Days</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 1 SCHEDULE BLOCK -->
+            <div id="day1Schedule" class="schedule-day-block" data-reveal>
+                <div class="day-header-banner">
+                    <div>
+                        <h2>Day 1 — Friday, 13 November 2026</h2>
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">Inauguration, qualifiers, and opening round showdowns</span>
+                    </div>
+                    <span class="day-header-tag">Gates Open 08:00 AM</span>
+                </div>
+
+                <div class="schedule-grid">
+                    <!-- Opening Ceremony -->
+                    <div class="schedule-card" data-category="ceremony">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>08:30 AM – 09:15 AM</span>
+                            </div>
+                            <span class="badge-category badge-ceremony">Ceremony</span>
+                        </div>
+                        <h3 class="schedule-card-title">Opening Ceremony</h3>
+                        <p class="schedule-card-note">Official inauguration of IGNITE 2026, torch lighting, and school procession.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                IB Amphitheatre
+                            </span>
+                            <span style="font-size: 0.78rem; color: var(--accent-gold); font-weight: 600;">All Delegates</span>
+                        </div>
+                    </div>
+
+                    <!-- Director's Cut (Cultural) -->
+                    <div class="schedule-card" data-category="cultural">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>09:30 AM – 11:30 AM</span>
+                            </div>
+                            <span class="badge-category badge-cultural">Cultural</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="cultural.html#directors-cut">Director's Cut</a></h3>
+                        <p class="schedule-card-note">Day 1 live stage theater performance from creative brief &amp; improvisation challenge.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                Art Block Multi-Purpose Hall
+                            </span>
+                            <a href="cultural.html#directors-cut" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Through the Lens (Cultural) -->
+                    <div class="schedule-card" data-category="cultural">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>09:30 AM – 11:00 AM &amp; 01:00 PM – 02:00 PM</span>
+                            </div>
+                            <span class="badge-category badge-cultural">Cultural</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="cultural.html#through-the-lens">Through the Lens</a></h3>
+                        <p class="schedule-card-note">Theme briefings and campus photo sessions across two active Day 1 windows.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                Physics Lab Classroom
+                            </span>
+                            <a href="cultural.html#through-the-lens" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Wolf of Wall Street (Cultural) -->
+                    <div class="schedule-card" data-category="cultural">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>09:30 AM – 11:00 AM &amp; 12:00 PM – 01:30 PM</span>
+                            </div>
+                            <span class="badge-category badge-cultural">Cultural</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="cultural.html#wolf-of-wall-street">Wolf of Wall Street</a></h3>
+                        <p class="schedule-card-note">High-stakes trading floor, portfolio crisis simulations, and stock auctions.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                LER (Learning Enhancement Room)
+                            </span>
+                            <a href="cultural.html#wolf-of-wall-street" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Respawn Gaming (Cultural) -->
+                    <div class="schedule-card" data-category="cultural">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>09:30 AM – 11:30 AM &amp; 12:00 PM – 02:00 PM</span>
+                            </div>
+                            <span class="badge-category badge-cultural">Cultural</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="cultural.html#respawn">Respawn (Gaming)</a></h3>
+                        <p class="schedule-card-note">FIFA knockout brackets, Roblox trials &amp; Minecraft squad challenge rounds.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                IB Block AV Room
+                            </span>
+                            <a href="cultural.html#respawn" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Dyed in Crimson (Cultural) -->
+                    <div class="schedule-card" data-category="cultural">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>09:30 AM – 11:30 AM &amp; 12:00 PM – 02:00 PM</span>
+                            </div>
+                            <span class="badge-category badge-cultural">Cultural</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="cultural.html#dyed-in-crimson">Dyed in Crimson</a></h3>
+                        <p class="schedule-card-note">Crime scene investigation across the campus grounds (Clues on field; outside academic block).</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                Campus Field (Clues Area)
+                            </span>
+                            <a href="cultural.html#dyed-in-crimson" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Basketball (Sports) -->
+                    <div class="schedule-card" data-category="sports">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>09:30 AM – 01:40 PM</span>
+                            </div>
+                            <span class="badge-category badge-sports">Sports</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="sports.html#basketball">Basketball</a></h3>
+                        <p class="schedule-card-note">Boys &amp; girls interschool full-court qualifiers and quarter-final matchups.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                ICSE Basketball Courts
+                            </span>
+                            <a href="sports.html#basketball" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Volleyball (Sports) -->
+                    <div class="schedule-card" data-category="sports">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>09:30 AM – 01:40 PM</span>
+                            </div>
+                            <span class="badge-category badge-sports">Sports</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="sports.html#volleyball">Volleyball</a></h3>
+                        <p class="schedule-card-note">High-energy rallies and best-of-three preliminary ties on synthetic courts.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                IG Volleyball Courts
+                            </span>
+                            <a href="sports.html#volleyball" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Tennis (Sports) -->
+                    <div class="schedule-card" data-category="sports">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>09:30 AM – 01:45 PM</span>
+                            </div>
+                            <span class="badge-category badge-sports">Sports</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="sports.html#tennis">Tennis</a></h3>
+                        <p class="schedule-card-note">Singles &amp; doubles knockout rounds on hard court championship surfaces.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                IG Tennis Courts
+                            </span>
+                            <a href="sports.html#tennis" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Table Tennis (Sports) -->
+                    <div class="schedule-card" data-category="sports">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>09:30 AM – 01:45 PM</span>
+                            </div>
+                            <span class="badge-category badge-sports">Sports</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="sports.html#table-tennis">Table Tennis</a></h3>
+                        <p class="schedule-card-note">Speed table ties, individual knockouts, and team fixtures.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                IG TT Room
+                            </span>
+                            <a href="sports.html#table-tennis" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Shooting (Sports) -->
+                    <div class="schedule-card" data-category="sports">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>09:30 AM – 01:45 PM</span>
+                            </div>
+                            <span class="badge-category badge-sports">Sports</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="sports.html#shooting">Shooting</a></h3>
+                        <p class="schedule-card-note">10m Air Rifle and Air Pistol qualifying relays (Greenwood internal slot: 10:00 AM – 01:30 PM).</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                IG Shooting Range
+                            </span>
+                            <a href="sports.html#shooting" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Badminton (Sports) -->
+                    <div class="schedule-card" data-category="sports">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>09:30 AM – 02:00 PM</span>
+                            </div>
+                            <span class="badge-category badge-sports">Sports</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="sports.html#badminton">Badminton</a></h3>
+                        <p class="schedule-card-note">Singles and doubles preliminary ties across 4 synthetic indoor courts.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                IG Badminton Courts
+                            </span>
+                            <a href="sports.html#badminton" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Flag Football (Sports) -->
+                    <div class="schedule-card" data-category="sports">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>09:30 AM – 02:00 PM</span>
+                            </div>
+                            <span class="badge-category badge-sports">Sports</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="sports.html#flag-football">Flag Football</a></h3>
+                        <p class="schedule-card-note">7-a-side mixed non-contact gridiron matches (maximum 2 female players on field).</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                IG Field
+                            </span>
+                            <a href="sports.html#flag-football" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Football (Sports) -->
+                    <div class="schedule-card" data-category="sports">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>09:30 AM – 03:00 PM</span>
+                            </div>
+                            <span class="badge-category badge-sports">Sports</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="sports.html#football">Football</a></h3>
+                        <p class="schedule-card-note">Boys 11v11 &amp; Girls 7v7 preliminary showdowns on FIFA-grade astro turf.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                ICSE Turf Field
+                            </span>
+                            <a href="sports.html#football" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Dress to Impress (Cultural) -->
+                    <div class="schedule-card" data-category="cultural">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>10:00 AM – 11:30 AM</span>
+                            </div>
+                            <span class="badge-category badge-cultural">Cultural</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="cultural.html#dress-to-impress">Dress to Impress</a></h3>
+                        <p class="schedule-card-note">Round 1 (Reforged): Mythological runway showcase featuring upcycled sustainable designs.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                ICSE New Auditorium - K Block
+                            </span>
+                            <a href="cultural.html#dress-to-impress" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Insync (Cultural) -->
+                    <div class="schedule-card" data-category="cultural">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>10:00 AM – 11:30 AM</span>
+                            </div>
+                            <span class="badge-category badge-cultural">Cultural</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="cultural.html#insync">Insync</a></h3>
+                        <p class="schedule-card-note">Choreography heats and group dance showdown in the outdoor amphitheatre.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                Amphitheatre
+                            </span>
+                            <a href="cultural.html#insync" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Kryptos Visos (Cultural) -->
+                    <div class="schedule-card" data-category="cultural">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>10:00 AM – 11:30 AM</span>
+                            </div>
+                            <span class="badge-category badge-cultural">Cultural</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="cultural.html#kryptos-visos">Kryptos Visos</a></h3>
+                        <p class="schedule-card-note">Round 1 body &amp; face painting heats from the pre-released creative theme.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                Art Block Steps
+                            </span>
+                            <a href="cultural.html#kryptos-visos" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Veritas (Cultural) -->
+                    <div class="schedule-card" data-category="cultural">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>10:00 AM – 12:00 PM</span>
+                            </div>
+                            <span class="badge-category badge-cultural">Cultural</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="cultural.html#veritas">Veritas</a></h3>
+                        <p class="schedule-card-note">Cryptic escape room adventure: Day 1 logic puzzles, decoding, and lock-picking.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                Classrooms F-26 &amp; F-27
+                            </span>
+                            <a href="cultural.html#veritas" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Thespian of Melody (Cultural) -->
+                    <div class="schedule-card" data-category="cultural">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>12:00 PM – 01:30 PM</span>
+                            </div>
+                            <span class="badge-category badge-cultural">Cultural</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="cultural.html">Thespian of Melody</a></h3>
+                        <p class="schedule-card-note">Live dramatic musical performance blending theatrical storytelling and vocals.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                Multipurpose Hall
+                            </span>
+                            <a href="cultural.html" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Pitch Perfect (Cultural) -->
+                    <div class="schedule-card" data-category="cultural">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>12:30 PM – 02:00 PM</span>
+                            </div>
+                            <span class="badge-category badge-cultural">Cultural</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="cultural.html#pitch-perfect">Pitch Perfect</a></h3>
+                        <p class="schedule-card-note">Live solo vocal competition with backing tracks (Two intense rounds — Day 1 only!).</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                Art Block Multi-Purpose Hall
+                            </span>
+                            <a href="cultural.html#pitch-perfect" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Battle of the Bands (Cultural) -->
+                    <div class="schedule-card" data-category="cultural">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>01:00 PM – 02:30 PM</span>
+                            </div>
+                            <span class="badge-category badge-cultural">Cultural</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="cultural.html#battle-of-the-bands">Battle of the Bands</a></h3>
+                        <p class="schedule-card-note">Day 1 electrifying rock band showdown and acoustic preliminary heats.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                ICSE New Auditorium - K Block
+                            </span>
+                            <a href="cultural.html#battle-of-the-bands" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DAY 2 SCHEDULE BLOCK -->
+            <div id="day2Schedule" class="schedule-day-block is-hidden" data-reveal>
+                <div class="day-header-banner">
+                    <div>
+                        <h2>Day 2 — Saturday, 14 November 2026</h2>
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">Knockout finals, championship trophy ties, and grand closing ceremony</span>
+                    </div>
+                    <span class="day-header-tag">Finals Day • Gates Open 08:00 AM</span>
+                </div>
+
+                <div class="schedule-grid">
+                    <!-- Tennis (Sports) -->
+                    <div class="schedule-card" data-category="sports">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>08:30 AM – 12:00 PM</span>
+                            </div>
+                            <span class="badge-category badge-sports">Sports</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="sports.html#tennis">Tennis</a></h3>
+                        <p class="schedule-card-note">Championship tie finals and podium matches on hard courts.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                IG Tennis Courts
+                            </span>
+                            <a href="sports.html#tennis" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Basketball (Sports) -->
+                    <div class="schedule-card" data-category="sports">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>08:30 AM – 12:50 PM</span>
+                            </div>
+                            <span class="badge-category badge-sports">Sports</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="sports.html#basketball">Basketball</a></h3>
+                        <p class="schedule-card-note">Semi-finals and Grand Championship Finals for boys &amp; girls divisions.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                ICSE Basketball Courts
+                            </span>
+                            <a href="sports.html#basketball" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Volleyball (Sports) -->
+                    <div class="schedule-card" data-category="sports">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>08:30 AM – 12:50 PM</span>
+                            </div>
+                            <span class="badge-category badge-sports">Sports</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="sports.html#volleyball">Volleyball</a></h3>
+                        <p class="schedule-card-note">Semi-finals, 3rd-place playoff, and Grand Finals on indoor volleyball arena.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                IG Volleyball Courts
+                            </span>
+                            <a href="sports.html#volleyball" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Table Tennis (Sports) -->
+                    <div class="schedule-card" data-category="sports">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>08:30 AM – 01:15 PM</span>
+                            </div>
+                            <span class="badge-category badge-sports">Sports</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="sports.html#table-tennis">Table Tennis</a></h3>
+                        <p class="schedule-card-note">Knockout semi-finals and high-speed championship table deciders.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                IG TT Room
+                            </span>
+                            <a href="sports.html#table-tennis" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Football (Sports) -->
+                    <div class="schedule-card" data-category="sports">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>08:30 AM – 02:00 PM</span>
+                            </div>
+                            <span class="badge-category badge-sports">Sports</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="sports.html#football">Football</a></h3>
+                        <p class="schedule-card-note">Semi-finals and Grand Championship title matches under floodlight turf.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                ICSE Turf Field
+                            </span>
+                            <a href="sports.html#football" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Flag Football (Sports) -->
+                    <div class="schedule-card" data-category="sports">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>08:30 AM – 02:00 PM</span>
+                            </div>
+                            <span class="badge-category badge-sports">Sports</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="sports.html#flag-football">Flag Football</a></h3>
+                        <p class="schedule-card-note">Gridiron semi-finals and championship trophy match on the main field.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                IG Field
+                            </span>
+                            <a href="sports.html#flag-football" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Through the Lens (Cultural) -->
+                    <div class="schedule-card" data-category="cultural">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>09:00 AM – 10:00 AM &amp; 11:00 AM – 12:30 PM</span>
+                            </div>
+                            <span class="badge-category badge-cultural">Cultural</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="cultural.html#through-the-lens">Through the Lens</a></h3>
+                        <p class="schedule-card-note">Final portfolio submission, post-processing selection, and jury presentation.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                Physics Lab Classroom
+                            </span>
+                            <a href="cultural.html#through-the-lens" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Dress to Impress (Cultural) -->
+                    <div class="schedule-card" data-category="cultural">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>09:00 AM – 10:30 AM</span>
+                            </div>
+                            <span class="badge-category badge-cultural">Cultural</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="cultural.html#dress-to-impress">Dress to Impress</a></h3>
+                        <p class="schedule-card-note">Round 2 Grand Runway Finals (Legacy, Reworn): Traditional Indian eras fashion runway.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                ICSE New Auditorium - K Block
+                            </span>
+                            <a href="cultural.html#dress-to-impress" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Insync (Cultural) -->
+                    <div class="schedule-card" data-category="cultural">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>09:00 AM – 10:30 AM</span>
+                            </div>
+                            <span class="badge-category badge-cultural">Cultural</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="cultural.html#insync">Insync</a></h3>
+                        <p class="schedule-card-note">Premier dance finals: top qualification crews battle for the IGNITE choreography trophy.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                Amphitheatre
+                            </span>
+                            <a href="cultural.html#insync" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Director's Cut (Cultural) -->
+                    <div class="schedule-card" data-category="cultural">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>09:30 AM – 11:30 AM</span>
+                            </div>
+                            <span class="badge-category badge-cultural">Cultural</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="cultural.html#directors-cut">Director's Cut</a></h3>
+                        <p class="schedule-card-note">Day 2 big screen cinema screening of original 3–7 minute short films + director Q&amp;A.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                Art Block Multi-Purpose Hall
+                            </span>
+                            <a href="cultural.html#directors-cut" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Kryptos Visos (Cultural) -->
+                    <div class="schedule-card" data-category="cultural">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>09:30 AM – 11:30 AM</span>
+                            </div>
+                            <span class="badge-category badge-cultural">Cultural</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="cultural.html#kryptos-visos">Kryptos Visos</a></h3>
+                        <p class="schedule-card-note">Grand visual art finals with surprise themes revealed 10 minutes before the clock starts.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                Art Block Steps
+                            </span>
+                            <a href="cultural.html#kryptos-visos" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Wolf of Wall Street (Cultural) -->
+                    <div class="schedule-card" data-category="cultural">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>09:30 AM – 11:30 AM</span>
+                            </div>
+                            <span class="badge-category badge-cultural">Cultural</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="cultural.html#wolf-of-wall-street">Wolf of Wall Street</a></h3>
+                        <p class="schedule-card-note">Shark-tank style IPO company pitch finals in front of venture judge panel.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                LER (Learning Enhancement Room)
+                            </span>
+                            <a href="cultural.html#wolf-of-wall-street" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Respawn Gaming (Cultural) -->
+                    <div class="schedule-card" data-category="cultural">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>09:30 AM – 01:30 PM</span>
+                            </div>
+                            <span class="badge-category badge-cultural">Cultural</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="cultural.html#respawn">Respawn (Gaming)</a></h3>
+                        <p class="schedule-card-note">FIFA Finals, Roblox runway design showcase &amp; Minecraft sudden-death decider.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                IB Block AV Room
+                            </span>
+                            <a href="cultural.html#respawn" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Shooting (Sports) -->
+                    <div class="schedule-card" data-category="sports">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>09:45 AM – 01:45 PM</span>
+                            </div>
+                            <span class="badge-category badge-sports">Sports</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="sports.html#shooting">Shooting</a></h3>
+                        <p class="schedule-card-note">10m Air Rifle and Pistol medal rounds, precision finals &amp; shoot-offs.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                IG Shooting Range
+                            </span>
+                            <a href="sports.html#shooting" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Badminton (Sports) -->
+                    <div class="schedule-card" data-category="sports">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>10:00 AM – 12:00 PM</span>
+                            </div>
+                            <span class="badge-category badge-sports">Sports</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="sports.html#badminton">Badminton</a></h3>
+                        <p class="schedule-card-note">Championship deciding ties: Singles 1, Singles 2 &amp; deciding Doubles.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                IG Badminton Courts
+                            </span>
+                            <a href="sports.html#badminton" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Veritas (Cultural) -->
+                    <div class="schedule-card" data-category="cultural">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>10:00 AM – 12:00 PM</span>
+                            </div>
+                            <span class="badge-category badge-cultural">Cultural</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="cultural.html#veritas">Veritas</a></h3>
+                        <p class="schedule-card-note">Day 2 ultimate room breakout across the 9th grade classroom cluster.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                3 Classrooms in 9th Grade Cluster
+                            </span>
+                            <a href="cultural.html#veritas" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Battle of the Bands (Cultural) -->
+                    <div class="schedule-card" data-category="cultural">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>12:00 PM – 01:30 PM</span>
+                            </div>
+                            <span class="badge-category badge-cultural">Cultural</span>
+                        </div>
+                        <h3 class="schedule-card-title"><a href="cultural.html#battle-of-the-bands">Battle of the Bands</a></h3>
+                        <p class="schedule-card-note">Thunderous live rock knockout finals: original tracks and high-energy covers.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                ICSE Old Auditorium
+                            </span>
+                            <a href="cultural.html#battle-of-the-bands" class="schedule-card-link">Details →</a>
+                        </div>
+                    </div>
+
+                    <!-- Closing Ceremony -->
+                    <div class="schedule-card" data-category="ceremony">
+                        <div class="schedule-card-top">
+                            <div class="schedule-card-time">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                                <span>02:45 PM – 03:30 PM</span>
+                            </div>
+                            <span class="badge-category badge-ceremony">Ceremony</span>
+                        </div>
+                        <h3 class="schedule-card-title">Grand Closing &amp; Valedictory</h3>
+                        <p class="schedule-card-note">Trophy distributions, overall school championship declaration, and celebration.</p>
+                        <div class="schedule-card-bottom">
+                            <span class="schedule-card-venue">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                IB Amphitheatre (ICSE Old Auditorium backup)
+                            </span>
+                            <span style="font-size: 0.78rem; color: var(--accent-gold); font-weight: 600;">All Delegates</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Master Venues & Schedule Matrix (Table View) -->
+            <div class="days-table-wrap" data-reveal>
+                <div class="matrix-header">
+                    <div>
+                        <h2>Full Venues &amp; Timings Matrix</h2>
+                        <span class="matrix-sub">Complete chronological schedule as coordinated with Greenwood High administration</span>
+                    </div>
+                </div>
                 <table class="days-table">
                     <thead>
                         <tr>
-                            <th scope="col">Cultural Event</th>
-                            <th scope="col">Day 1<span>Fri 13 Nov</span></th>
-                            <th scope="col">Day 2<span>Sat 14 Nov</span></th>
+                            <th scope="col">Event</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Day 1<span>Fri 13 Nov 2026</span></th>
+                            <th scope="col">Day 2<span>Sat 14 Nov 2026</span></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><th scope="row"><a href="cultural.html#insync">Insync</a></th><td>On (Heats)</td><td class="is-final">Finals</td></tr>
-                        <tr><th scope="row"><a href="cultural.html#dress-to-impress">Dress to Impress</a></th><td>On (Showcase)</td><td class="is-final">Finals</td></tr>
-                        <tr><th scope="row"><a href="cultural.html#battle-of-the-bands">Battle of the Bands</a></th><td>Showcase</td><td class="is-final">Knockout Finals</td></tr>
-                        <tr><th scope="row"><a href="cultural.html#directors-cut">Director's Cut</a></th><td>On (Stage &amp; Improv)</td><td>On (Short Film)</td></tr>
-                        <tr><th scope="row"><a href="cultural.html#through-the-lens">Through the Lens</a></th><td>On</td><td>On</td></tr>
-                        <tr><th scope="row"><a href="cultural.html#dyed-in-crimson">Dyed in Crimson</a></th><td>On (Investigation)</td><td>On (Conclusion)</td></tr>
-                        <tr><th scope="row"><a href="cultural.html#veritas">Veritas</a></th><td>On (Daily Winner)</td><td>On (Daily Winner)</td></tr>
-                        <tr><th scope="row"><a href="cultural.html#respawn">Respawn</a></th><td>On (Qualifiers)</td><td class="is-final">Finals</td></tr>
-                        <tr><th scope="row"><a href="cultural.html#radioshack">Radioshack</a></th><td>On (Drop-in)</td><td>On (Drop-in)</td></tr>
-                        <tr><th scope="row"><a href="cultural.html#wolf-of-wall-street">Wolf of Wall Street</a></th><td>On (Trading &amp; Bids)</td><td>On (IPO Pitch)</td></tr>
-                        <tr><th scope="row"><a href="cultural.html#kryptos-visos">Kryptos Visos</a></th><td>On (Theme Heats)</td><td class="is-final">Surprise Finals</td></tr>
-                        <tr><th scope="row"><a href="cultural.html#pitch-perfect">Pitch Perfect</a></th><td>On (Knockouts)</td><td class="is-off">—</td></tr>
+                        <!-- CEREMONIES -->
+                        <tr data-category="ceremony">
+                            <th scope="row">🌟 Opening Ceremony</th>
+                            <td><span class="badge-category badge-ceremony">Ceremony</span></td>
+                            <td><span class="slot-time">08:30 AM – 09:15 AM</span><span class="slot-venue">📍 IB Amphitheatre</span></td>
+                            <td class="is-off">—</td>
+                        </tr>
+                        <tr data-category="ceremony">
+                            <th scope="row">🏆 Closing Ceremony</th>
+                            <td><span class="badge-category badge-ceremony">Ceremony</span></td>
+                            <td class="is-off">—</td>
+                            <td><span class="slot-time">02:45 PM – 03:30 PM</span><span class="slot-venue">📍 IB Amphitheatre <span style="opacity: 0.75;">(or ICSE Old)</span></span></td>
+                        </tr>
+
+                        <!-- 8 SPORTS DISCIPLINES -->
+                        <tr data-category="sports">
+                            <th scope="row"><a href="sports.html#football">Football</a></th>
+                            <td><span class="badge-category badge-sports">Sports</span></td>
+                            <td><span class="slot-time">09:30 AM – 03:00 PM</span><span class="slot-venue">📍 ICSE Turf Field</span></td>
+                            <td><span class="slot-time">08:30 AM – 02:00 PM</span><span class="slot-venue">📍 ICSE Turf Field</span></td>
+                        </tr>
+                        <tr data-category="sports">
+                            <th scope="row"><a href="sports.html#badminton">Badminton</a></th>
+                            <td><span class="badge-category badge-sports">Sports</span></td>
+                            <td><span class="slot-time">09:30 AM – 02:00 PM</span><span class="slot-venue">📍 IG Badminton Courts</span></td>
+                            <td><span class="slot-time">10:00 AM – 12:00 PM</span><span class="slot-venue">📍 IG Badminton Courts</span></td>
+                        </tr>
+                        <tr data-category="sports">
+                            <th scope="row"><a href="sports.html#tennis">Tennis</a></th>
+                            <td><span class="badge-category badge-sports">Sports</span></td>
+                            <td><span class="slot-time">09:30 AM – 01:45 PM</span><span class="slot-venue">📍 IG Tennis Courts</span></td>
+                            <td><span class="slot-time">08:30 AM – 12:00 PM</span><span class="slot-venue">📍 IG Tennis Courts</span></td>
+                        </tr>
+                        <tr data-category="sports">
+                            <th scope="row"><a href="sports.html#shooting">Shooting</a></th>
+                            <td><span class="badge-category badge-sports">Sports</span></td>
+                            <td><span class="slot-time">09:30 AM – 01:45 PM</span><span class="slot-venue">📍 IG Shooting Range <span style="font-size: 0.74rem; color: var(--accent-gold); display: block;">(GWH: 10:00 AM – 01:30 PM)</span></span></td>
+                            <td><span class="slot-time">09:45 AM – 01:45 PM</span><span class="slot-venue">📍 IG Shooting Range</span></td>
+                        </tr>
+                        <tr data-category="sports">
+                            <th scope="row"><a href="sports.html#flag-football">Flag Football</a></th>
+                            <td><span class="badge-category badge-sports">Sports</span></td>
+                            <td><span class="slot-time">09:30 AM – 02:00 PM</span><span class="slot-venue">📍 IG Field</span></td>
+                            <td><span class="slot-time">08:30 AM – 02:00 PM</span><span class="slot-venue">📍 IG Field</span></td>
+                        </tr>
+                        <tr data-category="sports">
+                            <th scope="row"><a href="sports.html#table-tennis">Table Tennis</a></th>
+                            <td><span class="badge-category badge-sports">Sports</span></td>
+                            <td><span class="slot-time">09:30 AM – 01:45 PM</span><span class="slot-venue">📍 IG TT Room</span></td>
+                            <td><span class="slot-time">08:30 AM – 01:15 PM</span><span class="slot-venue">📍 IG TT Room</span></td>
+                        </tr>
+                        <tr data-category="sports">
+                            <th scope="row"><a href="sports.html#basketball">Basketball</a></th>
+                            <td><span class="badge-category badge-sports">Sports</span></td>
+                            <td><span class="slot-time">09:30 AM – 01:40 PM</span><span class="slot-venue">📍 ICSE Basketball Courts</span></td>
+                            <td><span class="slot-time">08:30 AM – 12:50 PM</span><span class="slot-venue">📍 ICSE Basketball Courts</span></td>
+                        </tr>
+                        <tr data-category="sports">
+                            <th scope="row"><a href="sports.html#volleyball">Volleyball</a></th>
+                            <td><span class="badge-category badge-sports">Sports</span></td>
+                            <td><span class="slot-time">09:30 AM – 01:40 PM</span><span class="slot-venue">📍 IG Volleyball Courts</span></td>
+                            <td><span class="slot-time">08:30 AM – 12:50 PM</span><span class="slot-venue">📍 IG Volleyball Courts</span></td>
+                        </tr>
+
+                        <!-- CULTURAL EVENTS -->
+                        <tr data-category="cultural">
+                            <th scope="row"><a href="cultural.html#dress-to-impress">Dress to Impress (DTI)</a></th>
+                            <td><span class="badge-category badge-cultural">Cultural</span></td>
+                            <td><span class="slot-time">10:00 AM – 11:30 AM</span><span class="slot-venue">📍 ICSE New Auditorium - K Block</span></td>
+                            <td><span class="slot-time">09:00 AM – 10:30 AM</span><span class="slot-venue">📍 ICSE New Auditorium - K Block</span></td>
+                        </tr>
+                        <tr data-category="cultural">
+                            <th scope="row"><a href="cultural.html#battle-of-the-bands">Battle of the Bands (BOTB)</a></th>
+                            <td><span class="badge-category badge-cultural">Cultural</span></td>
+                            <td><span class="slot-time">01:00 PM – 02:30 PM</span><span class="slot-venue">📍 ICSE New Auditorium - K Block</span></td>
+                            <td><span class="slot-time">12:00 PM – 01:30 PM</span><span class="slot-venue">📍 ICSE Old Auditorium</span></td>
+                        </tr>
+                        <tr data-category="cultural">
+                            <th scope="row"><a href="cultural.html#insync">Insync</a></th>
+                            <td><span class="badge-category badge-cultural">Cultural</span></td>
+                            <td><span class="slot-time">10:00 AM – 11:30 AM</span><span class="slot-venue">📍 Amphitheatre</span></td>
+                            <td><span class="slot-time">09:00 AM – 10:30 AM</span><span class="slot-venue">📍 Amphitheatre</span></td>
+                        </tr>
+                        <tr data-category="cultural">
+                            <th scope="row"><a href="cultural.html#directors-cut">Director's Cut</a></th>
+                            <td><span class="badge-category badge-cultural">Cultural</span></td>
+                            <td><span class="slot-time">09:30 AM – 11:30 AM</span><span class="slot-venue">📍 Art Block Multi-Purpose Hall</span></td>
+                            <td><span class="slot-time">09:30 AM – 11:30 AM</span><span class="slot-venue">📍 Art Block Multi-Purpose Hall</span></td>
+                        </tr>
+                        <tr data-category="cultural">
+                            <th scope="row"><a href="cultural.html#pitch-perfect">Pitch Perfect</a></th>
+                            <td><span class="badge-category badge-cultural">Cultural</span></td>
+                            <td><span class="slot-time">12:30 PM – 02:00 PM</span><span class="slot-venue">📍 Art Block Multi-Purpose Hall</span></td>
+                            <td class="is-off">— (Day 1 only)</td>
+                        </tr>
+                        <tr data-category="cultural">
+                            <th scope="row"><a href="cultural.html#through-the-lens">Through the Lens</a></th>
+                            <td><span class="badge-category badge-cultural">Cultural</span></td>
+                            <td><span class="slot-time">09:30 AM – 11:00 AM &amp; 01:00 PM – 02:00 PM</span><span class="slot-venue">📍 Physics Lab Classroom</span></td>
+                            <td><span class="slot-time">09:00 AM – 10:00 AM &amp; 11:00 AM – 12:30 PM</span><span class="slot-venue">📍 Physics Lab Classroom</span></td>
+                        </tr>
+                        <tr data-category="cultural">
+                            <th scope="row"><a href="cultural.html#veritas">Veritas</a></th>
+                            <td><span class="badge-category badge-cultural">Cultural</span></td>
+                            <td><span class="slot-time">10:00 AM – 12:00 PM</span><span class="slot-venue">📍 Classrooms F-26 &amp; F-27</span></td>
+                            <td><span class="slot-time">10:00 AM – 12:00 PM</span><span class="slot-venue">📍 3 Classrooms in 9th Grade Cluster</span></td>
+                        </tr>
+                        <tr data-category="cultural">
+                            <th scope="row"><a href="cultural.html#kryptos-visos">Kryptos Visos</a></th>
+                            <td><span class="badge-category badge-cultural">Cultural</span></td>
+                            <td><span class="slot-time">10:00 AM – 11:30 AM</span><span class="slot-venue">📍 Art Block Steps</span></td>
+                            <td><span class="slot-time">09:30 AM – 11:30 AM</span><span class="slot-venue">📍 Art Block Steps</span></td>
+                        </tr>
+                        <tr data-category="cultural">
+                            <th scope="row"><a href="cultural.html#wolf-of-wall-street">Wolf of Wall Street</a></th>
+                            <td><span class="badge-category badge-cultural">Cultural</span></td>
+                            <td><span class="slot-time">09:30 AM – 11:00 AM &amp; 12:00 PM – 01:30 PM</span><span class="slot-venue">📍 LER</span></td>
+                            <td><span class="slot-time">09:30 AM – 11:30 AM</span><span class="slot-venue">📍 LER</span></td>
+                        </tr>
+                        <tr data-category="cultural">
+                            <th scope="row"><a href="cultural.html">Thespian of Melody</a></th>
+                            <td><span class="badge-category badge-cultural">Cultural</span></td>
+                            <td><span class="slot-time">12:00 PM – 01:30 PM</span><span class="slot-venue">📍 Multipurpose Hall</span></td>
+                            <td class="is-off">—</td>
+                        </tr>
+                        <tr data-category="cultural">
+                            <th scope="row"><a href="cultural.html#respawn">Respawn (Gaming)</a></th>
+                            <td><span class="badge-category badge-cultural">Cultural</span></td>
+                            <td><span class="slot-time">09:30 AM – 11:30 AM &amp; 12:00 PM – 02:00 PM</span><span class="slot-venue">📍 IB Block AV Room</span></td>
+                            <td><span class="slot-time">09:30 AM – 01:30 PM</span><span class="slot-venue">📍 IB Block AV Room</span></td>
+                        </tr>
+                        <tr data-category="cultural">
+                            <th scope="row"><a href="cultural.html#dyed-in-crimson">Dyed in Crimson</a></th>
+                            <td><span class="badge-category badge-cultural">Cultural</span></td>
+                            <td><span class="slot-time">09:30 AM – 11:30 AM &amp; 12:00 PM – 02:00 PM</span><span class="slot-venue">📍 Clues across field (Outside Academic Block)</span></td>
+                            <td class="is-off">—</td>
+                        </tr>
+                        <tr data-category="cultural">
+                            <th scope="row"><a href="cultural.html#radioshack">Radioshack</a></th>
+                            <td><span class="badge-category badge-cultural">Cultural</span></td>
+                            <td><span class="slot-time">Drop-in throughout day</span><span class="slot-venue">📍 Festival Grounds</span></td>
+                            <td><span class="slot-time">Drop-in throughout day</span><span class="slot-venue">📍 Festival Grounds</span></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

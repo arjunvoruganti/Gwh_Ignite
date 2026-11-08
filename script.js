@@ -440,12 +440,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 3. Cultural Events Filtering Logic with Smooth Sliding Pill (iOS Native feel)
-    const filterBar = document.querySelector('.event-filter-bar');
-    const subFilterBtns = document.querySelectorAll('.sub-filter-btn');
+    // 3. Cultural Events Filtering Logic with Smooth Sliding Pill (iOS Native feel - cultural.html only)
+    const culturalGrid = document.querySelector('#culturalGrid');
+    const filterBar = culturalGrid ? document.querySelector('.event-filter-bar:not(.schedule-category-filter)') : null;
+    const subFilterBtns = filterBar ? filterBar.querySelectorAll('.sub-filter-btn') : [];
     const culturalCards = document.querySelectorAll('#culturalGrid .event-card');
 
-    if (filterBar && subFilterBtns.length > 0) {
+    if (filterBar && subFilterBtns.length > 0 && culturalCards.length > 0) {
         // Create or acquire the sliding pill indicator
         let pill = filterBar.querySelector('.filter-pill-indicator');
         if (!pill) {
@@ -500,6 +501,97 @@ document.addEventListener('DOMContentLoaded', () => {
                         }, 220);
                     }
                 });
+            });
+        });
+    }
+
+    // 3.1. Schedule Page Interactive Filtering (Category: Sports vs Cultural, and Day Switcher)
+    const schedCategoryFilter = document.querySelector('.schedule-category-filter');
+    const schedCategoryBtns = document.querySelectorAll('.schedule-category-filter .sub-filter-btn');
+    const schedDayBtns = document.querySelectorAll('.day-tab-btn');
+    const schedCards = document.querySelectorAll('.schedule-card');
+    const schedMatrixRows = document.querySelectorAll('.days-table tbody tr');
+    const day1Block = document.getElementById('day1Schedule');
+    const day2Block = document.getElementById('day2Schedule');
+
+    if (schedCategoryFilter && schedCategoryBtns.length > 0) {
+        let schedPill = schedCategoryFilter.querySelector('.filter-pill-indicator');
+        if (!schedPill) {
+            schedPill = document.createElement('div');
+            schedPill.className = 'filter-pill-indicator';
+            schedCategoryFilter.insertBefore(schedPill, schedCategoryFilter.firstChild);
+        }
+
+        const updateSchedPill = (targetBtn) => {
+            if (!schedPill || !targetBtn) return;
+            schedPill.style.transform = `translateX(${targetBtn.offsetLeft}px)`;
+            schedPill.style.width = `${targetBtn.offsetWidth}px`;
+        };
+
+        const initialCategoryActive = schedCategoryFilter.querySelector('.sub-filter-btn.active') || schedCategoryBtns[0];
+        if (initialCategoryActive) {
+            setTimeout(() => updateSchedPill(initialCategoryActive), 50);
+        }
+
+        window.addEventListener('resize', () => {
+            const current = schedCategoryFilter.querySelector('.sub-filter-btn.active');
+            if (current) updateSchedPill(current);
+        });
+
+        const applyCategoryFilter = (cat) => {
+            // Filter schedule cards
+            schedCards.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                const show = (cat === 'all') || (cardCat === cat) || (cardCat === 'ceremony');
+                if (show) {
+                    card.classList.remove('is-hidden');
+                } else {
+                    card.classList.add('is-hidden');
+                }
+            });
+
+            // Filter matrix table rows
+            schedMatrixRows.forEach(row => {
+                const rowCat = row.getAttribute('data-category');
+                const show = (cat === 'all') || (rowCat === cat) || (rowCat === 'ceremony');
+                if (show) {
+                    row.classList.remove('is-hidden');
+                } else {
+                    row.classList.add('is-hidden');
+                }
+            });
+        };
+
+        schedCategoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                schedCategoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                updateSchedPill(btn);
+
+                const filterVal = btn.getAttribute('data-schedule-category');
+                applyCategoryFilter(filterVal);
+            });
+        });
+    }
+
+    // Day Switcher Logic (Day 1 vs Day 2 vs Full Fest / Both)
+    if (schedDayBtns.length > 0 && day1Block && day2Block) {
+        schedDayBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                schedDayBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const dayMode = btn.getAttribute('data-schedule-day');
+                if (dayMode === 'day1') {
+                    day1Block.classList.remove('is-hidden');
+                    day2Block.classList.add('is-hidden');
+                } else if (dayMode === 'day2') {
+                    day1Block.classList.add('is-hidden');
+                    day2Block.classList.remove('is-hidden');
+                } else {
+                    day1Block.classList.remove('is-hidden');
+                    day2Block.classList.remove('is-hidden');
+                }
             });
         });
     }
@@ -931,12 +1023,26 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             name: 'dates and schedule',
             phrases: [
-                'when is ignite', 'dates of ignite', 'event dates', 'which day', 'what time', 'schedule matrix'
+                'when is ignite', 'dates of ignite', 'event dates', 'which day', 'what time', 'schedule matrix', 'timings', 'fixtures'
             ],
-            primaryKeywords: ['schedule', 'dates', 'when'],
-            keywords: ['november', 'friday', 'saturday', 'day 1', 'day 2', 'matrix'],
-            response: "IGNITE 2026 takes place on **Friday, 13 November and Saturday, 14 November 2026** at Greenwood High International School, Sarjapur, Bangalore.\n\n" +
-                      "Check out the **[Schedule page](schedule.html)** for the full matrix of Day 1 and Day 2 event timings and rounds!"
+            primaryKeywords: ['schedule', 'dates', 'when', 'timings', 'fixtures'],
+            keywords: ['november', 'friday', 'saturday', 'day 1', 'day 2', 'matrix', 'timing'],
+            response: "IGNITE 2026 takes place on **Friday, 13 November & Saturday, 14 November 2026** at Greenwood High International School:\n\n" +
+                      "• **Day 1 (Fri 13 Nov)**: Opening Ceremony at 08:30 AM (IB Amphitheatre), followed by sports & cultural heats/qualifiers from 09:30 AM onwards.\n" +
+                      "• **Day 2 (Sat 14 Nov)**: Finals & championship ties from 08:30 AM onwards, culminating in the Grand Closing Ceremony at 02:45 PM.\n\n" +
+                      "Visit the **[Schedule page](schedule.html)** to filter by Sports or Cultural and view exact venues & times for every event!"
+        },
+        {
+            name: 'ceremonies',
+            phrases: [
+                'opening ceremony', 'closing ceremony', 'valedictory', 'inauguration', 'when does it start', 'when does it end', 'prize distribution'
+            ],
+            primaryKeywords: ['opening ceremony', 'closing ceremony', 'ceremony', 'valedictory', 'inauguration'],
+            keywords: ['amphitheatre', 'ib amphitheatre', '8:30 am', '2:45 pm', 'awards', 'trophies', 'start time'],
+            response: "**IGNITE 2026 Ceremonies**:\n\n" +
+                      "🌟 **Opening Ceremony**: Friday, 13 Nov 2026 · 08:30 AM – 09:15 AM at the **IB Amphitheatre**.\n" +
+                      "🏆 **Grand Closing & Valedictory**: Saturday, 14 Nov 2026 · 02:45 PM – 03:30 PM at the **IB Amphitheatre** (ICSE Old Auditorium as backup).\n\n" +
+                      "Full chronological fixtures and venues are on the **[Schedule page](schedule.html)**!"
         },
 
         // --- GENERAL RULES & ENTRY ---
