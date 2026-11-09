@@ -1202,6 +1202,126 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // -------------------------------------------------------------------------
+    // Creative Bottom-Left Live Notice: Extended Registrations
+    // -------------------------------------------------------------------------
+    function initBottomLeftNotice() {
+        let noticeEl = document.getElementById('igniteLiveNotice');
+        let reopenBtn = document.getElementById('igniteNoticeReopen');
+
+        if (!noticeEl) {
+            const wrap = document.createElement('div');
+            wrap.innerHTML = `
+                <div id="igniteLiveNotice" class="ignite-live-notice" role="region" aria-label="Registration Update">
+                    <div class="live-notice-glow"></div>
+                    <div class="live-notice-content">
+                        <div class="live-notice-badge-row">
+                            <span class="live-notice-pulse">
+                                <span class="pulse-ring"></span>
+                                <span class="pulse-core"></span>
+                            </span>
+                            <span class="live-notice-tag">UPDATE • EXTENDED</span>
+                            <button id="liveNoticeClose" class="live-notice-close" aria-label="Dismiss notice">✕</button>
+                        </div>
+                        <div class="live-notice-body">
+                            <div class="live-notice-icon">🔥</div>
+                            <div class="live-notice-text">
+                                <div class="live-notice-title">Registrations Extended!</div>
+                                <div class="live-notice-desc">All Cultural &amp; Sports entries now open until <strong>12th November</strong>.</div>
+                            </div>
+                        </div>
+                        <div class="live-notice-footer">
+                            <a href="registrations.html" class="live-notice-btn" id="liveNoticeAction">
+                                <span>Register Squad</span>
+                                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
+                            <span class="live-notice-expiry">⏳ Nov 12 Deadline</span>
+                        </div>
+                    </div>
+                </div>
+                <button id="igniteNoticeReopen" class="ignite-notice-reopen" aria-label="Show Registration Notice" title="Registrations Extended to Nov 12">
+                    <span class="pulse-ring"></span>
+                    <span class="reopen-icon">🔥</span>
+                    <span class="reopen-text">Extended to Nov 12</span>
+                </button>
+            `;
+            while (wrap.firstElementChild) {
+                document.body.appendChild(wrap.firstElementChild);
+            }
+            noticeEl = document.getElementById('igniteLiveNotice');
+            reopenBtn = document.getElementById('igniteNoticeReopen');
+        }
+
+        const closeBtn = document.getElementById('liveNoticeClose');
+        const actionBtn = document.getElementById('liveNoticeAction');
+
+        // Check if user is currently on registrations.html
+        const isRegPage = window.location.pathname.endsWith('registrations.html');
+        if (isRegPage && actionBtn) {
+            actionBtn.innerHTML = `<span>View Forms</span><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>`;
+            actionBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector('.regs-section');
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        }
+
+        // Interactive cursor torchlight glow on hover
+        if (noticeEl) {
+            const glowEl = noticeEl.querySelector('.live-notice-glow');
+            noticeEl.addEventListener('mousemove', (e) => {
+                if (!glowEl) return;
+                const rect = noticeEl.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                glowEl.style.transform = `translate(${x - 65}px, ${y - 65}px)`;
+            });
+            noticeEl.addEventListener('mouseleave', () => {
+                if (glowEl) {
+                    glowEl.style.transform = '';
+                }
+            });
+        }
+
+        // Show notice with smooth spring after 1s delay
+        const wasDismissed = sessionStorage.getItem('igniteNoticeDismissed') === '1';
+
+        if (wasDismissed) {
+            if (reopenBtn) reopenBtn.classList.add('is-visible');
+        } else {
+            setTimeout(() => {
+                if (noticeEl && sessionStorage.getItem('igniteNoticeDismissed') !== '1') {
+                    noticeEl.classList.add('is-visible');
+                }
+            }, 1000);
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (noticeEl) noticeEl.classList.remove('is-visible');
+                sessionStorage.setItem('igniteNoticeDismissed', '1');
+                setTimeout(() => {
+                    if (reopenBtn) reopenBtn.classList.add('is-visible');
+                }, 350);
+            });
+        }
+
+        if (reopenBtn) {
+            reopenBtn.addEventListener('click', () => {
+                reopenBtn.classList.remove('is-visible');
+                sessionStorage.removeItem('igniteNoticeDismissed');
+                setTimeout(() => {
+                    if (noticeEl) noticeEl.classList.add('is-visible');
+                }, 150);
+            });
+        }
+    }
+
+    initBottomLeftNotice();
+
     // 5. Fire page transitions between HTML files
     // Leaving: flames sweep up and burn the page away.
     // Arriving: the dark curtain burns off to reveal the new page.
