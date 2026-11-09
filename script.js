@@ -973,7 +973,7 @@ document.addEventListener('DOMContentLoaded', () => {
             primaryKeywords: ['register', 'registration', 'registrations'],
             keywords: ['fee', 'payment', 'portal', 'deadline', 'dates'],
             response: "**Registrations for IGNITE 2026**\n" +
-                      "📅 **Window**: Open 2 November – 10 November 2026.\n" +
+                      "📅 **Window**: Open 2 November – 12 November 2026 (Extended!).\n" +
                       "🔗 **Portal**: Head to the [Registrations page](registrations.html) to submit your school delegation.\n" +
                       "💳 **Payment Methods**:\n" +
                       "• **Cultural Events**: Registered and paid online via the portal.\n" +
